@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -140,7 +141,9 @@
     .map-hdr { margin-bottom: 40px; }
     .map-layout { display: grid; grid-template-columns: 1fr 320px; gap: 28px; align-items: start; }
     .map-embed-wrap { overflow: hidden; height: 460px; }
-    .map-embed-wrap iframe { width: 100%; height: 100%; border: none; display: block; }
+    #richland-map { width: 100%; height: 100%; }
+    .leaflet-popup-content-wrapper { border-radius: 0; box-shadow: 0 4px 20px rgba(0,0,0,0.12); }
+    .leaflet-popup-content { margin: 14px 16px; }
     .map-properties { display: flex; flex-direction: column; }
     .map-prop-card { background: white; padding: 26px 26px 22px; border-top: 1px solid var(--border); }
     .map-prop-card:first-child { border-top: none; }
@@ -168,9 +171,28 @@
     .success-msg.show { display: block; }
 
     /* FOOTER */
-    footer { background: #0e1520; padding: 28px 56px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
-    .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 14px; color: rgba(255,255,255,0.25); letter-spacing: 0.06em; text-transform: uppercase; }
-    .footer-copy { font-size: 11px; color: rgba(255,255,255,0.18); }
+    footer { background: #0d1520; }
+    .footer-inner { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 64px; padding: 72px 56px 56px; max-width: 1280px; margin: 0 auto; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 300; color: white; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 16px; }
+    .footer-tagline { font-size: 13px; color: rgba(255,255,255,0.35); line-height: 1.8; margin-bottom: 20px; font-weight: 300; max-width: 280px; }
+    .footer-status { font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 36px; }
+    .footer-developer { padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.07); }
+    .footer-dev-label { font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.2); }
+    .footer-col-title { font-size: 9px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.28); margin-bottom: 22px; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 14px; margin-bottom: 40px; }
+    .footer-links a { font-size: 14px; color: rgba(255,255,255,0.5); text-decoration: none; font-weight: 300; transition: color 0.2s; }
+    .footer-links a:hover { color: white; }
+    .footer-social-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .footer-social-list a { font-size: 13px; color: rgba(255,255,255,0.4); text-decoration: none; font-weight: 300; transition: color 0.2s; display: flex; align-items: center; gap: 8px; }
+    .footer-social-list a:hover { color: rgba(255,255,255,0.75); }
+    .footer-social-list svg { flex-shrink: 0; opacity: 0.6; }
+    .footer-addr { font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.75; margin-bottom: 18px; font-weight: 300; }
+    .footer-phone { display: block; font-size: 15px; color: rgba(255,255,255,0.6); text-decoration: none; margin-bottom: 10px; transition: color 0.2s; font-weight: 300; letter-spacing: 0.01em; }
+    .footer-phone:hover { color: white; }
+    .footer-email { display: block; font-size: 13px; color: rgba(255,255,255,0.35); text-decoration: none; transition: color 0.2s; font-weight: 300; word-break: break-all; }
+    .footer-email:hover { color: rgba(255,255,255,0.65); }
+    .footer-bottom { padding: 20px 56px; display: flex; justify-content: space-between; align-items: center; max-width: 1280px; margin: 0 auto; }
+    .footer-bottom span { font-size: 11px; color: rgba(255,255,255,0.16); }
 
     /* LIGHTBOX */
     .lightbox { display: none; position: fixed; inset: 0; background: rgba(5,10,18,0.97); z-index: 500; align-items: center; justify-content: center; padding: 40px; }
@@ -199,7 +221,8 @@
       .contact-section { padding: 72px 24px; }
       .contact-form { grid-template-columns: 1fr; }
       .contact-form textarea, .contact-submit { grid-column: 1; }
-      footer { padding: 24px; }
+      .footer-inner { grid-template-columns: 1fr; gap: 40px; padding: 48px 24px 40px; }
+      .footer-bottom { padding: 18px 24px; flex-direction: column; gap: 6px; text-align: center; }
       .split-content { padding: 36px 32px; }
       .rv3-intro { padding: 0 24px; }
     }
@@ -459,7 +482,7 @@
       </div>
       <div class="map-layout">
         <div class="map-embed-wrap">
-          <iframe src="https://maps.google.com/maps?saddr=538+Richland+Road+Auburn+AL&daddr=1256+Shug+Jordan+Pkwy+Auburn+AL&output=embed" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          <div id="richland-map"></div>
         </div>
         <div class="map-properties">
           <div class="map-prop-card">
@@ -506,8 +529,60 @@
 
   <!-- FOOTER -->
   <footer>
-    <div class="footer-logo">Richland Village</div>
-    <div class="footer-copy">&copy; 2026 Richland Village. All rights reserved.</div>
+    <div class="footer-inner">
+      <!-- Brand column -->
+      <div class="footer-brand">
+        <div class="footer-logo">Richland Village</div>
+        <p class="footer-tagline">Luxury townhome living in the heart of Auburn, Alabama — minutes from campus, shops, and everything the Loveliest Village has to offer.</p>
+        <div class="footer-status">Now Leasing</div>
+        <div class="footer-developer">
+          <div class="footer-dev-label">A Parmer Development Community</div>
+        </div>
+      </div>
+
+      <!-- Explore + Follow column -->
+      <div>
+        <div class="footer-col-title">Explore</div>
+        <ul class="footer-links">
+          <li><a href="#floor-plans">Floor Plans</a></li>
+          <li><a href="#virtual-tour">Virtual Tour</a></li>
+          <li><a href="#map">Find Us</a></li>
+          <li><a href="#contact">Schedule a Tour</a></li>
+        </ul>
+
+        <div class="footer-col-title">Follow Us</div>
+        <ul class="footer-social-list">
+          <li>
+            <a href="https://www.instagram.com/richlandvillageauburn" target="_blank" rel="noopener">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+              @richlandvillageauburn
+            </a>
+          </li>
+          <li>
+            <a href="https://www.instagram.com/parmerdevelopment" target="_blank" rel="noopener">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+              @parmerdevelopment
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Contact column -->
+      <div>
+        <div class="footer-col-title">Contact</div>
+        <p class="footer-addr">
+          538 Richland Road<br>
+          Auburn, AL 36832
+        </p>
+        <a href="tel:3347502059" class="footer-phone">(334) 750-2059</a>
+        <a href="mailto:leasing@parmerdevelopment.com" class="footer-email">leasing@parmerdevelopment.com</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>&copy; 2026 Richland Village &middot; Auburn, Alabama</span>
+      <span>A Parmer Development Community</span>
+    </div>
   </footer>
 
   <!-- LIGHTBOX -->
@@ -516,7 +591,67 @@
     <img id="lbImg" src="" alt="">
   </div>
 
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
   <script>
+    // MAP
+    (function() {
+      const map = L.map('richland-map', { scrollWheelZoom: false, zoomControl: true });
+
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+        subdomains: 'abcd', maxZoom: 20
+      }).addTo(map);
+
+      function makePin(fill, border, label) {
+        const fs = label.length > 2 ? '8' : '11';
+        return L.divIcon({
+          html: `<svg viewBox="0 0 44 56" width="44" height="56" xmlns="http://www.w3.org/2000/svg" style="filter:drop-shadow(0 4px 10px rgba(0,0,0,0.45));overflow:visible">
+            <path d="M22 2C10.95 2 2 10.95 2 22C2 38.5 22 54 22 54C22 54 42 38.5 42 22C42 10.95 33.05 2 22 2Z" fill="${fill}" stroke="${border}" stroke-width="2.5"/>
+            <circle cx="22" cy="21" r="11" fill="white" opacity="0.13"/>
+            <text x="22" y="26" text-anchor="middle" fill="white" font-family="Georgia,serif" font-size="${fs}" font-weight="bold" letter-spacing="0.8">${label}</text>
+          </svg>`,
+          className: '', iconSize: [44, 56], iconAnchor: [22, 56], popupAnchor: [0, -60]
+        });
+      }
+
+      function popup(name, addr) {
+        return `<div style="font-family:'Inter',sans-serif;min-width:170px;padding:2px 0">
+          <p style="font-family:'Cormorant Garamond',serif;font-size:16px;color:#1a2a42;margin:0 0 5px;font-weight:400">${name}</p>
+          <p style="font-size:12px;color:#7a7a7a;margin:0;line-height:1.6">${addr}</p>
+        </div>`;
+      }
+
+      async function geocode(q) {
+        const r = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(q)}&format=json&limit=1`);
+        const d = await r.json();
+        return d[0] ? [+d[0].lat, +d[0].lon] : null;
+      }
+
+      async function init() {
+        const [c1, c2] = await Promise.all([
+          geocode('538 Richland Road Auburn Alabama USA'),
+          geocode('1256 Shug Jordan Pkwy Auburn Alabama USA')
+        ]);
+
+        const pts = [];
+        [
+          { coords: c1, fill: '#1a2a42', border: '#9a7540', label: 'RV',  name: 'Richland Village',      addr: '538 Richland Road · Auburn, AL' },
+          { coords: c2, fill: '#9a7540', border: '#1a2a42', label: 'III', name: 'Richland Village III',   addr: '1256 Shug Jordan Pkwy · Auburn, AL' }
+        ].forEach(loc => {
+          if (!loc.coords) return;
+          pts.push(loc.coords);
+          L.marker(loc.coords, { icon: makePin(loc.fill, loc.border, loc.label) })
+            .addTo(map)
+            .bindPopup(popup(loc.name, loc.addr), { maxWidth: 240 });
+        });
+
+        if (pts.length === 2) map.fitBounds(pts, { padding: [70, 70] });
+        else if (pts.length === 1) map.setView(pts[0], 16);
+      }
+
+      init();
+    })();
+
     function switchComm(commId, tabEl) {
       document.querySelectorAll('.comm-tab').forEach(t => t.classList.remove('active'));
       document.querySelectorAll('.comm-plans').forEach(p => p.classList.remove('active'));
