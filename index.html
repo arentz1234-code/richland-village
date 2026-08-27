@@ -327,38 +327,25 @@
   <section class="plans-section" id="plans">
     <div class="plans-header">
       <h2 class="section-title">Floor Plans</h2>
-      <div class="plans-filter-row">
-        <select class="plans-price-sel" id="priceFilter">
-          <option value="0">Any Price</option>
-          <option value="410000">Under $410K</option>
-          <option value="480000">Under $480K</option>
-          <option value="530000">Under $530K</option>
-          <option value="600000">Under $600K</option>
-        </select>
-      </div>
     </div>
 
     <!-- Plan selector tabs -->
     <div class="fp-selector">
-      <button class="fp-sel-tab active" data-plan="2br" data-price="389000" onclick="selectPlan('2br', this)">
+      <button class="fp-sel-tab active" data-plan="2br" onclick="selectPlan('2br', this)">
         <span class="fp-sel-beds">2 Bedroom</span>
         <span class="fp-sel-name">The Richland</span>
-        <span class="fp-sel-price">From $389,000</span>
       </button>
-      <button class="fp-sel-tab" data-plan="3br" data-price="459000" onclick="selectPlan('3br', this)">
+      <button class="fp-sel-tab" data-plan="3br" onclick="selectPlan('3br', this)">
         <span class="fp-sel-beds">3 Bedroom</span>
         <span class="fp-sel-name">The Richland</span>
-        <span class="fp-sel-price">From $459,000</span>
       </button>
-      <button class="fp-sel-tab" data-plan="3br-den" data-price="499000" onclick="selectPlan('3br-den', this)">
+      <button class="fp-sel-tab" data-plan="3br-den" onclick="selectPlan('3br-den', this)">
         <span class="fp-sel-beds">3BR + Den</span>
         <span class="fp-sel-name">The Richland</span>
-        <span class="fp-sel-price">From $499,000</span>
       </button>
-      <button class="fp-sel-tab" data-plan="4br" data-price="569000" onclick="selectPlan('4br', this)">
+      <button class="fp-sel-tab" data-plan="4br" onclick="selectPlan('4br', this)">
         <span class="fp-sel-beds">4 Bedroom</span>
         <span class="fp-sel-name">The Richland</span>
-        <span class="fp-sel-price">From $569,000</span>
       </button>
     </div>
 
@@ -374,7 +361,7 @@
           <div class="fp-level-img"><img src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/floorplans/colored-2br-second.jpg" alt="2BR Second Level" onclick="openLightbox(this.src)"></div>
         </div>
       </div>
-      <div class="fp-specs-row"><span>2 Bed &nbsp;·&nbsp; 2.5 Bath &nbsp;·&nbsp; 2-Story</span><span class="fp-price">From $389,000</span><a href="#contact" class="fp-cta">Schedule a Tour</a></div>
+      <div class="fp-specs-row"><span>2 Bed &nbsp;·&nbsp; 2.5 Bath &nbsp;·&nbsp; 2-Story</span><a href="#contact" class="fp-cta">Schedule a Tour</a></div>
     </div>
 
     <!-- 3BR -->
@@ -389,7 +376,7 @@
           <div class="fp-level-img"><img src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/floorplans/colored-3br-second.jpg" alt="3BR Second Level" onclick="openLightbox(this.src)"></div>
         </div>
       </div>
-      <div class="fp-specs-row"><span>3 Bed &nbsp;·&nbsp; 2.5 Bath &nbsp;·&nbsp; 2-Story</span><span class="fp-price">From $459,000</span><a href="#contact" class="fp-cta">Schedule a Tour</a></div>
+      <div class="fp-specs-row"><span>3 Bed &nbsp;·&nbsp; 2.5 Bath &nbsp;·&nbsp; 2-Story</span><a href="#contact" class="fp-cta">Schedule a Tour</a></div>
     </div>
 
     <!-- 3BR + Den -->
@@ -404,7 +391,7 @@
           <div class="fp-level-img"><img src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/floorplans/colored-3br-den-second.jpg" alt="3BR+Den Second Level" onclick="openLightbox(this.src)"></div>
         </div>
       </div>
-      <div class="fp-specs-row"><span>3 Bed &nbsp;·&nbsp; 3 Bath &nbsp;·&nbsp; + Den</span><span class="fp-price">From $499,000</span><a href="#contact" class="fp-cta">Schedule a Tour</a></div>
+      <div class="fp-specs-row"><span>3 Bed &nbsp;·&nbsp; 3 Bath &nbsp;·&nbsp; + Den</span><a href="#contact" class="fp-cta">Schedule a Tour</a></div>
     </div>
 
     <!-- 4BR -->
@@ -431,7 +418,7 @@
           </div>
         </div>
       </div>
-      <div class="fp-specs-row"><span>4 Bed &nbsp;·&nbsp; 3.5 Bath &nbsp;·&nbsp; 2-Story</span><span class="fp-price">From $569,000</span><a href="#contact" class="fp-cta">Schedule a Tour</a></div>
+      <div class="fp-specs-row"><span>4 Bed &nbsp;·&nbsp; 3.5 Bath &nbsp;·&nbsp; 2-Story</span><a href="#contact" class="fp-cta">Schedule a Tour</a></div>
     </div>
   </section>
 
@@ -609,29 +596,6 @@
 
   <script>
     // ── PLAN SELECTOR ──
-    const priceSelect = document.getElementById('priceFilter');
-    let maxPrice = 0;
-
-    priceSelect.addEventListener('change', () => {
-      maxPrice = parseInt(priceSelect.value) || 0;
-      applyPriceFilter();
-    });
-
-    function applyPriceFilter() {
-      const tabs = document.querySelectorAll('.fp-sel-tab');
-      let firstVisible = null;
-      tabs.forEach(tab => {
-        const price = parseInt(tab.dataset.price);
-        const dimmed = maxPrice > 0 && price > maxPrice;
-        tab.classList.toggle('fp-tab-dimmed', dimmed);
-        if (!dimmed && !firstVisible) firstVisible = tab;
-      });
-      const activeTab = document.querySelector('.fp-sel-tab.active');
-      if (activeTab && activeTab.classList.contains('fp-tab-dimmed') && firstVisible) {
-        selectPlan(firstVisible.dataset.plan, firstVisible);
-      }
-    }
-
     function selectPlan(planId, tabEl) {
       document.querySelectorAll('.fp-sel-tab').forEach(t => t.classList.remove('active'));
       document.querySelectorAll('.fp-display').forEach(d => d.classList.remove('active'));
