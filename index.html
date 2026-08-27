@@ -176,15 +176,25 @@
     .tour-section .section-hdr { margin-bottom: 36px; }
     .tour-section .section-title { color: white; font-weight: 300; }
     .tour-desc { color: rgba(255,255,255,0.45); font-size: 13px; margin-top: 10px; }
-    .tour-unit-tabs { display: flex; gap: 0; margin-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,0.15); }
+    .tour-unit-tabs { display: flex; gap: 12px; margin-bottom: 48px; flex-wrap: wrap; }
     .tour-tab {
-      padding: 14px 32px 16px; background: transparent; border: none;
-      border-bottom: 3px solid transparent; margin-bottom: -1px;
-      font-size: 12px; font-family: 'Inter', sans-serif; font-weight: 500; letter-spacing: 0.06em;
-      text-transform: uppercase; color: rgba(255,255,255,0.55); cursor: pointer; transition: all 0.15s;
+      flex: 1; min-width: 140px; padding: 20px 24px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+      cursor: pointer; text-align: left; transition: all 0.2s; display: flex; flex-direction: column; gap: 6px;
     }
-    .tour-tab:hover { color: rgba(255,255,255,0.9); }
-    .tour-tab.active { color: white; border-bottom-color: #9a7540; }
+    .tour-tab:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.25); }
+    .tour-tab.active { background: rgba(154,117,64,0.15); border-color: #9a7540; }
+    .tour-tab-beds {
+      font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 300;
+      color: rgba(255,255,255,0.5); line-height: 1; transition: color 0.2s;
+    }
+    .tour-tab:hover .tour-tab-beds { color: rgba(255,255,255,0.8); }
+    .tour-tab.active .tour-tab-beds { color: white; }
+    .tour-tab-label {
+      font-size: 10px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+      color: rgba(255,255,255,0.35); transition: color 0.2s;
+    }
+    .tour-tab:hover .tour-tab-label { color: rgba(255,255,255,0.6); }
+    .tour-tab.active .tour-tab-label { color: #9a7540; }
     .tour-unit { display: none; max-width: 1300px; margin: 0 auto; }
     .tour-unit.active { display: block; }
     .tour-embed { width: 100%; aspect-ratio: 16/9; border: 0; display: block; margin-bottom: 8px; }
@@ -457,30 +467,42 @@
     </div>
 
     <div class="tour-unit-tabs">
-      <button class="tour-tab active" onclick="switchUnit('unit1', this)">3 Bed · 3.5 Bath</button>
-      <button class="tour-tab" onclick="switchUnit('unit3', this)">2 Bed · 2.5 Bath</button>
-      <button class="tour-tab" onclick="switchUnit('unit6', this)">4 Bed · 4.5 Bath</button>
-      <button class="tour-tab" onclick="switchUnit('unit10', this)">3 Bed · 3.5 Bath</button>
+      <button class="tour-tab active" onclick="switchUnit('unit3', this)">
+        <span class="tour-tab-beds">2 Bed</span>
+        <span class="tour-tab-label">2.5 Bath</span>
+      </button>
+      <button class="tour-tab" onclick="switchUnit('unit1', this)">
+        <span class="tour-tab-beds">3 Bed</span>
+        <span class="tour-tab-label">3.5 Bath</span>
+      </button>
+      <button class="tour-tab" onclick="switchUnit('unit10', this)">
+        <span class="tour-tab-beds">3 Bed</span>
+        <span class="tour-tab-label">3.5 Bath</span>
+      </button>
+      <button class="tour-tab" onclick="switchUnit('unit6', this)">
+        <span class="tour-tab-beds">4 Bed</span>
+        <span class="tour-tab-label">4.5 Bath</span>
+      </button>
     </div>
 
-    <!-- Unit 1 -->
-    <div class="tour-unit active" id="tour-unit1">
-      <iframe class="tour-embed" src="https://my.matterport.com/show/?m=wo3qGHMzLVR&play=1" allowfullscreen allow="xr-spatial-tracking; gyroscope; accelerometer"></iframe>
-    </div>
-
-    <!-- Unit 3 -->
-    <div class="tour-unit" id="tour-unit3">
+    <!-- Unit 3 (2BR) — shown first -->
+    <div class="tour-unit active" id="tour-unit3">
       <iframe class="tour-embed" src="https://my.matterport.com/show/?m=nAha3DLi7LG&play=1" allowfullscreen allow="xr-spatial-tracking; gyroscope; accelerometer"></iframe>
     </div>
 
-    <!-- Unit 6 -->
-    <div class="tour-unit" id="tour-unit6">
-      <iframe class="tour-embed" src="https://my.matterport.com/show/?m=HB5wVuChnxR&play=1" allowfullscreen allow="xr-spatial-tracking; gyroscope; accelerometer"></iframe>
+    <!-- Unit 1 (3BR) -->
+    <div class="tour-unit" id="tour-unit1">
+      <iframe class="tour-embed" src="https://my.matterport.com/show/?m=wo3qGHMzLVR&play=1" allowfullscreen allow="xr-spatial-tracking; gyroscope; accelerometer"></iframe>
     </div>
 
-    <!-- Unit 10 -->
+    <!-- Unit 10 (3BR) -->
     <div class="tour-unit" id="tour-unit10">
       <iframe class="tour-embed" src="https://my.matterport.com/show/?m=wYBsMXMtcgC&play=1" allowfullscreen allow="xr-spatial-tracking; gyroscope; accelerometer"></iframe>
+    </div>
+
+    <!-- Unit 6 (4BR) -->
+    <div class="tour-unit" id="tour-unit6">
+      <iframe class="tour-embed" src="https://my.matterport.com/show/?m=HB5wVuChnxR&play=1" allowfullscreen allow="xr-spatial-tracking; gyroscope; accelerometer"></iframe>
     </div>
   </section>
 
