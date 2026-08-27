@@ -158,6 +158,49 @@
     .no-results h3 { font-family: 'Cormorant Garamond', serif; font-size: 28px; color: var(--navy); margin-bottom: 8px; }
     .no-results p { color: var(--muted); }
 
+    /* ── VIRTUAL TOUR ── */
+    .tour-section { background: var(--navy); padding: 88px 56px; }
+    .tour-section .section-hdr { margin-bottom: 40px; }
+    .tour-section .section-title { color: white; }
+    .tour-section .eyebrow { color: var(--gold-light); }
+    .tour-desc { color: rgba(255,255,255,0.6); font-size: 15px; font-weight: 300; margin-top: 12px; }
+    .tour-unit-tabs { display: flex; justify-content: center; gap: 8px; margin-bottom: 40px; flex-wrap: wrap; }
+    .tour-tab {
+      padding: 9px 24px; border: 1.5px solid rgba(255,255,255,0.2); border-radius: 2px; background: transparent;
+      font-size: 11px; font-family: 'Inter', sans-serif; font-weight: 500; letter-spacing: 0.12em;
+      text-transform: uppercase; color: rgba(255,255,255,0.55); cursor: pointer; transition: all 0.18s;
+    }
+    .tour-tab:hover { border-color: var(--gold-light); color: var(--gold-light); }
+    .tour-tab.active { background: var(--gold); border-color: var(--gold); color: white; }
+    .tour-unit { display: none; max-width: 1300px; margin: 0 auto; }
+    .tour-unit.active { display: block; }
+    .tour-embed {
+      position: relative; width: 100%; padding-bottom: 52%; border-radius: 3px; overflow: hidden;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); margin-bottom: 16px;
+    }
+    .tour-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
+    .tour-embed-placeholder {
+      position: absolute; inset: 0; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 14px;
+    }
+    .tour-embed-placeholder svg { opacity: 0.35; }
+    .tour-embed-placeholder p { color: rgba(255,255,255,0.4); font-size: 13px; font-weight: 300; }
+    .tour-embed-placeholder a {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--gold-light); text-decoration: none; border: 1px solid var(--gold); padding: 9px 22px; border-radius: 2px;
+      transition: background 0.2s;
+    }
+    .tour-embed-placeholder a:hover { background: var(--gold); color: white; }
+    .tour-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
+    }
+    .tour-thumb {
+      overflow: hidden; border-radius: 2px; cursor: zoom-in; aspect-ratio: 4/3;
+    }
+    .tour-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s, opacity 0.2s; }
+    .tour-thumb:hover img { transform: scale(1.07); opacity: 0.85; }
+    .tour-thumb.t-wide { grid-column: span 2; }
+
     /* ── GALLERY ── */
     .gallery-section { background: white; padding: 80px 56px; }
     .section-hdr { text-align: center; margin-bottom: 48px; }
@@ -229,6 +272,9 @@
       .plans-carousel { padding: 16px 56px 24px; }
       .carousel-prev { left: 8px; }
       .carousel-next { right: 8px; }
+      .tour-section { padding: 64px 24px; }
+      .tour-grid { grid-template-columns: repeat(2, 1fr); }
+      .tour-thumb.t-wide { grid-column: span 2; }
       .gallery-section { padding: 64px 24px; }
       .gallery-grid { grid-template-columns: 1fr 1fr; }
       .gallery-item.wide { grid-column: span 2; }
@@ -254,6 +300,7 @@
     <div class="nav-links">
       <a href="#plans">Floor Plans</a>
       <a href="#gallery">Gallery</a>
+      <a href="#tour">Virtual Tour</a>
       <a href="#contact" class="nav-cta">Inquire Now</a>
     </div>
   </nav>
@@ -395,6 +442,103 @@
     <div class="no-results" id="noResults">
       <h3>No plans match your filters</h3>
       <p>Try adjusting your floor plan or price selection.</p>
+    </div>
+  </section>
+
+  <!-- ── VIRTUAL TOUR ── -->
+  <section class="tour-section" id="tour">
+    <div class="section-hdr">
+      <span class="eyebrow">Walk the Units</span>
+      <h2 class="section-title">Virtual Tour</h2>
+      <p class="tour-desc">Browse real photos from completed units. Add your Matterport link below for the full interactive 3D experience.</p>
+    </div>
+
+    <div class="tour-unit-tabs">
+      <button class="tour-tab active" onclick="switchUnit('unit1', this)">Unit 1</button>
+      <button class="tour-tab" onclick="switchUnit('unit3', this)">Unit 3</button>
+      <button class="tour-tab" onclick="switchUnit('unit6', this)">Unit 6</button>
+      <button class="tour-tab" onclick="switchUnit('unit10', this)">Unit 10</button>
+    </div>
+
+    <!-- Unit 1 -->
+    <div class="tour-unit active" id="tour-unit1">
+      <div class="tour-embed">
+        <div class="tour-embed-placeholder">
+          <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="3" fill="white" fill-opacity="0.2"/></svg>
+          <p>Interactive 3D tour — add your Matterport link</p>
+          <a href="#contact">Request Access &rsaquo;</a>
+        </div>
+      </div>
+      <div class="tour-grid">
+        <div class="tour-thumb t-wide"><img src="assets/matterport/unit1-01.jpg" alt="Unit 1" onclick="openLightbox(this.src)"></div>
+        <div class="tour-thumb"><img src="assets/matterport/unit1-02.jpg" alt="Unit 1" onclick="openLightbox(this.src)"></div>
+        <div class="tour-thumb"><img src="assets/matterport/unit1-03.jpg" alt="Unit 1" onclick="openLightbox(this.src)"></div>
+        <div class="tour-thumb"><img src="assets/matterport/unit1-04.jpg" alt="Unit 1" onclick="openLightbox(this.src)"></div>
+        <div class="tour-thumb"><img src="assets/matterport/unit1-05.jpg" alt="Unit 1" onclick="openLightbox(this.src)"></div>
+        <div class="tour-thumb"><img src="assets/matterport/unit1-06.jpg" alt="Unit 1" onclick="openLightbox(this.src)"></div>
+        <div class="tour-thumb"><img src="assets/matterport/unit1-07.jpg" alt="Unit 1" onclick="openLightbox(this.src)"></div>
+        <div class="tour-thumb"><img src="assets/matterport/unit1-08.jpg" alt="Unit 1" onclick="openLightbox(this.src)"></div>
+      </div>
+    </div>
+
+    <!-- Unit 3 -->
+    <div class="tour-unit" id="tour-unit3">
+      <div class="tour-embed">
+        <div class="tour-embed-placeholder">
+          <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="3" fill="white" fill-opacity="0.2"/></svg>
+          <p>Interactive 3D tour — add your Matterport link</p>
+          <a href="#contact">Request Access &rsaquo;</a>
+        </div>
+      </div>
+      <div class="tour-grid">
+        <div class="tour-thumb t-wide"><img src="assets/matterport/unit3-01.jpg" alt="Unit 3" onclick="openLightbox(this.src)"></div>
+        <div class="tour-thumb"><img src="assets/matterport/unit3-02.jpg" alt="Unit 3" onclick="openLightbox(this.src)"></div>
+        <div class="tour-thumb"><img src="assets/matterport/unit3-03.jpg" alt="Unit 3" onclick="openLightbox(this.src)"></div>
+        <div class="tour-thumb"><img src="assets/matterport/unit3-04.jpg" alt="Unit 3" onclick="openLightbox(this.src)"></div>
+      </div>
+    </div>
+
+    <!-- Unit 6 -->
+    <div class="tour-unit" id="tour-unit6">
+      <div class="tour-embed">
+        <div class="tour-embed-placeholder">
+          <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="3" fill="white" fill-opacity="0.2"/></svg>
+          <p>Interactive 3D tour — add your Matterport link</p>
+          <a href="#contact">Request Access &rsaquo;</a>
+        </div>
+      </div>
+      <div class="tour-grid">
+        <div class="tour-thumb t-wide"><img src="assets/matterport/unit6-06.jpg" alt="Unit 6" onclick="openLightbox(this.src)"></div>
+        <div class="tour-thumb"><img src="assets/matterport/unit6-01.jpg" alt="Unit 6" onclick="openLightbox(this.src)"></div>
+        <div class="tour-thumb"><img src="assets/matterport/unit6-02.jpg" alt="Unit 6" onclick="openLightbox(this.src)"></div>
+        <div class="tour-thumb"><img src="assets/matterport/unit6-03.jpg" alt="Unit 6" onclick="openLightbox(this.src)"></div>
+        <div class="tour-thumb"><img src="assets/matterport/unit6-04.jpg" alt="Unit 6" onclick="openLightbox(this.src)"></div>
+        <div class="tour-thumb"><img src="assets/matterport/unit6-05.jpg" alt="Unit 6" onclick="openLightbox(this.src)"></div>
+        <div class="tour-thumb"><img src="assets/matterport/unit6-07.jpg" alt="Unit 6" onclick="openLightbox(this.src)"></div>
+      </div>
+    </div>
+
+    <!-- Unit 10 -->
+    <div class="tour-unit" id="tour-unit10">
+      <div class="tour-embed">
+        <div class="tour-embed-placeholder">
+          <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="3" fill="white" fill-opacity="0.2"/></svg>
+          <p>Interactive 3D tour — add your Matterport link</p>
+          <a href="#contact">Request Access &rsaquo;</a>
+        </div>
+      </div>
+      <div class="tour-grid">
+        <div class="tour-thumb t-wide"><img src="assets/matterport/unit10-05.jpg" alt="Unit 10" onclick="openLightbox(this.src)"></div>
+        <div class="tour-thumb"><img src="assets/matterport/unit10-06.jpg" alt="Unit 10" onclick="openLightbox(this.src)"></div>
+        <div class="tour-thumb"><img src="assets/matterport/unit10-07.jpg" alt="Unit 10" onclick="openLightbox(this.src)"></div>
+        <div class="tour-thumb"><img src="assets/matterport/unit10-01.jpg" alt="Unit 10" onclick="openLightbox(this.src)"></div>
+        <div class="tour-thumb"><img src="assets/matterport/unit10-02.jpg" alt="Unit 10" onclick="openLightbox(this.src)"></div>
+        <div class="tour-thumb"><img src="assets/matterport/unit10-03.jpg" alt="Unit 10" onclick="openLightbox(this.src)"></div>
+        <div class="tour-thumb"><img src="assets/matterport/unit10-08.jpg" alt="Unit 10" onclick="openLightbox(this.src)"></div>
+        <div class="tour-thumb"><img src="assets/matterport/unit10-09.jpg" alt="Unit 10" onclick="openLightbox(this.src)"></div>
+        <div class="tour-thumb"><img src="assets/matterport/unit10-10.jpg" alt="Unit 10" onclick="openLightbox(this.src)"></div>
+        <div class="tour-thumb"><img src="assets/matterport/unit10-11.jpg" alt="Unit 10" onclick="openLightbox(this.src)"></div>
+      </div>
     </div>
   </section>
 
@@ -574,6 +718,14 @@
     }
 
     document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeFpModal(); closeLightbox(); } });
+
+    // ── VIRTUAL TOUR TABS ──
+    function switchUnit(unitId, tabEl) {
+      document.querySelectorAll('.tour-unit').forEach(u => u.classList.remove('active'));
+      document.querySelectorAll('.tour-tab').forEach(t => t.classList.remove('active'));
+      document.getElementById('tour-' + unitId).classList.add('active');
+      tabEl.classList.add('active');
+    }
 
     // ── CONTACT FORM ──
     function handleSubmit(e) {
