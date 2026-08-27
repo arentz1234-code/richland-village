@@ -153,23 +153,6 @@
     .tour-tab.active { background: var(--gold); border-color: var(--gold); color: white; }
     .tour-unit { display: none; max-width: 1300px; margin: 0 auto; }
     .tour-unit.active { display: block; }
-    .tour-embed {
-      position: relative; width: 100%; padding-bottom: 52%; border-radius: 3px; overflow: hidden;
-      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); margin-bottom: 16px;
-    }
-    .tour-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
-    .tour-embed-placeholder {
-      position: absolute; inset: 0; display: flex; flex-direction: column;
-      align-items: center; justify-content: center; gap: 14px;
-    }
-    .tour-embed-placeholder svg { opacity: 0.35; }
-    .tour-embed-placeholder p { color: rgba(255,255,255,0.4); font-size: 13px; font-weight: 300; }
-    .tour-embed-placeholder a {
-      font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--gold-light); text-decoration: none; border: 1px solid var(--gold); padding: 9px 22px; border-radius: 2px;
-      transition: background 0.2s;
-    }
-    .tour-embed-placeholder a:hover { background: var(--gold); color: white; }
     .tour-grid {
       display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
     }
@@ -491,7 +474,7 @@
     <div class="section-hdr">
       <span class="eyebrow">Walk the Units</span>
       <h2 class="section-title">Virtual Tour</h2>
-      <p class="tour-desc">Browse real photos from completed units. Add your Matterport link below for the full interactive 3D experience.</p>
+      <p class="tour-desc">Browse real Matterport scan photos from completed units. Click any image to view full size.</p>
     </div>
 
     <div class="tour-unit-tabs">
@@ -503,13 +486,6 @@
 
     <!-- Unit 1 -->
     <div class="tour-unit active" id="tour-unit1">
-      <div class="tour-embed">
-        <div class="tour-embed-placeholder">
-          <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="3" fill="white" fill-opacity="0.2"/></svg>
-          <p>Interactive 3D tour — add your Matterport link</p>
-          <a href="#contact">Request Access &rsaquo;</a>
-        </div>
-      </div>
       <div class="tour-grid">
         <div class="tour-thumb t-wide"><img src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/matterport/unit1-01.jpg" alt="Unit 1" onclick="openLightbox(this.src)"></div>
         <div class="tour-thumb"><img src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/matterport/unit1-02.jpg" alt="Unit 1" onclick="openLightbox(this.src)"></div>
@@ -524,13 +500,6 @@
 
     <!-- Unit 3 -->
     <div class="tour-unit" id="tour-unit3">
-      <div class="tour-embed">
-        <div class="tour-embed-placeholder">
-          <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="3" fill="white" fill-opacity="0.2"/></svg>
-          <p>Interactive 3D tour — add your Matterport link</p>
-          <a href="#contact">Request Access &rsaquo;</a>
-        </div>
-      </div>
       <div class="tour-grid">
         <div class="tour-thumb t-wide"><img src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/matterport/unit3-01.jpg" alt="Unit 3" onclick="openLightbox(this.src)"></div>
         <div class="tour-thumb"><img src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/matterport/unit3-02.jpg" alt="Unit 3" onclick="openLightbox(this.src)"></div>
@@ -541,13 +510,6 @@
 
     <!-- Unit 6 -->
     <div class="tour-unit" id="tour-unit6">
-      <div class="tour-embed">
-        <div class="tour-embed-placeholder">
-          <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="3" fill="white" fill-opacity="0.2"/></svg>
-          <p>Interactive 3D tour — add your Matterport link</p>
-          <a href="#contact">Request Access &rsaquo;</a>
-        </div>
-      </div>
       <div class="tour-grid">
         <div class="tour-thumb t-wide"><img src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/matterport/unit6-06.jpg" alt="Unit 6" onclick="openLightbox(this.src)"></div>
         <div class="tour-thumb"><img src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/matterport/unit6-01.jpg" alt="Unit 6" onclick="openLightbox(this.src)"></div>
@@ -561,13 +523,6 @@
 
     <!-- Unit 10 -->
     <div class="tour-unit" id="tour-unit10">
-      <div class="tour-embed">
-        <div class="tour-embed-placeholder">
-          <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="3" fill="white" fill-opacity="0.2"/></svg>
-          <p>Interactive 3D tour — add your Matterport link</p>
-          <a href="#contact">Request Access &rsaquo;</a>
-        </div>
-      </div>
       <div class="tour-grid">
         <div class="tour-thumb t-wide"><img src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/matterport/unit10-05.jpg" alt="Unit 10" onclick="openLightbox(this.src)"></div>
         <div class="tour-thumb"><img src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/matterport/unit10-06.jpg" alt="Unit 10" onclick="openLightbox(this.src)"></div>
