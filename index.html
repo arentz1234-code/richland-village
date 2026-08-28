@@ -3,275 +3,214 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Richland Village | Townhomes in Auburn, Alabama</title>
+  <title>Richland Village | Auburn, Alabama</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --navy: #1a2a42;
-      --gold: #9a7540;
-      --cream: #f8f6f1;
-      --warm: #f2efe8;
-      --text: #1c1c1c;
-      --muted: #7a7a7a;
-      --border: #dedad3;
+      --navy: #1B2B41;
+      --gold: #9A7540;
+      --cream: #F9F6F0;
+      --white: #ffffff;
+      --text: #1C1C1C;
+      --muted: #6B6B6B;
+      --border: #E3DDD5;
     }
     html { scroll-behavior: smooth; }
-    body { font-family: 'Inter', sans-serif; background: #fff; color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
 
-    /* ANNOUNCEMENT BANNER */
-    .announce-bar { position: fixed; top: 0; left: 0; right: 0; z-index: 210; background: var(--gold); display: flex; align-items: center; justify-content: center; gap: 28px; padding: 10px 24px; flex-wrap: wrap; }
-    .announce-text { font-size: 11px; font-weight: 500; letter-spacing: 0.09em; text-transform: uppercase; color: white; white-space: nowrap; }
-    .announce-dot { width: 3px; height: 3px; border-radius: 50%; background: rgba(255,255,255,0.5); flex-shrink: 0; }
-    .announce-phone { font-size: 11px; font-weight: 600; letter-spacing: 0.06em; color: white; text-decoration: none; white-space: nowrap; }
-    .announce-cta { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); background: white; padding: 5px 18px; text-decoration: none; white-space: nowrap; transition: background 0.15s; }
-    .announce-cta:hover { background: var(--cream); }
-    @media (max-width: 700px) {
-      .announce-bar { gap: 14px; padding: 8px 16px; }
-      .announce-dot { display: none; }
-    }
+    /* BANNER */
+    .banner { position: fixed; top: 0; left: 0; right: 0; z-index: 300; background: var(--navy); display: flex; align-items: center; justify-content: center; gap: 24px; padding: 9px 24px; flex-wrap: wrap; }
+    .banner-text { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.85); white-space: nowrap; }
+    .banner-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+    .banner-cta { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--navy); background: var(--gold); padding: 5px 16px; text-decoration: none; white-space: nowrap; transition: opacity 0.15s; }
+    .banner-cta:hover { opacity: 0.88; }
+    @media (max-width: 640px) { .banner { gap: 12px; } .banner-dot { display: none; } }
 
     /* NAV */
-    nav { position: fixed; top: 37px; left: 0; right: 0; z-index: 200; display: flex; align-items: center; justify-content: space-between; padding: 20px 52px; background: rgba(26,42,66,0.96); backdrop-filter: blur(12px); }
-    .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 400; letter-spacing: 0.06em; color: white; text-transform: uppercase; text-decoration: none; }
+    nav { position: fixed; top: 33px; left: 0; right: 0; z-index: 200; background: rgba(255,255,255,0.97); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 52px; height: 60px; }
+    .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 400; letter-spacing: 0.08em; color: var(--navy); text-transform: uppercase; text-decoration: none; }
     .nav-links { display: flex; align-items: center; gap: 32px; }
-    .nav-links a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 11px; font-weight: 400; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s; }
-    .nav-links a:hover { color: white; }
-    .nav-cta { border: 1px solid rgba(255,255,255,0.3) !important; color: rgba(255,255,255,0.85) !important; padding: 8px 20px !important; background: transparent !important; transition: border-color 0.2s, color 0.2s !important; }
-    .nav-cta:hover { border-color: white !important; color: white !important; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 11px; font-weight: 400; letter-spacing: 0.05em; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--navy); }
+    .nav-apply { background: var(--navy) !important; color: white !important; padding: 9px 22px !important; transition: background 0.2s !important; }
+    .nav-apply:hover { background: var(--gold) !important; color: white !important; }
+    @media (max-width: 768px) { nav { padding: 0 20px; } .nav-links { gap: 18px; } .nav-links a:not(.nav-apply) { display: none; } }
 
     /* HERO */
-    .hero { height: 100vh; min-height: 640px; position: relative; display: flex; align-items: flex-end; overflow: hidden; }
+    .hero { height: 100vh; min-height: 600px; position: relative; display: flex; align-items: flex-end; overflow: hidden; padding-top: 93px; }
     .hero-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
-    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,18,32,0.9) 0%, rgba(10,18,32,0.3) 55%, transparent 100%); }
-    .hero-content { position: relative; z-index: 2; padding: 0 64px 80px; }
-    .hero-tag { font-size: 11px; color: rgba(255,255,255,0.5); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 16px; display: block; }
-    .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(68px, 9vw, 112px); font-weight: 300; line-height: 0.88; color: white; margin-bottom: 24px; }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,18,30,0.88) 0%, rgba(10,18,30,0.35) 50%, rgba(10,18,30,0.1) 100%); }
+    .hero-content { position: relative; z-index: 2; padding: 0 60px 72px; max-width: 760px; }
+    .hero-eyebrow { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 18px; display: block; }
+    .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(56px, 7vw, 96px); font-weight: 300; line-height: 0.92; color: white; margin-bottom: 22px; }
     .hero-title em { font-style: italic; }
-    .hero-sub { font-size: 15px; font-weight: 300; color: rgba(255,255,255,0.6); max-width: 420px; margin-bottom: 40px; line-height: 1.8; }
-    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
-    .btn-primary { display: inline-block; background: white; color: var(--navy); text-decoration: none; font-size: 11px; font-weight: 500; letter-spacing: 0.07em; text-transform: uppercase; padding: 14px 36px; transition: background 0.2s; }
-    .btn-primary:hover { background: var(--cream); }
-    .btn-ghost { display: inline-block; color: rgba(255,255,255,0.7); text-decoration: none; font-size: 11px; font-weight: 400; letter-spacing: 0.06em; text-transform: uppercase; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.3); transition: color 0.2s, border-color 0.2s; }
-    .btn-ghost:hover { color: white; border-color: white; }
+    .hero-sub { font-size: 15px; color: rgba(255,255,255,0.6); line-height: 1.8; font-weight: 300; margin-bottom: 36px; max-width: 440px; }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn { display: inline-block; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; padding: 13px 32px; transition: all 0.2s; }
+    .btn-white { background: white; color: var(--navy); }
+    .btn-white:hover { background: var(--cream); }
+    .btn-outline { border: 1px solid rgba(255,255,255,0.4); color: rgba(255,255,255,0.8); }
+    .btn-outline:hover { border-color: white; color: white; }
+    @media (max-width: 768px) { .hero-content { padding: 0 24px 56px; } }
 
-    /* COMMUNITY SPLIT */
-    .split-section { display: grid; grid-template-columns: 1fr 1fr; }
-    .split-panel { position: relative; min-height: 500px; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; }
-    .split-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.7s ease; }
-    .split-panel:hover .split-bg { transform: scale(1.04); }
-    .split-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,18,32,0.94) 0%, rgba(10,18,32,0.5) 55%, rgba(10,18,32,0.1) 100%); }
-    .split-content { position: relative; z-index: 2; padding: 44px 52px; border-right: 1px solid rgba(255,255,255,0.07); }
-    .split-panel:last-child .split-content { border-right: none; }
-    .split-badge { font-size: 9px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 14px; }
-    .split-name { font-family: 'Cormorant Garamond', serif; font-size: clamp(26px, 3vw, 40px); font-weight: 300; color: white; line-height: 1.05; margin-bottom: 8px; }
-    .split-addr { font-size: 11px; color: rgba(255,255,255,0.38); letter-spacing: 0.03em; margin-bottom: 16px; }
-    .split-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.75; max-width: 340px; margin-bottom: 28px; font-weight: 300; }
-    .split-meta { display: flex; align-items: center; gap: 18px; margin-bottom: 28px; }
-    .split-meta-item { font-size: 10px; color: rgba(255,255,255,0.32); letter-spacing: 0.04em; text-transform: uppercase; }
-    .split-meta-item strong { display: block; font-family: 'Cormorant Garamond', serif; font-size: 24px; color: white; font-weight: 300; letter-spacing: 0; line-height: 1; margin-bottom: 3px; text-transform: none; }
-    .split-meta-div { width: 1px; height: 30px; background: rgba(255,255,255,0.12); }
-    .split-cta { display: inline-block; font-size: 11px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: white; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.35); padding-bottom: 2px; transition: border-color 0.2s; }
-    .split-cta:hover { border-color: white; }
+    /* SECTION TITLES */
+    .section-label { font-size: 10px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; display: block; }
+    .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(28px, 3.5vw, 44px); font-weight: 300; line-height: 1.1; color: var(--navy); }
 
-    /* SHARED */
-    .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(32px, 4vw, 50px); font-weight: 300; line-height: 1.1; color: var(--navy); }
+    /* MAP */
+    .map-section { background: var(--cream); padding: 80px 56px; }
+    .map-inner { max-width: 1200px; margin: 0 auto; }
+    .map-hdr { margin-bottom: 36px; }
+    .map-layout { display: grid; grid-template-columns: 1fr 300px; gap: 24px; align-items: start; }
+    .map-wrap { overflow: hidden; height: 460px; isolation: isolate; }
+    #rv-map { width: 100%; height: 100%; }
+    .leaflet-popup-content-wrapper { border-radius: 0; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+    .leaflet-popup-content { margin: 14px 16px; }
+    .map-cards { display: flex; flex-direction: column; gap: 0; }
+    .map-card { background: white; padding: 24px; border-top: 1px solid var(--border); cursor: pointer; transition: background 0.15s; }
+    .map-card:first-child { border-top: none; }
+    .map-card:hover { background: #faf7f3; }
+    .map-card-tag { font-size: 9px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 6px; }
+    .map-card-name { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 400; color: var(--navy); margin-bottom: 6px; }
+    .map-card-detail { font-size: 12px; color: var(--muted); line-height: 1.7; }
+    .map-card-link { display: inline-block; margin-top: 10px; font-size: 11px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; color: var(--navy); text-decoration: none; border-bottom: 1px solid var(--border); padding-bottom: 1px; transition: border-color 0.2s; }
+    .map-card-link:hover { border-color: var(--navy); }
+    @media (max-width: 900px) { .map-section { padding: 60px 24px; } .map-layout { grid-template-columns: 1fr; } .map-wrap { height: 340px; } }
+
+    /* COMMUNITIES */
+    .communities-section { background: white; padding: 80px 56px; }
+    .communities-inner { max-width: 1200px; margin: 0 auto; }
+    .comm-hdr { margin-bottom: 48px; }
+    .comm-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-bottom: 2px; }
+    .comm-card { position: relative; min-height: 380px; overflow: hidden; cursor: pointer; }
+    .comm-card-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.6s ease; }
+    .comm-card:hover .comm-card-bg { transform: scale(1.04); }
+    .comm-card-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,18,30,0.92) 0%, rgba(10,18,30,0.5) 55%, rgba(10,18,30,0.15) 100%); transition: background 0.3s; }
+    .comm-card.active .comm-card-overlay { background: linear-gradient(to top, rgba(10,18,30,0.95) 0%, rgba(10,18,30,0.6) 55%, rgba(10,18,30,0.2) 100%); }
+    .comm-card-content { position: relative; z-index: 2; padding: 36px 40px; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; }
+    .comm-card-badge { font-size: 9px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 10px; }
+    .comm-card-name { font-family: 'Cormorant Garamond', serif; font-size: clamp(24px, 2.5vw, 36px); font-weight: 300; color: white; line-height: 1.1; margin-bottom: 6px; }
+    .comm-card-addr { font-size: 11px; color: rgba(255,255,255,0.4); margin-bottom: 14px; }
+    .comm-card-units { font-size: 12px; color: rgba(255,255,255,0.6); font-weight: 300; line-height: 1.6; margin-bottom: 20px; }
+    .comm-card-btn { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255,255,255,0.5); border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 2px; transition: all 0.2s; }
+    .comm-card.active .comm-card-btn { color: var(--gold); border-color: var(--gold); }
+    .comm-card-indicator { position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: var(--gold); transform: scaleX(0); transition: transform 0.3s; transform-origin: left; }
+    .comm-card.active .comm-card-indicator { transform: scaleX(1); }
+    @media (max-width: 700px) { .communities-section { padding: 60px 20px; } .comm-cards { grid-template-columns: 1fr; } .comm-card { min-height: 280px; } .comm-card-content { padding: 24px; } }
+
+    /* COMMUNITY DETAIL */
+    .comm-detail { display: none; background: var(--cream); }
+    .comm-detail.active { display: block; }
+    .detail-inner { max-width: 1200px; margin: 0 auto; padding: 60px 56px; }
+    .detail-tabs { display: flex; border-bottom: 1px solid var(--border); margin-bottom: 48px; }
+    .detail-tab { padding: 14px 28px 16px; background: none; border: none; border-bottom: 2px solid transparent; margin-bottom: -1px; cursor: pointer; font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); transition: all 0.2s; }
+    .detail-tab.active { color: var(--navy); border-bottom-color: var(--navy); }
+    .detail-tab:hover:not(.active) { color: var(--navy); }
+    .detail-panel { display: none; }
+    .detail-panel.active { display: block; }
+    @media (max-width: 900px) { .detail-inner { padding: 40px 20px; } .detail-tab { padding: 12px 16px 14px; } }
 
     /* FLOOR PLANS */
-    .plans-section { background: #fff; padding: 80px 0 96px; }
-    .plans-header { padding: 0 56px; margin-bottom: 44px; display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
-    .comm-toggle { display: flex; border: 1px solid var(--border); }
-    .comm-tab { padding: 10px 28px; background: transparent; border: none; cursor: pointer; font-size: 11px; font-family: 'Inter', sans-serif; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); transition: all 0.15s; white-space: nowrap; }
-    .comm-tab.active { background: var(--navy); color: white; }
-    .comm-tab:hover:not(.active) { background: var(--warm); color: var(--text); }
-    .comm-plans { display: none; }
-    .comm-plans.active { display: block; }
+    .fp-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; }
+    .fp-thumb { background: white; cursor: pointer; overflow: hidden; border: 2px solid transparent; transition: border-color 0.2s; }
+    .fp-thumb.active { border-color: var(--navy); }
+    .fp-thumb-img { width: 100%; aspect-ratio: 4/3; object-fit: contain; padding: 20px; background: white; display: block; }
+    .fp-thumb-label { padding: 12px 16px; border-top: 1px solid var(--border); }
+    .fp-thumb-beds { font-size: 9px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 2px; }
+    .fp-thumb-name { font-family: 'Cormorant Garamond', serif; font-size: 16px; font-weight: 400; color: var(--navy); }
+    .fp-thumb-sqft { font-size: 11px; color: var(--muted); margin-top: 2px; }
+    .fp-display { margin-top: 2px; background: white; }
+    .fp-display-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+    .fp-img-wrap { padding: 40px; display: flex; align-items: center; justify-content: center; min-height: 480px; background: white; }
+    .fp-img-wrap img { max-width: 100%; max-height: 560px; object-fit: contain; cursor: zoom-in; display: block; }
+    .fp-info { padding: 48px 40px; background: var(--navy); color: white; display: flex; flex-direction: column; justify-content: center; }
+    .fp-info-tag { font-size: 9px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; display: block; }
+    .fp-info-title { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 300; color: white; line-height: 1.1; margin-bottom: 24px; }
+    .fp-info-stats { display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }
+    .fp-stat { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .fp-stat-label { font-size: 11px; color: rgba(255,255,255,0.45); letter-spacing: 0.04em; text-transform: uppercase; }
+    .fp-stat-val { font-size: 13px; color: white; font-weight: 400; }
+    .fp-cta { display: inline-block; background: var(--gold); color: white; padding: 12px 28px; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; transition: opacity 0.2s; align-self: flex-start; }
+    .fp-cta:hover { opacity: 0.88; }
+    .fp-placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; min-height: 400px; background: #f4f0eb; }
+    .fp-placeholder p { font-size: 14px; color: var(--muted); text-align: center; max-width: 220px; line-height: 1.7; }
+    @media (max-width: 900px) { .fp-grid { grid-template-columns: 1fr 1fr; } .fp-display-inner { grid-template-columns: 1fr; } .fp-img-wrap { min-height: 300px; padding: 24px; } .fp-info { padding: 32px 24px; } }
+    @media (max-width: 500px) { .fp-grid { grid-template-columns: 1fr; } }
 
-    /* Plan tabs */
-    .fp-selector { display: flex; max-width: 1100px; margin: 0 auto 48px; padding: 0 56px; border-bottom: 1px solid var(--border); }
-    .fp-sel-tab { flex: 1; padding: 16px 12px 18px; background: transparent; border: none; border-bottom: 2px solid transparent; margin-bottom: -1px; cursor: pointer; text-align: left; transition: all 0.18s; display: flex; flex-direction: column; gap: 4px; }
-    .fp-sel-tab:hover:not(.active) .fp-sel-name { color: var(--navy); }
-    .fp-sel-tab.active { border-bottom-color: var(--navy); }
-    .fp-sel-beds { font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
-    .fp-sel-name { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 400; color: #999; line-height: 1.1; transition: color 0.15s; }
-    .fp-sel-tab.active .fp-sel-name { color: var(--navy); }
-
-    /* Plan display */
-    .fp-display { display: none; max-width: 1100px; margin: 0 auto; padding: 0 56px; }
-    .fp-display.active { display: block; }
-    .fp-levels { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
-    .fp-level-block { background: var(--warm); overflow: hidden; }
-    .fp-level-label { padding: 10px 18px; border-bottom: 1px solid rgba(0,0,0,0.07); display: flex; align-items: center; gap: 8px; }
-    .fp-level-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
-    .fp-level-label span { font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
-    .fp-level-img { padding: 24px; display: flex; align-items: center; justify-content: center; min-height: 300px; }
-    .fp-level-img img { max-width: 100%; max-height: 340px; object-fit: contain; display: block; cursor: zoom-in; }
-    .fp-level-placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; min-height: 300px; }
-    .fp-level-placeholder p { font-size: 13px; color: var(--muted); text-align: center; max-width: 200px; line-height: 1.6; }
-    .fp-specs-row { display: flex; align-items: center; gap: 28px; padding: 18px 0; border-top: 1px solid var(--border); flex-wrap: wrap; }
-    .fp-specs-row > span:first-child { font-size: 13px; color: var(--muted); flex: 1; }
-    .fp-cta { display: inline-block; font-size: 11px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--navy); text-decoration: none; border-bottom: 1px solid var(--navy); padding-bottom: 2px; transition: color 0.2s, border-color 0.2s; }
-    .fp-cta:hover { color: var(--gold); border-color: var(--gold); }
-
-    /* RV3 plans */
-    .rv3-intro { padding: 0 56px; max-width: 1100px; margin: 0 auto; }
-    .rv3-intro-note { font-size: 14px; color: var(--muted); line-height: 1.8; margin-bottom: 36px; max-width: 620px; }
-    .rv3-plans-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 36px; }
-    .rv3-plan-card { background: var(--warm); padding: 28px 20px 24px; display: flex; flex-direction: column; gap: 6px; }
-    .rv3-plan-num { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 300; color: var(--navy); line-height: 1; }
-    .rv3-plan-label { font-size: 10px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
-    .rv3-plan-tag { font-size: 9px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); margin-top: 6px; }
-    .rv3-contact-note { font-size: 13px; color: var(--muted); line-height: 1.75; }
-    .rv3-contact-note a { color: var(--navy); text-decoration: none; border-bottom: 1px solid var(--border); transition: border-color 0.2s; }
-    .rv3-contact-note a:hover { border-color: var(--navy); }
-
-    /* VIRTUAL TOUR */
-    .tour-section { background: #16202e; padding: 80px 56px; }
-    .tour-hdr { margin-bottom: 40px; }
-    .tour-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(32px, 4vw, 50px); font-weight: 300; color: white; line-height: 1.1; }
-    .tour-desc { color: rgba(255,255,255,0.38); font-size: 13px; margin-top: 10px; }
-    .tour-unit-tabs { display: flex; gap: 12px; margin-bottom: 44px; flex-wrap: wrap; }
-    .tour-tab { flex: 1; min-width: 130px; padding: 20px 24px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); cursor: pointer; text-align: left; transition: all 0.2s; display: flex; flex-direction: column; gap: 5px; }
-    .tour-tab:hover { background: rgba(255,255,255,0.09); border-color: rgba(255,255,255,0.22); }
-    .tour-tab.active { background: rgba(154,117,64,0.14); border-color: #9a7540; }
-    .tour-tab-beds { font-family: 'Cormorant Garamond', serif; font-size: 30px; font-weight: 300; color: rgba(255,255,255,0.45); line-height: 1; transition: color 0.2s; }
-    .tour-tab:hover .tour-tab-beds { color: rgba(255,255,255,0.75); }
-    .tour-tab.active .tour-tab-beds { color: white; }
-    .tour-tab-label { font-size: 10px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.3); transition: color 0.2s; }
-    .tour-tab:hover .tour-tab-label { color: rgba(255,255,255,0.55); }
-    .tour-tab.active .tour-tab-label { color: #9a7540; }
-    .tour-tab-tag { font-size: 9px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.2); margin-top: 2px; transition: color 0.2s; }
-    .tour-tab:hover .tour-tab-tag { color: rgba(255,255,255,0.4); }
-    .tour-tab.active .tour-tab-tag { color: rgba(154,117,64,0.7); }
-    .tour-unit { display: none; max-width: 1300px; margin: 0 auto; }
+    /* VIRTUAL TOURS */
+    .tour-tabs { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 32px; }
+    .tour-tab { flex: 1; min-width: 120px; padding: 18px 20px; background: white; border: 1px solid var(--border); cursor: pointer; text-align: left; transition: all 0.2s; display: flex; flex-direction: column; gap: 4px; }
+    .tour-tab:hover { border-color: var(--navy); }
+    .tour-tab.active { border-color: var(--navy); background: var(--navy); }
+    .tour-tab-num { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300; color: var(--muted); line-height: 1; transition: color 0.2s; }
+    .tour-tab.active .tour-tab-num { color: white; }
+    .tour-tab-label { font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); transition: color 0.2s; }
+    .tour-tab.active .tour-tab-label { color: var(--gold); }
+    .tour-tab-sub { font-size: 10px; color: rgba(155,155,155,0.8); }
+    .tour-tab.active .tour-tab-sub { color: rgba(255,255,255,0.4); }
+    .tour-unit { display: none; }
     .tour-unit.active { display: block; }
     .tour-embed { width: 100%; aspect-ratio: 16/9; border: 0; display: block; }
 
-    /* MAP */
-    .map-section { background: var(--warm); padding: 80px 56px; }
-    .map-inner { max-width: 1200px; margin: 0 auto; }
-    .map-hdr { margin-bottom: 40px; }
-    .map-layout { display: grid; grid-template-columns: 1fr 320px; gap: 28px; align-items: start; }
-    .map-embed-wrap { overflow: hidden; height: 460px; isolation: isolate; }
-    #richland-map { width: 100%; height: 100%; }
-    .leaflet-popup-content-wrapper { border-radius: 0; box-shadow: 0 4px 20px rgba(0,0,0,0.12); }
-    .leaflet-popup-content { margin: 14px 16px; }
-    .map-properties { display: flex; flex-direction: column; }
-    .map-prop-card { background: white; padding: 26px 26px 22px; border-top: 1px solid var(--border); }
-    .map-prop-card:first-child { border-top: none; }
-    .map-prop-status { font-size: 9px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 8px; }
-    .map-prop-name { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 400; color: var(--navy); margin-bottom: 8px; line-height: 1.2; }
-    .map-prop-detail { font-size: 12px; color: var(--muted); line-height: 1.75; }
-    .map-prop-detail strong { color: var(--text); font-weight: 500; }
-    .map-prop-link { display: inline-block; margin-top: 12px; font-size: 11px; color: var(--navy); text-decoration: none; border-bottom: 1px solid var(--border); padding-bottom: 1px; transition: border-color 0.2s; }
-    .map-prop-link:hover { border-color: var(--navy); }
-
     /* CONTACT */
     .contact-section { background: var(--navy); padding: 88px 56px; }
-    .contact-inner { max-width: 740px; margin: 0 auto; }
-    .contact-section .section-title { color: white; }
-    .contact-sub { color: rgba(255,255,255,0.4); font-size: 14px; font-weight: 300; margin: 12px 0 44px; }
-    .contact-form { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    .contact-form input, .contact-form select, .contact-form textarea { width: 100%; padding: 13px 14px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: white; font-size: 13px; font-family: 'Inter', sans-serif; font-weight: 300; outline: none; transition: border-color 0.2s; appearance: none; }
-    .contact-form input::placeholder, .contact-form textarea::placeholder { color: rgba(255,255,255,0.3); }
-    .contact-form input:focus, .contact-form textarea:focus, .contact-form select:focus { border-color: rgba(255,255,255,0.4); }
-    .contact-form select option { color: black; background: white; }
-    .contact-form textarea { grid-column: 1 / -1; resize: none; height: 96px; }
-    .contact-submit { grid-column: 1 / -1; background: white; color: var(--navy); border: none; padding: 15px; font-size: 11px; font-weight: 500; letter-spacing: 0.07em; text-transform: uppercase; cursor: pointer; font-family: 'Inter', sans-serif; transition: background 0.2s; }
-    .contact-submit:hover { background: var(--cream); }
+    .contact-inner { max-width: 680px; margin: 0 auto; }
+    .contact-section .section-title { color: white; margin-bottom: 8px; }
+    .contact-section .section-label { color: var(--gold); }
+    .contact-sub { color: rgba(255,255,255,0.4); font-size: 14px; font-weight: 300; margin-bottom: 40px; }
+    .contact-form { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .contact-form input, .contact-form select, .contact-form textarea { width: 100%; padding: 12px 14px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: white; font-size: 13px; font-family: 'Inter', sans-serif; font-weight: 300; outline: none; transition: border-color 0.2s; appearance: none; }
+    .contact-form input::placeholder, .contact-form textarea::placeholder { color: rgba(255,255,255,0.28); }
+    .contact-form input:focus, .contact-form textarea:focus, .contact-form select:focus { border-color: rgba(255,255,255,0.38); }
+    .contact-form select option { background: var(--navy); }
+    .contact-form textarea { grid-column: 1/-1; resize: none; height: 90px; }
+    .contact-submit { grid-column: 1/-1; background: var(--gold); color: white; border: none; padding: 14px; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; font-family: 'Inter', sans-serif; transition: opacity 0.2s; }
+    .contact-submit:hover { opacity: 0.88; }
     .success-msg { display: none; margin-top: 20px; color: rgba(255,255,255,0.5); font-size: 13px; }
     .success-msg.show { display: block; }
+    @media (max-width: 768px) { .contact-section { padding: 64px 24px; } .contact-form { grid-template-columns: 1fr; } .contact-form textarea, .contact-submit { grid-column: 1; } }
 
     /* FOOTER */
-    footer { background: #0d1520; }
-    .footer-inner { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 64px; padding: 72px 56px 56px; max-width: 1280px; margin: 0 auto; border-bottom: 1px solid rgba(255,255,255,0.06); }
-    .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 300; color: white; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 16px; }
-    .footer-tagline { font-size: 13px; color: rgba(255,255,255,0.35); line-height: 1.8; margin-bottom: 20px; font-weight: 300; max-width: 280px; }
-    .footer-status { font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 36px; }
-    .footer-developer { padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.07); }
-    .footer-dev-label { font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.2); }
-    .footer-col-title { font-size: 9px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.28); margin-bottom: 22px; }
-    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 14px; margin-bottom: 40px; }
-    .footer-links a { font-size: 14px; color: rgba(255,255,255,0.5); text-decoration: none; font-weight: 300; transition: color 0.2s; }
-    .footer-links a:hover { color: white; }
-    .footer-social-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
-    .footer-social-list a { font-size: 13px; color: rgba(255,255,255,0.4); text-decoration: none; font-weight: 300; transition: color 0.2s; display: flex; align-items: center; gap: 8px; }
-    .footer-social-list a:hover { color: rgba(255,255,255,0.75); }
-    .footer-social-list svg { flex-shrink: 0; opacity: 0.6; }
-    .footer-addr { font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.75; margin-bottom: 18px; font-weight: 300; }
-    .footer-phone { display: block; font-size: 15px; color: rgba(255,255,255,0.6); text-decoration: none; margin-bottom: 10px; transition: color 0.2s; font-weight: 300; letter-spacing: 0.01em; }
-    .footer-phone:hover { color: white; }
-    .footer-email { display: block; font-size: 13px; color: rgba(255,255,255,0.35); text-decoration: none; transition: color 0.2s; font-weight: 300; word-break: break-all; }
-    .footer-email:hover { color: rgba(255,255,255,0.65); }
-    .footer-bottom { padding: 20px 56px; display: flex; justify-content: space-between; align-items: center; max-width: 1280px; margin: 0 auto; }
-    .footer-bottom span { font-size: 11px; color: rgba(255,255,255,0.16); }
+    footer { background: #0e1824; padding: 48px 56px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; border-top: 1px solid rgba(255,255,255,0.05); }
+    .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 300; color: rgba(255,255,255,0.4); letter-spacing: 0.1em; text-transform: uppercase; }
+    .footer-links-row { display: flex; gap: 28px; flex-wrap: wrap; }
+    .footer-links-row a { font-size: 11px; color: rgba(255,255,255,0.25); text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s; }
+    .footer-links-row a:hover { color: rgba(255,255,255,0.55); }
+    .footer-copy { font-size: 11px; color: rgba(255,255,255,0.18); }
+    @media (max-width: 768px) { footer { padding: 40px 24px; flex-direction: column; align-items: flex-start; gap: 16px; } }
 
     /* LIGHTBOX */
-    .lightbox { display: none; position: fixed; inset: 0; background: rgba(5,10,18,0.97); z-index: 500; align-items: center; justify-content: center; padding: 40px; }
+    .lightbox { display: none; position: fixed; inset: 0; background: rgba(5,10,18,0.97); z-index: 600; align-items: center; justify-content: center; padding: 40px; }
     .lightbox.open { display: flex; }
     .lightbox img { max-width: 90vw; max-height: 90vh; object-fit: contain; }
-    .lb-close { position: absolute; top: 24px; right: 28px; color: rgba(255,255,255,0.6); font-size: 32px; line-height: 1; cursor: pointer; transition: color 0.2s; }
+    .lb-close { position: absolute; top: 20px; right: 24px; color: rgba(255,255,255,0.5); font-size: 36px; cursor: pointer; line-height: 1; transition: color 0.2s; }
     .lb-close:hover { color: white; }
-
-    /* RESPONSIVE */
-    @media (max-width: 1000px) {
-      .split-section { grid-template-columns: 1fr; }
-      .split-panel { min-height: 420px; }
-      .fp-selector { padding: 0 24px; }
-      .fp-display { padding: 0 24px; }
-      .map-layout { grid-template-columns: 1fr; }
-      .map-embed-wrap { height: 360px; }
-      .rv3-plans-grid { grid-template-columns: repeat(3, 1fr); }
-    }
-    @media (max-width: 900px) {
-      nav { padding: 16px 24px; }
-      .hero-content { padding: 0 32px 64px; }
-      .plans-header { padding: 0 24px; }
-      .plans-section { padding: 64px 0 80px; }
-      .tour-section { padding: 64px 24px; }
-      .map-section { padding: 64px 24px; }
-      .contact-section { padding: 72px 24px; }
-      .contact-form { grid-template-columns: 1fr; }
-      .contact-form textarea, .contact-submit { grid-column: 1; }
-      .footer-inner { grid-template-columns: 1fr; gap: 40px; padding: 48px 24px 40px; }
-      .footer-bottom { padding: 18px 24px; flex-direction: column; gap: 6px; text-align: center; }
-      .split-content { padding: 36px 32px; }
-      .rv3-intro { padding: 0 24px; }
-    }
-    @media (max-width: 700px) {
-      .fp-levels { grid-template-columns: 1fr; }
-      .fp-sel-tab { padding: 12px 8px 14px; }
-      .fp-sel-name { font-size: 16px; }
-      .plans-header { flex-direction: column; align-items: flex-start; }
-      .rv3-plans-grid { grid-template-columns: repeat(2, 1fr); }
-      .tour-unit-tabs { gap: 8px; }
-    }
   </style>
 </head>
 <body>
 
-  <!-- ANNOUNCEMENT BANNER -->
-  <div class="announce-bar">
-    <span class="announce-text">Now Leasing &mdash; Fall 2027</span>
-    <div class="announce-dot"></div>
-    <span class="announce-text">Limited Spots Available</span>
-    <div class="announce-dot"></div>
-    <a href="tel:3347502059" class="announce-phone">(334) 750-2059</a>
-    <div class="announce-dot"></div>
-    <a href="#contact" class="announce-cta">Apply Now</a>
+  <!-- BANNER -->
+  <div class="banner">
+    <span class="banner-text">Now Leasing &mdash; Fall 2027</span>
+    <div class="banner-dot"></div>
+    <span class="banner-text">Limited Availability</span>
+    <div class="banner-dot"></div>
+    <span class="banner-text">(334) 750-2059</span>
+    <div class="banner-dot"></div>
+    <a href="#contact" class="banner-cta">Apply Now</a>
   </div>
 
   <!-- NAV -->
   <nav>
     <a href="#" class="nav-logo">Richland Village</a>
     <div class="nav-links">
-      <a href="#plans">Floor Plans</a>
-      <a href="#tour">Virtual Tour</a>
-      <a href="#map">Find Us</a>
-      <a href="#contact" class="nav-cta">Inquire Now</a>
+      <a href="#map">Locations</a>
+      <a href="#communities">Communities</a>
+      <a href="#contact" class="nav-apply">Apply Now</a>
     </div>
   </nav>
 
@@ -280,251 +219,372 @@
     <img class="hero-bg" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/exterior/exterior-rv-cover.jpg" alt="Richland Village">
     <div class="hero-overlay"></div>
     <div class="hero-content">
-      <span class="hero-tag">Auburn, Alabama &nbsp;&middot;&nbsp; Now Leasing</span>
+      <span class="hero-eyebrow">Auburn, Alabama &nbsp;&middot;&nbsp; Now Leasing Fall 2027</span>
       <h1 class="hero-title">Richland<br><em>Village</em></h1>
-      <p class="hero-sub">Two premier townhome communities &mdash; thoughtfully designed, minutes apart, and built to last.</p>
+      <p class="hero-sub">Two distinct communities in Auburn &mdash; Richland Village and Richland Village III &mdash; offering thoughtfully designed townhomes and cottages minutes from campus.</p>
       <div class="hero-actions">
-        <a href="#plans" class="btn-primary">View Floor Plans</a>
-        <a href="#tour" class="btn-ghost">Take a Virtual Tour</a>
+        <a href="#communities" class="btn btn-white">Explore Communities</a>
+        <a href="#map" class="btn btn-outline">View Locations</a>
       </div>
     </div>
   </section>
-
-  <!-- COMMUNITY SPLIT -->
-  <div class="split-section">
-    <div class="split-panel">
-      <img class="split-bg" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/exterior/exterior-rv-cover.jpg" alt="Richland Village">
-      <div class="split-overlay"></div>
-      <div class="split-content">
-        <span class="split-badge">Now Leasing</span>
-        <h2 class="split-name">Richland Village</h2>
-        <p class="split-addr">538 Richland Road &middot; Auburn, AL</p>
-        <p class="split-desc">Open-concept townhomes with timeless brick architecture, designer finishes, and private outdoor living. Available in 2, 3 and 4 bedroom layouts.</p>
-        <div class="split-meta">
-          <div class="split-meta-item"><strong>4</strong>Floor Plans</div>
-          <div class="split-meta-div"></div>
-          <div class="split-meta-item"><strong>2&ndash;4</strong>Bedrooms</div>
-          <div class="split-meta-div"></div>
-          <div class="split-meta-item"><strong>4</strong>Units to Tour</div>
-        </div>
-        <a href="#plans" class="split-cta">View Floor Plans</a>
-      </div>
-    </div>
-    <div class="split-panel">
-      <img class="split-bg" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/exterior/exterior-rv3-cover.jpg" alt="Richland Village III" style="object-position: center 30%;">
-      <div class="split-overlay"></div>
-      <div class="split-content">
-        <span class="split-badge">Now Leasing</span>
-        <h2 class="split-name">Richland Village III</h2>
-        <p class="split-addr">1256 Shug Jordan Pkwy &middot; Auburn, AL</p>
-        <p class="split-desc">The next evolution of Richland Village &mdash; just minutes away. Five floor plans, including new designs exclusive to Phase III, in a prime Auburn location.</p>
-        <div class="split-meta">
-          <div class="split-meta-item"><strong>5</strong>Floor Plans</div>
-          <div class="split-meta-div"></div>
-          <div class="split-meta-item"><strong>New</strong>Designs</div>
-          <div class="split-meta-div"></div>
-          <div class="split-meta-item"><strong>Prime</strong>Location</div>
-        </div>
-        <a href="#plans" class="split-cta">Explore Plans</a>
-      </div>
-    </div>
-  </div>
 
   <!-- MAP -->
   <section class="map-section" id="map">
     <div class="map-inner">
       <div class="map-hdr">
-        <h2 class="section-title">Find Us</h2>
+        <span class="section-label">Auburn, Alabama</span>
+        <h2 class="section-title">Two Locations</h2>
       </div>
       <div class="map-layout">
-        <div class="map-embed-wrap">
-          <div id="richland-map"></div>
+        <div class="map-wrap">
+          <div id="rv-map"></div>
         </div>
-        <div class="map-properties">
-          <div class="map-prop-card">
-            <span class="map-prop-status">Now Leasing</span>
-            <h3 class="map-prop-name">Richland Village</h3>
-            <p class="map-prop-detail"><strong>538 Richland Road</strong><br>Auburn, Alabama<br>4 floor plans &middot; 2&ndash;4 bedrooms</p>
-            <a href="#contact" class="map-prop-link">Schedule a Showing</a>
+        <div class="map-cards">
+          <div class="map-card" onclick="document.getElementById('communities').scrollIntoView({behavior:'smooth'});selectComm('rv')">
+            <span class="map-card-tag">Richland Village</span>
+            <div class="map-card-name">538 Richland Road</div>
+            <div class="map-card-detail">Auburn, AL 36832<br>10 Townhomes &middot; 4 Floor Plans</div>
+            <a class="map-card-link">View Floor Plans &rsaquo;</a>
           </div>
-          <div class="map-prop-card">
-            <span class="map-prop-status">Now Leasing</span>
-            <h3 class="map-prop-name">Richland Village III</h3>
-            <p class="map-prop-detail"><strong>1256 Shug Jordan Pkwy</strong><br>Auburn, Alabama<br>5 floor plans &middot; includes new Phase III designs</p>
-            <a href="#contact" class="map-prop-link">Join the Interest List</a>
+          <div class="map-card" onclick="document.getElementById('communities').scrollIntoView({behavior:'smooth'});selectComm('rv3')">
+            <span class="map-card-tag">Richland Village III</span>
+            <div class="map-card-name">1256 Shug Jordan Pkwy</div>
+            <div class="map-card-detail">Auburn, AL 36832<br>11 Units &middot; 3 Cottages &amp; 8 Townhomes</div>
+            <a class="map-card-link">View Floor Plans &rsaquo;</a>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- FLOOR PLANS -->
-  <section class="plans-section" id="plans">
-    <div class="plans-header">
-      <h2 class="section-title">Floor Plans</h2>
-      <div class="comm-toggle">
-        <button class="comm-tab active" onclick="switchComm('rv', this)">Richland Village</button>
-        <button class="comm-tab" onclick="switchComm('rv3', this)">Richland Village III</button>
+  <!-- COMMUNITIES -->
+  <section class="communities-section" id="communities">
+    <div class="communities-inner">
+      <div class="comm-hdr">
+        <span class="section-label">Now Leasing</span>
+        <h2 class="section-title">Select a Community</h2>
       </div>
-    </div>
+      <div class="comm-cards">
+        <div class="comm-card active" id="card-rv" onclick="selectComm('rv')">
+          <img class="comm-card-bg" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/exterior/exterior-rv-cover.jpg" alt="Richland Village">
+          <div class="comm-card-overlay"></div>
+          <div class="comm-card-content">
+            <span class="comm-card-badge">Now Leasing &middot; Fall 2027</span>
+            <h3 class="comm-card-name">Richland Village</h3>
+            <div class="comm-card-addr">538 Richland Road &middot; Auburn, AL</div>
+            <div class="comm-card-units">10 Townhomes<br>2, 3 &amp; 4 Bedroom layouts</div>
+            <span class="comm-card-btn">View Floor Plans &amp; Tours &rsaquo;</span>
+          </div>
+          <div class="comm-card-indicator"></div>
+        </div>
+        <div class="comm-card" id="card-rv3" onclick="selectComm('rv3')">
+          <img class="comm-card-bg" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/exterior/exterior-rv3-cover.jpg" alt="Richland Village III" style="object-position:center 30%">
+          <div class="comm-card-overlay"></div>
+          <div class="comm-card-content">
+            <span class="comm-card-badge">Now Leasing &middot; Fall 2027</span>
+            <h3 class="comm-card-name">Richland Village III</h3>
+            <div class="comm-card-addr">1256 Shug Jordan Pkwy &middot; Auburn, AL</div>
+            <div class="comm-card-units">11 Units &mdash; 3 Cottages &amp; 8 Townhomes<br>Multiple floor plans available</div>
+            <span class="comm-card-btn">View Floor Plans &rsaquo;</span>
+          </div>
+          <div class="comm-card-indicator"></div>
+        </div>
+      </div>
 
-    <!-- Richland Village Plans -->
-    <div class="comm-plans active" id="comm-rv">
-      <div class="fp-selector">
-        <button class="fp-sel-tab active" onclick="selectPlan('fp-rv-2br', this)">
-          <span class="fp-sel-beds">2 Bedroom</span>
-          <span class="fp-sel-name">2 Bed &middot; 2.5 Bath</span>
-        </button>
-        <button class="fp-sel-tab" onclick="selectPlan('fp-rv-3br', this)">
-          <span class="fp-sel-beds">3 Bedroom</span>
-          <span class="fp-sel-name">3 Bed &middot; 2.5 Bath</span>
-        </button>
-        <button class="fp-sel-tab" onclick="selectPlan('fp-rv-3br-den', this)">
-          <span class="fp-sel-beds">3BR + Den</span>
-          <span class="fp-sel-name">3 Bed &middot; 3 Bath</span>
-        </button>
-        <button class="fp-sel-tab" onclick="selectPlan('fp-rv-4br', this)">
-          <span class="fp-sel-beds">4 Bedroom</span>
-          <span class="fp-sel-name">4 Bed &middot; 3.5 Bath</span>
-        </button>
-        <button class="fp-sel-tab" onclick="selectPlan('fp-rv-4br-45', this)">
-          <span class="fp-sel-beds">4 Bedroom</span>
-          <span class="fp-sel-name">4 Bed &middot; 4.5 Bath</span>
-        </button>
-      </div>
-      <div class="fp-display active" id="fp-rv-2br">
-        <div class="fp-level-block" style="margin-bottom:16px;">
-          <div class="fp-level-label"><div class="fp-level-dot"></div><span>1,200 sq ft &nbsp;&middot;&nbsp; All Levels</span></div>
-          <div class="fp-level-img"><img src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/floorplans/fp-2br-combined.jpg" alt="2 Bed 2.5 Bath Floor Plan" onclick="openLightbox(this.src)"></div>
-        </div>
-        <div class="fp-specs-row"><span>2 Bed &nbsp;&middot;&nbsp; 2.5 Bath &nbsp;&middot;&nbsp; 1,200 sq ft</span><a href="#contact" class="fp-cta">Schedule a Tour</a></div>
-      </div>
-      <div class="fp-display" id="fp-rv-3br">
-        <div class="fp-levels">
-          <div class="fp-level-block">
-            <div class="fp-level-label"><div class="fp-level-dot"></div><span>Ground Level</span></div>
-            <div class="fp-level-img"><img src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/floorplans/colored-3br-ground.jpg" alt="3BR Ground" onclick="openLightbox(this.src)"></div>
+      <!-- RICHLAND VILLAGE DETAIL -->
+      <div class="comm-detail active" id="detail-rv">
+        <div class="detail-inner">
+          <div class="detail-tabs">
+            <button class="detail-tab active" onclick="switchTab('rv','plans',this)">Floor Plans</button>
+            <button class="detail-tab" onclick="switchTab('rv','tours',this)">Virtual Tours</button>
           </div>
-          <div class="fp-level-block">
-            <div class="fp-level-label"><div class="fp-level-dot"></div><span>Second Level</span></div>
-            <div class="fp-level-img"><img src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/floorplans/colored-3br-second.jpg" alt="3BR Second" onclick="openLightbox(this.src)"></div>
+
+          <!-- RV FLOOR PLANS -->
+          <div class="detail-panel active" id="rv-plans">
+            <div class="fp-grid" id="rv-fp-grid">
+              <div class="fp-thumb active" onclick="selectPlan('rv','fp-rv-2br',this)">
+                <img class="fp-thumb-img" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/floorplans/fp-2br.jpg" alt="2BR">
+                <div class="fp-thumb-label">
+                  <span class="fp-thumb-beds">2 Bedroom</span>
+                  <div class="fp-thumb-name">2 Bed &middot; 2.5 Bath</div>
+                  <div class="fp-thumb-sqft">1,200 sq ft</div>
+                </div>
+              </div>
+              <div class="fp-thumb" onclick="selectPlan('rv','fp-rv-3br',this)">
+                <img class="fp-thumb-img" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/floorplans/fp-3br.jpg" alt="3BR">
+                <div class="fp-thumb-label">
+                  <span class="fp-thumb-beds">3 Bedroom</span>
+                  <div class="fp-thumb-name">3 Bed &middot; 3.5 Bath</div>
+                  <div class="fp-thumb-sqft">&nbsp;</div>
+                </div>
+              </div>
+              <div class="fp-thumb" onclick="selectPlan('rv','fp-rv-4br-35',this)">
+                <img class="fp-thumb-img" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/floorplans/fp-4br-35.jpg" alt="4BR 3.5BA">
+                <div class="fp-thumb-label">
+                  <span class="fp-thumb-beds">4 Bedroom</span>
+                  <div class="fp-thumb-name">4 Bed &middot; 3.5 Bath</div>
+                  <div class="fp-thumb-sqft">1,772 sq ft</div>
+                </div>
+              </div>
+              <div class="fp-thumb" onclick="selectPlan('rv','fp-rv-placeholder',this)">
+                <div class="fp-placeholder" style="min-height:160px;gap:10px;">
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#C9B99A" stroke-width="1.2"><rect x="2" y="3" width="20" height="14" rx="1"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                  <p style="font-size:11px;color:var(--muted);text-align:center;padding:0 8px;">Coming Soon</p>
+                </div>
+                <div class="fp-thumb-label">
+                  <span class="fp-thumb-beds">4 Bedroom</span>
+                  <div class="fp-thumb-name">4 Bed &middot; 4.5 Bath</div>
+                  <div class="fp-thumb-sqft">Floor plan pending</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="fp-display" id="fp-rv-2br" style="display:block">
+              <div class="fp-display-inner">
+                <div class="fp-img-wrap"><img src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/floorplans/fp-2br.jpg" alt="2BR Floor Plan" onclick="openLightbox(this.src)"></div>
+                <div class="fp-info">
+                  <span class="fp-info-tag">Richland Village</span>
+                  <div class="fp-info-title">2 Bed · 2.5 Bath</div>
+                  <div class="fp-info-stats">
+                    <div class="fp-stat"><span class="fp-stat-label">Size</span><span class="fp-stat-val">1,200 sq ft</span></div>
+                    <div class="fp-stat"><span class="fp-stat-label">Bedrooms</span><span class="fp-stat-val">2</span></div>
+                    <div class="fp-stat"><span class="fp-stat-label">Bathrooms</span><span class="fp-stat-val">2.5</span></div>
+                    <div class="fp-stat"><span class="fp-stat-label">Stories</span><span class="fp-stat-val">2</span></div>
+                    <div class="fp-stat"><span class="fp-stat-label">Community</span><span class="fp-stat-val">Richland Village</span></div>
+                  </div>
+                  <a href="#contact" class="fp-cta">Schedule a Showing</a>
+                </div>
+              </div>
+            </div>
+            <div class="fp-display" id="fp-rv-3br">
+              <div class="fp-display-inner">
+                <div class="fp-img-wrap"><img src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/floorplans/fp-3br.jpg" alt="3BR Floor Plan" onclick="openLightbox(this.src)"></div>
+                <div class="fp-info">
+                  <span class="fp-info-tag">Richland Village</span>
+                  <div class="fp-info-title">3 Bed · 3.5 Bath</div>
+                  <div class="fp-info-stats">
+                    <div class="fp-stat"><span class="fp-stat-label">Bedrooms</span><span class="fp-stat-val">3</span></div>
+                    <div class="fp-stat"><span class="fp-stat-label">Bathrooms</span><span class="fp-stat-val">3.5</span></div>
+                    <div class="fp-stat"><span class="fp-stat-label">Stories</span><span class="fp-stat-val">2</span></div>
+                    <div class="fp-stat"><span class="fp-stat-label">Community</span><span class="fp-stat-val">Richland Village</span></div>
+                  </div>
+                  <a href="#contact" class="fp-cta">Schedule a Showing</a>
+                </div>
+              </div>
+            </div>
+            <div class="fp-display" id="fp-rv-4br-35">
+              <div class="fp-display-inner">
+                <div class="fp-img-wrap"><img src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/floorplans/fp-4br-35.jpg" alt="4BR 3.5BA Floor Plan" onclick="openLightbox(this.src)"></div>
+                <div class="fp-info">
+                  <span class="fp-info-tag">Richland Village</span>
+                  <div class="fp-info-title">4 Bed · 3.5 Bath</div>
+                  <div class="fp-info-stats">
+                    <div class="fp-stat"><span class="fp-stat-label">Size</span><span class="fp-stat-val">1,772 sq ft</span></div>
+                    <div class="fp-stat"><span class="fp-stat-label">Bedrooms</span><span class="fp-stat-val">4</span></div>
+                    <div class="fp-stat"><span class="fp-stat-label">Bathrooms</span><span class="fp-stat-val">3.5</span></div>
+                    <div class="fp-stat"><span class="fp-stat-label">Stories</span><span class="fp-stat-val">2</span></div>
+                    <div class="fp-stat"><span class="fp-stat-label">Community</span><span class="fp-stat-val">Richland Village</span></div>
+                  </div>
+                  <a href="#contact" class="fp-cta">Schedule a Showing</a>
+                </div>
+              </div>
+            </div>
+            <div class="fp-display" id="fp-rv-placeholder">
+              <div class="fp-display-inner">
+                <div class="fp-placeholder" style="min-height:400px;">
+                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#C9B99A" stroke-width="1.1"><rect x="2" y="3" width="20" height="14" rx="1"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                  <p>Floor plan rendering coming soon</p>
+                  <a href="#contact" style="font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--navy);text-decoration:none;">Contact Us &rsaquo;</a>
+                </div>
+                <div class="fp-info">
+                  <span class="fp-info-tag">Richland Village</span>
+                  <div class="fp-info-title">4 Bed · 4.5 Bath</div>
+                  <div class="fp-info-stats">
+                    <div class="fp-stat"><span class="fp-stat-label">Bedrooms</span><span class="fp-stat-val">4</span></div>
+                    <div class="fp-stat"><span class="fp-stat-label">Bathrooms</span><span class="fp-stat-val">4.5</span></div>
+                    <div class="fp-stat"><span class="fp-stat-label">Community</span><span class="fp-stat-val">Richland Village</span></div>
+                  </div>
+                  <a href="#contact" class="fp-cta">Get Details</a>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="fp-specs-row"><span>3 Bed &nbsp;&middot;&nbsp; 2.5 Bath &nbsp;&middot;&nbsp; 2-Story</span><a href="#contact" class="fp-cta">Schedule a Tour</a></div>
-      </div>
-      <div class="fp-display" id="fp-rv-3br-den">
-        <div class="fp-levels">
-          <div class="fp-level-block">
-            <div class="fp-level-label"><div class="fp-level-dot"></div><span>Ground Level</span></div>
-            <div class="fp-level-img"><img src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/floorplans/colored-3br-den-ground.jpg" alt="3BR+Den Ground" onclick="openLightbox(this.src)"></div>
-          </div>
-          <div class="fp-level-block">
-            <div class="fp-level-label"><div class="fp-level-dot"></div><span>Second Level</span></div>
-            <div class="fp-level-img"><img src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/floorplans/colored-3br-den-second.jpg" alt="3BR+Den Second" onclick="openLightbox(this.src)"></div>
-          </div>
-        </div>
-        <div class="fp-specs-row"><span>3 Bed &nbsp;&middot;&nbsp; 3 Bath &nbsp;&middot;&nbsp; + Den</span><a href="#contact" class="fp-cta">Schedule a Tour</a></div>
-      </div>
-      <div class="fp-display" id="fp-rv-4br">
-        <div class="fp-level-block" style="margin-bottom:16px;">
-          <div class="fp-level-label"><div class="fp-level-dot"></div><span>1,772 sq ft &nbsp;&middot;&nbsp; All Levels</span></div>
-          <div class="fp-level-img"><img src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/floorplans/fp-4br-combined.jpg" alt="4 Bed 3.5 Bath Floor Plan" onclick="openLightbox(this.src)"></div>
-        </div>
-        <div class="fp-specs-row"><span>4 Bed &nbsp;&middot;&nbsp; 3.5 Bath &nbsp;&middot;&nbsp; 1,772 sq ft</span><a href="#contact" class="fp-cta">Schedule a Tour</a></div>
-      </div>
-      <div class="fp-display" id="fp-rv-4br-45">
-        <div class="fp-level-block" style="margin-bottom:16px;">
-          <div class="fp-level-label"><div class="fp-level-dot"></div><span>4 Bed &middot; 4.5 Bath &middot; All Levels</span></div>
-          <div class="fp-level-img">
-            <div class="fp-level-placeholder">
-              <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#C9B99A" stroke-width="1.1"><rect x="2" y="3" width="20" height="14" rx="1"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-              <p>Floor plan rendering coming soon</p>
-              <a href="#contact" style="font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--navy);text-decoration:none;">Contact Us for Details &rsaquo;</a>
+
+          <!-- RV VIRTUAL TOURS -->
+          <div class="detail-panel" id="rv-tours">
+            <div class="tour-tabs">
+              <button class="tour-tab active" onclick="switchTour('rv','tour-rv-2br',this)">
+                <span class="tour-tab-num">2</span>
+                <span class="tour-tab-label">Bed / 2.5 Bath</span>
+              </button>
+              <button class="tour-tab" onclick="switchTour('rv','tour-rv-3br',this)">
+                <span class="tour-tab-num">3</span>
+                <span class="tour-tab-label">Bed / 3.5 Bath</span>
+              </button>
+              <button class="tour-tab" onclick="switchTour('rv','tour-rv-3br-m',this)">
+                <span class="tour-tab-num">3</span>
+                <span class="tour-tab-label">Bed / 3.5 Bath</span>
+                <span class="tour-tab-sub">Mirrored</span>
+              </button>
+              <button class="tour-tab" onclick="switchTour('rv','tour-rv-4br',this)">
+                <span class="tour-tab-num">4</span>
+                <span class="tour-tab-label">Bed / 4.5 Bath</span>
+              </button>
+            </div>
+            <div class="tour-unit active" id="tour-rv-2br">
+              <iframe class="tour-embed" src="https://my.matterport.com/show/?m=nAha3DLi7LG&play=1" allowfullscreen allow="xr-spatial-tracking; gyroscope; accelerometer"></iframe>
+            </div>
+            <div class="tour-unit" id="tour-rv-3br">
+              <iframe class="tour-embed" src="https://my.matterport.com/show/?m=wo3qGHMzLVR&play=1" allowfullscreen allow="xr-spatial-tracking; gyroscope; accelerometer"></iframe>
+            </div>
+            <div class="tour-unit" id="tour-rv-3br-m">
+              <iframe class="tour-embed" src="https://my.matterport.com/show/?m=wYBsMXMtcgC&play=1" allowfullscreen allow="xr-spatial-tracking; gyroscope; accelerometer"></iframe>
+            </div>
+            <div class="tour-unit" id="tour-rv-4br">
+              <iframe class="tour-embed" src="https://my.matterport.com/show/?m=HB5wVuChnxR&play=1" allowfullscreen allow="xr-spatial-tracking; gyroscope; accelerometer"></iframe>
             </div>
           </div>
         </div>
-        <div class="fp-specs-row"><span>4 Bed &nbsp;&middot;&nbsp; 4.5 Bath</span><a href="#contact" class="fp-cta">Schedule a Tour</a></div>
       </div>
-    </div>
 
-    <!-- Richland Village III Plans -->
-    <div class="comm-plans" id="comm-rv3">
-      <div class="rv3-intro">
-        <p class="rv3-intro-note">Richland Village III offers five floor plans &mdash; including layouts shared with Richland Village and two new designs exclusive to this phase. Detailed floor plans are available upon request.</p>
-        <div class="rv3-plans-grid">
-          <div class="rv3-plan-card">
-            <span class="rv3-plan-num">Plan 01</span>
-            <span class="rv3-plan-label">Floor Plan</span>
-            <span class="rv3-plan-tag">Shared with RV</span>
+      <!-- RICHLAND VILLAGE III DETAIL -->
+      <div class="comm-detail" id="detail-rv3">
+        <div class="detail-inner">
+          <div class="detail-tabs">
+            <button class="detail-tab active" onclick="switchTab('rv3','plans',this)">Floor Plans</button>
           </div>
-          <div class="rv3-plan-card">
-            <span class="rv3-plan-num">Plan 02</span>
-            <span class="rv3-plan-label">Floor Plan</span>
-            <span class="rv3-plan-tag">Shared with RV</span>
-          </div>
-          <div class="rv3-plan-card">
-            <span class="rv3-plan-num">Plan 03</span>
-            <span class="rv3-plan-label">Floor Plan</span>
-            <span class="rv3-plan-tag">Shared with RV</span>
-          </div>
-          <div class="rv3-plan-card">
-            <span class="rv3-plan-num">Plan 04</span>
-            <span class="rv3-plan-label">Floor Plan</span>
-            <span class="rv3-plan-tag">New to Phase III</span>
-          </div>
-          <div class="rv3-plan-card">
-            <span class="rv3-plan-num">Plan 05</span>
-            <span class="rv3-plan-label">Floor Plan</span>
-            <span class="rv3-plan-tag">New to Phase III</span>
+
+          <!-- RV3 FLOOR PLANS -->
+          <div class="detail-panel active" id="rv3-plans">
+            <p style="font-size:13px;color:var(--muted);margin-bottom:32px;line-height:1.8;max-width:600px;">Richland Village III offers <strong>11 units</strong> &mdash; 3 cottages and 8 townhomes. Townhome floor plans are shared with Richland Village; cottage plans are unique to Phase III.</p>
+
+            <div style="margin-bottom:12px;">
+              <span class="section-label" style="font-size:9px;">Townhomes &mdash; Shared with Richland Village</span>
+            </div>
+            <div class="fp-grid" id="rv3-fp-grid" style="margin-bottom:32px;">
+              <div class="fp-thumb active" onclick="selectPlan('rv3','fp-rv3-2br',this)">
+                <img class="fp-thumb-img" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/floorplans/fp-2br.jpg" alt="2BR">
+                <div class="fp-thumb-label">
+                  <span class="fp-thumb-beds">2 Bedroom</span>
+                  <div class="fp-thumb-name">2 Bed &middot; 2.5 Bath</div>
+                  <div class="fp-thumb-sqft">1,200 sq ft</div>
+                </div>
+              </div>
+              <div class="fp-thumb" onclick="selectPlan('rv3','fp-rv3-3br',this)">
+                <img class="fp-thumb-img" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/floorplans/fp-3br.jpg" alt="3BR">
+                <div class="fp-thumb-label">
+                  <span class="fp-thumb-beds">3 Bedroom</span>
+                  <div class="fp-thumb-name">3 Bed &middot; 3.5 Bath</div>
+                  <div class="fp-thumb-sqft">&nbsp;</div>
+                </div>
+              </div>
+              <div class="fp-thumb" onclick="selectPlan('rv3','fp-rv3-4br-35',this)">
+                <img class="fp-thumb-img" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/floorplans/fp-4br-35.jpg" alt="4BR 3.5BA">
+                <div class="fp-thumb-label">
+                  <span class="fp-thumb-beds">4 Bedroom</span>
+                  <div class="fp-thumb-name">4 Bed &middot; 3.5 Bath</div>
+                  <div class="fp-thumb-sqft">1,772 sq ft</div>
+                </div>
+              </div>
+            </div>
+
+            <div style="margin-bottom:12px;">
+              <span class="section-label" style="font-size:9px;">Cottages &mdash; Exclusive to Richland Village III</span>
+            </div>
+            <div class="fp-grid" style="grid-template-columns:repeat(3,1fr);margin-bottom:32px;">
+              <div class="fp-thumb" onclick="selectPlan('rv3','fp-rv3-cottage',this)">
+                <div class="fp-placeholder" style="min-height:160px;gap:10px;">
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#C9B99A" stroke-width="1.2"><path d="M3 9l9-7 9 7v11a1 1 0 01-1 1H4a1 1 0 01-1-1z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                  <p style="font-size:11px;color:var(--muted);text-align:center;padding:0 8px;">Coming Soon</p>
+                </div>
+                <div class="fp-thumb-label">
+                  <span class="fp-thumb-beds">Cottage</span>
+                  <div class="fp-thumb-name">3 Units</div>
+                  <div class="fp-thumb-sqft">Floor plan pending</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="fp-display" id="fp-rv3-2br" style="display:block">
+              <div class="fp-display-inner">
+                <div class="fp-img-wrap"><img src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/floorplans/fp-2br.jpg" alt="2BR Floor Plan" onclick="openLightbox(this.src)"></div>
+                <div class="fp-info">
+                  <span class="fp-info-tag">Richland Village III &mdash; Townhome</span>
+                  <div class="fp-info-title">2 Bed · 2.5 Bath</div>
+                  <div class="fp-info-stats">
+                    <div class="fp-stat"><span class="fp-stat-label">Size</span><span class="fp-stat-val">1,200 sq ft</span></div>
+                    <div class="fp-stat"><span class="fp-stat-label">Bedrooms</span><span class="fp-stat-val">2</span></div>
+                    <div class="fp-stat"><span class="fp-stat-label">Bathrooms</span><span class="fp-stat-val">2.5</span></div>
+                    <div class="fp-stat"><span class="fp-stat-label">Type</span><span class="fp-stat-val">Townhome</span></div>
+                    <div class="fp-stat"><span class="fp-stat-label">Community</span><span class="fp-stat-val">Richland Village III</span></div>
+                  </div>
+                  <a href="#contact" class="fp-cta">Schedule a Showing</a>
+                </div>
+              </div>
+            </div>
+            <div class="fp-display" id="fp-rv3-3br">
+              <div class="fp-display-inner">
+                <div class="fp-img-wrap"><img src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/floorplans/fp-3br.jpg" alt="3BR Floor Plan" onclick="openLightbox(this.src)"></div>
+                <div class="fp-info">
+                  <span class="fp-info-tag">Richland Village III &mdash; Townhome</span>
+                  <div class="fp-info-title">3 Bed · 3.5 Bath</div>
+                  <div class="fp-info-stats">
+                    <div class="fp-stat"><span class="fp-stat-label">Bedrooms</span><span class="fp-stat-val">3</span></div>
+                    <div class="fp-stat"><span class="fp-stat-label">Bathrooms</span><span class="fp-stat-val">3.5</span></div>
+                    <div class="fp-stat"><span class="fp-stat-label">Type</span><span class="fp-stat-val">Townhome</span></div>
+                    <div class="fp-stat"><span class="fp-stat-label">Community</span><span class="fp-stat-val">Richland Village III</span></div>
+                  </div>
+                  <a href="#contact" class="fp-cta">Schedule a Showing</a>
+                </div>
+              </div>
+            </div>
+            <div class="fp-display" id="fp-rv3-4br-35">
+              <div class="fp-display-inner">
+                <div class="fp-img-wrap"><img src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/floorplans/fp-4br-35.jpg" alt="4BR 3.5BA Floor Plan" onclick="openLightbox(this.src)"></div>
+                <div class="fp-info">
+                  <span class="fp-info-tag">Richland Village III &mdash; Townhome</span>
+                  <div class="fp-info-title">4 Bed · 3.5 Bath</div>
+                  <div class="fp-info-stats">
+                    <div class="fp-stat"><span class="fp-stat-label">Size</span><span class="fp-stat-val">1,772 sq ft</span></div>
+                    <div class="fp-stat"><span class="fp-stat-label">Bedrooms</span><span class="fp-stat-val">4</span></div>
+                    <div class="fp-stat"><span class="fp-stat-label">Bathrooms</span><span class="fp-stat-val">3.5</span></div>
+                    <div class="fp-stat"><span class="fp-stat-label">Type</span><span class="fp-stat-val">Townhome</span></div>
+                    <div class="fp-stat"><span class="fp-stat-label">Community</span><span class="fp-stat-val">Richland Village III</span></div>
+                  </div>
+                  <a href="#contact" class="fp-cta">Schedule a Showing</a>
+                </div>
+              </div>
+            </div>
+            <div class="fp-display" id="fp-rv3-cottage">
+              <div class="fp-display-inner">
+                <div class="fp-placeholder" style="min-height:400px;">
+                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#C9B99A" stroke-width="1.1"><path d="M3 9l9-7 9 7v11a1 1 0 01-1 1H4a1 1 0 01-1-1z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                  <p>Cottage floor plan coming soon</p>
+                  <a href="#contact" style="font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--navy);text-decoration:none;">Join the Interest List &rsaquo;</a>
+                </div>
+                <div class="fp-info">
+                  <span class="fp-info-tag">Richland Village III &mdash; Cottage</span>
+                  <div class="fp-info-title">Cottage Units</div>
+                  <div class="fp-info-stats">
+                    <div class="fp-stat"><span class="fp-stat-label">Units</span><span class="fp-stat-val">3 Cottages</span></div>
+                    <div class="fp-stat"><span class="fp-stat-label">Type</span><span class="fp-stat-val">Cottage (exclusive to Phase III)</span></div>
+                    <div class="fp-stat"><span class="fp-stat-label">Community</span><span class="fp-stat-val">Richland Village III</span></div>
+                  </div>
+                  <a href="#contact" class="fp-cta">Get Details</a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <p class="rv3-contact-note"><a href="#contact">Contact us</a> to receive the full floor plan package for Richland Village III.</p>
       </div>
-    </div>
-  </section>
-
-  <!-- VIRTUAL TOUR -->
-  <section class="tour-section" id="tour">
-    <div class="tour-hdr">
-      <h2 class="tour-title">Virtual Tour</h2>
-      <p class="tour-desc">Step inside completed units &mdash; full 3D walkthroughs from Richland Village.</p>
-    </div>
-    <div class="tour-unit-tabs">
-      <button class="tour-tab active" onclick="switchUnit('unit3', this)">
-        <span class="tour-tab-beds">2 Bed</span>
-        <span class="tour-tab-label">2.5 Bath</span>
-      </button>
-      <button class="tour-tab" onclick="switchUnit('unit1', this)">
-        <span class="tour-tab-beds">3 Bed</span>
-        <span class="tour-tab-label">3.5 Bath</span>
-      </button>
-      <button class="tour-tab" onclick="switchUnit('unit10', this)">
-        <span class="tour-tab-beds">3 Bed</span>
-        <span class="tour-tab-label">3.5 Bath</span>
-        <span class="tour-tab-tag">(Mirrored)</span>
-      </button>
-      <button class="tour-tab" onclick="switchUnit('unit6', this)">
-        <span class="tour-tab-beds">4 Bed</span>
-        <span class="tour-tab-label">4.5 Bath</span>
-      </button>
-    </div>
-    <div class="tour-unit active" id="tour-unit3">
-      <iframe class="tour-embed" src="https://my.matterport.com/show/?m=nAha3DLi7LG&play=1" allowfullscreen allow="xr-spatial-tracking; gyroscope; accelerometer"></iframe>
-    </div>
-    <div class="tour-unit" id="tour-unit1">
-      <iframe class="tour-embed" src="https://my.matterport.com/show/?m=wo3qGHMzLVR&play=1" allowfullscreen allow="xr-spatial-tracking; gyroscope; accelerometer"></iframe>
-    </div>
-    <div class="tour-unit" id="tour-unit10">
-      <iframe class="tour-embed" src="https://my.matterport.com/show/?m=wYBsMXMtcgC&play=1" allowfullscreen allow="xr-spatial-tracking; gyroscope; accelerometer"></iframe>
-    </div>
-    <div class="tour-unit" id="tour-unit6">
-      <iframe class="tour-embed" src="https://my.matterport.com/show/?m=HB5wVuChnxR&play=1" allowfullscreen allow="xr-spatial-tracking; gyroscope; accelerometer"></iframe>
     </div>
   </section>
 
   <!-- CONTACT -->
   <section class="contact-section" id="contact">
     <div class="contact-inner">
+      <span class="section-label">Get in Touch</span>
       <h2 class="section-title">Let&rsquo;s Talk</h2>
       <p class="contact-sub">We&rsquo;ll be in touch within one business day.</p>
       <form class="contact-form" id="contactForm" onsubmit="handleSubmit(event)">
@@ -534,75 +594,29 @@
         <input type="tel" placeholder="Phone Number">
         <select>
           <option value="" disabled selected>Community of interest&hellip;</option>
-          <option value="rv">Richland Village</option>
-          <option value="rv3">Richland Village III</option>
-          <option value="both">Both Communities</option>
-          <option value="general">General Inquiry</option>
+          <option>Richland Village (10 Townhomes)</option>
+          <option>Richland Village III (Townhomes)</option>
+          <option>Richland Village III (Cottage)</option>
+          <option>Both Communities</option>
+          <option>General Inquiry</option>
         </select>
         <input type="text" placeholder="How did you hear about us?">
-        <textarea placeholder="Questions or additional notes&hellip;"></textarea>
+        <textarea placeholder="Questions or notes&hellip;"></textarea>
         <button type="submit" class="contact-submit">Send Inquiry</button>
       </form>
-      <div class="success-msg" id="successMsg">Thank you for reaching out! A member of our team will contact you within 24 hours.</div>
+      <div class="success-msg" id="successMsg">Thank you! A member of our team will be in touch within 24 hours.</div>
     </div>
   </section>
 
   <!-- FOOTER -->
   <footer>
-    <div class="footer-inner">
-      <!-- Brand column -->
-      <div class="footer-brand">
-        <div class="footer-logo">Richland Village</div>
-        <p class="footer-tagline">Luxury townhome living in the heart of Auburn, Alabama — minutes from campus, shops, and everything the Loveliest Village has to offer.</p>
-        <div class="footer-status">Now Leasing</div>
-        <div class="footer-developer">
-          <div class="footer-dev-label">A Parmer Development Community</div>
-        </div>
-      </div>
-
-      <!-- Explore + Follow column -->
-      <div>
-        <div class="footer-col-title">Explore</div>
-        <ul class="footer-links">
-          <li><a href="#plans">Floor Plans</a></li>
-          <li><a href="#tour">Virtual Tour</a></li>
-          <li><a href="#map">Find Us</a></li>
-          <li><a href="#contact">Schedule a Tour</a></li>
-        </ul>
-
-        <div class="footer-col-title">Follow Us</div>
-        <ul class="footer-social-list">
-          <li>
-            <a href="https://www.instagram.com/richlandvillageauburn" target="_blank" rel="noopener">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
-              @richlandvillageauburn
-            </a>
-          </li>
-          <li>
-            <a href="https://www.instagram.com/parmerdevelopment" target="_blank" rel="noopener">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
-              @parmerdevelopment
-            </a>
-          </li>
-        </ul>
-      </div>
-
-      <!-- Contact column -->
-      <div>
-        <div class="footer-col-title">Contact</div>
-        <p class="footer-addr">
-          538 Richland Road<br>
-          Auburn, AL 36832
-        </p>
-        <a href="tel:3347502059" class="footer-phone">(334) 750-2059</a>
-        <a href="mailto:leasing@parmerdevelopment.com" class="footer-email">leasing@parmerdevelopment.com</a>
-      </div>
+    <div class="footer-logo">Richland Village</div>
+    <div class="footer-links-row">
+      <a href="#map">Locations</a>
+      <a href="#communities">Communities</a>
+      <a href="#contact">Apply Now</a>
     </div>
-
-    <div class="footer-bottom">
-      <span>&copy; 2026 Richland Village &middot; Auburn, Alabama</span>
-      <span>A Parmer Development Community</span>
-    </div>
+    <div class="footer-copy">&copy; 2026 Richland Village &middot; Auburn, Alabama &middot; A Parmer Development Community</div>
   </footer>
 
   <!-- LIGHTBOX -->
@@ -615,29 +629,28 @@
   <script>
     // MAP
     (function() {
-      const map = L.map('richland-map', { scrollWheelZoom: false, zoomControl: true });
-
+      const map = L.map('rv-map', { scrollWheelZoom: false, zoomControl: true });
       L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
         subdomains: 'abcd', maxZoom: 20
       }).addTo(map);
 
-      function makePin(fill, border, label) {
+      function pin(fill, border, label) {
         const fs = label.length > 2 ? '8' : '11';
         return L.divIcon({
-          html: `<svg viewBox="0 0 44 56" width="44" height="56" xmlns="http://www.w3.org/2000/svg" style="filter:drop-shadow(0 4px 10px rgba(0,0,0,0.45));overflow:visible">
-            <path d="M22 2C10.95 2 2 10.95 2 22C2 38.5 22 54 22 54C22 54 42 38.5 42 22C42 10.95 33.05 2 22 2Z" fill="${fill}" stroke="${border}" stroke-width="2.5"/>
-            <circle cx="22" cy="21" r="11" fill="white" opacity="0.13"/>
-            <text x="22" y="26" text-anchor="middle" fill="white" font-family="Georgia,serif" font-size="${fs}" font-weight="bold" letter-spacing="0.8">${label}</text>
+          html: `<svg viewBox="0 0 44 56" width="44" height="56" xmlns="http://www.w3.org/2000/svg" style="filter:drop-shadow(0 4px 10px rgba(0,0,0,0.4));overflow:visible">
+            <path d="M22 2C10.95 2 2 10.95 2 22C2 38.5 22 54 22 54S42 38.5 42 22C42 10.95 33.05 2 22 2Z" fill="${fill}" stroke="${border}" stroke-width="2.5"/>
+            <text x="22" y="27" text-anchor="middle" fill="white" font-family="Georgia,serif" font-size="${fs}" font-weight="bold" letter-spacing="0.5">${label}</text>
           </svg>`,
-          className: '', iconSize: [44, 56], iconAnchor: [22, 56], popupAnchor: [0, -60]
+          className: '', iconSize: [44, 56], iconAnchor: [22, 56], popupAnchor: [0, -58]
         });
       }
 
-      function popup(name, addr) {
-        return `<div style="font-family:'Inter',sans-serif;min-width:170px;padding:2px 0">
-          <p style="font-family:'Cormorant Garamond',serif;font-size:16px;color:#1a2a42;margin:0 0 5px;font-weight:400">${name}</p>
-          <p style="font-size:12px;color:#7a7a7a;margin:0;line-height:1.6">${addr}</p>
+      function popup(name, addr, units) {
+        return `<div style="font-family:'Inter',sans-serif;min-width:180px;padding:4px 0">
+          <p style="font-family:'Cormorant Garamond',serif;font-size:17px;color:#1B2B41;margin:0 0 4px;font-weight:400">${name}</p>
+          <p style="font-size:12px;color:#6b6b6b;margin:0 0 3px;line-height:1.6">${addr}</p>
+          <p style="font-size:11px;color:#9A7540;margin:0;font-weight:500">${units}</p>
         </div>`;
       }
 
@@ -652,48 +665,54 @@
           geocode('538 Richland Road Auburn Alabama USA'),
           geocode('1256 Shug Jordan Pkwy Auburn Alabama USA')
         ]);
-
         const pts = [];
-        [
-          { coords: c1, fill: '#1a2a42', border: '#9a7540', label: 'RV',  name: 'Richland Village',      addr: '538 Richland Road · Auburn, AL' },
-          { coords: c2, fill: '#9a7540', border: '#1a2a42', label: 'III', name: 'Richland Village III',   addr: '1256 Shug Jordan Pkwy · Auburn, AL' }
-        ].forEach(loc => {
-          if (!loc.coords) return;
-          pts.push(loc.coords);
-          L.marker(loc.coords, { icon: makePin(loc.fill, loc.border, loc.label) })
-            .addTo(map)
-            .bindPopup(popup(loc.name, loc.addr), { maxWidth: 240 });
-        });
-
+        if (c1) { pts.push(c1); L.marker(c1, { icon: pin('#1B2B41','#9A7540','RV') }).addTo(map).bindPopup(popup('Richland Village','538 Richland Road · Auburn, AL','10 Townhomes'), { maxWidth: 260 }); }
+        if (c2) { pts.push(c2); L.marker(c2, { icon: pin('#9A7540','#1B2B41','III') }).addTo(map).bindPopup(popup('Richland Village III','1256 Shug Jordan Pkwy · Auburn, AL','3 Cottages & 8 Townhomes'), { maxWidth: 260 }); }
         if (pts.length === 2) map.fitBounds(pts, { padding: [70, 70] });
         else if (pts.length === 1) map.setView(pts[0], 16);
       }
-
       init();
     })();
 
-    function switchComm(commId, tabEl) {
-      document.querySelectorAll('.comm-tab').forEach(t => t.classList.remove('active'));
-      document.querySelectorAll('.comm-plans').forEach(p => p.classList.remove('active'));
-      tabEl.classList.add('active');
-      document.getElementById('comm-' + commId).classList.add('active');
+    // COMMUNITY SWITCHING
+    function selectComm(id) {
+      ['rv','rv3'].forEach(c => {
+        document.getElementById('card-' + c).classList.toggle('active', c === id);
+        document.getElementById('detail-' + c).classList.toggle('active', c === id);
+      });
     }
 
-    function selectPlan(planId, tabEl) {
-      const container = tabEl.closest('.comm-plans');
-      container.querySelectorAll('.fp-sel-tab').forEach(t => t.classList.remove('active'));
-      container.querySelectorAll('.fp-display').forEach(d => d.classList.remove('active'));
-      tabEl.classList.add('active');
-      document.getElementById(planId).classList.add('active');
+    // TAB SWITCHING (floor plans / tours)
+    function switchTab(comm, panel, btn) {
+      const detail = document.getElementById('detail-' + comm);
+      detail.querySelectorAll('.detail-tab').forEach(t => t.classList.remove('active'));
+      detail.querySelectorAll('.detail-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(comm + '-' + panel).classList.add('active');
     }
 
-    function switchUnit(unitId, tabEl) {
-      document.querySelectorAll('.tour-unit').forEach(u => u.classList.remove('active'));
-      document.querySelectorAll('.tour-tab').forEach(t => t.classList.remove('active'));
-      document.getElementById('tour-' + unitId).classList.add('active');
-      tabEl.classList.add('active');
+    // FLOOR PLAN SELECTION
+    function selectPlan(comm, planId, thumb) {
+      const grid = document.getElementById(comm + '-fp-grid') || thumb.closest('.fp-grid');
+      if (grid) grid.querySelectorAll('.fp-thumb').forEach(t => t.classList.remove('active'));
+      // handle rv3 cottage grid separately
+      thumb.closest('.fp-grid').querySelectorAll('.fp-thumb').forEach(t => t.classList.remove('active'));
+      thumb.classList.add('active');
+      // hide all fp-display in this detail
+      document.getElementById('detail-' + comm).querySelectorAll('.fp-display').forEach(d => d.style.display = 'none');
+      const target = document.getElementById(planId);
+      if (target) target.style.display = 'block';
     }
 
+    // TOUR SWITCHING
+    function switchTour(comm, unitId, btn) {
+      document.getElementById('detail-' + comm).querySelectorAll('.tour-tab').forEach(t => t.classList.remove('active'));
+      document.getElementById('detail-' + comm).querySelectorAll('.tour-unit').forEach(u => u.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(unitId).classList.add('active');
+    }
+
+    // LIGHTBOX
     function openLightbox(src) {
       document.getElementById('lbImg').src = src;
       document.getElementById('lightbox').classList.add('open');
@@ -707,6 +726,7 @@
     }
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
 
+    // CONTACT
     function handleSubmit(e) {
       e.preventDefault();
       document.getElementById('successMsg').classList.add('show');
