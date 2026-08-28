@@ -32,7 +32,7 @@
 
     /* NAV */
     nav { position: fixed; top: 33px; left: 0; right: 0; z-index: 200; background: rgba(255,255,255,0.97); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 52px; height: 60px; }
-    .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 400; letter-spacing: 0.08em; color: var(--navy); text-transform: uppercase; text-decoration: none; }
+    .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 500; letter-spacing: 0.12em; color: var(--navy); text-transform: uppercase; text-decoration: none; }
     .nav-links { display: flex; align-items: center; gap: 32px; }
     .nav-links a { color: var(--muted); text-decoration: none; font-size: 11px; font-weight: 400; letter-spacing: 0.05em; text-transform: uppercase; transition: color 0.2s; }
     .nav-links a:hover { color: var(--navy); }
@@ -182,6 +182,16 @@
     .footer-links-row a:hover { color: rgba(255,255,255,0.55); }
     .footer-copy { font-size: 11px; color: rgba(255,255,255,0.18); }
     @media (max-width: 768px) { footer { padding: 40px 24px; flex-direction: column; align-items: flex-start; gap: 16px; } }
+
+    /* PHOTO STRIP */
+    .fp-photos { display: flex; gap: 2px; margin-top: 2px; overflow-x: auto; scrollbar-width: thin; }
+    .fp-photos::-webkit-scrollbar { height: 3px; }
+    .fp-photos::-webkit-scrollbar-track { background: var(--border); }
+    .fp-photos::-webkit-scrollbar-thumb { background: var(--gold); }
+    .fp-photo { flex: 0 0 300px; height: 220px; object-fit: cover; cursor: zoom-in; transition: opacity 0.2s; display: block; }
+    .fp-photo:first-child { flex: 0 0 380px; }
+    .fp-photo:hover { opacity: 0.9; }
+    @media (max-width: 900px) { .fp-photo { flex: 0 0 220px; height: 160px; } .fp-photo:first-child { flex: 0 0 260px; } }
 
     /* LIGHTBOX */
     .lightbox { display: none; position: fixed; inset: 0; background: rgba(5,10,18,0.97); z-index: 600; align-items: center; justify-content: center; padding: 40px; }
@@ -356,6 +366,14 @@
                   <a href="#contact" class="fp-cta">Schedule a Showing</a>
                 </div>
               </div>
+              <div class="fp-photos">
+                <img class="fp-photo" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/exterior/ext-2br.jpg" alt="2BR Exterior" onclick="openLightbox(this.src)">
+                <img class="fp-photo" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/interior/2br-kitchen.jpg" alt="Kitchen" onclick="openLightbox(this.src)">
+                <img class="fp-photo" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/interior/2br-living.jpg" alt="Living Room" onclick="openLightbox(this.src)">
+                <img class="fp-photo" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/interior/2br-bedroom.jpg" alt="Bedroom" onclick="openLightbox(this.src)">
+                <img class="fp-photo" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/interior/2br-bath.jpg" alt="Bathroom" onclick="openLightbox(this.src)">
+                <img class="fp-photo" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/interior/2br-master.jpg" alt="Master" onclick="openLightbox(this.src)">
+              </div>
             </div>
             <div class="fp-display" id="fp-rv-3br">
               <div class="fp-display-inner">
@@ -371,6 +389,15 @@
                   </div>
                   <a href="#contact" class="fp-cta">Schedule a Showing</a>
                 </div>
+              </div>
+              <div class="fp-photos">
+                <img class="fp-photo" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/exterior/ext-3br.jpg" alt="3BR Exterior" onclick="openLightbox(this.src)">
+                <img class="fp-photo" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/interior/3br-kitchen.jpg" alt="Kitchen" onclick="openLightbox(this.src)">
+                <img class="fp-photo" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/interior/3br-living.jpg" alt="Living Room" onclick="openLightbox(this.src)">
+                <img class="fp-photo" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/interior/3br-bedroom.jpg" alt="Bedroom" onclick="openLightbox(this.src)">
+                <img class="fp-photo" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/interior/3br-bath.jpg" alt="Bathroom" onclick="openLightbox(this.src)">
+                <img class="fp-photo" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/interior/3br-master.jpg" alt="Master" onclick="openLightbox(this.src)">
+                <img class="fp-photo" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/interior/3br-den.jpg" alt="Den" onclick="openLightbox(this.src)">
               </div>
             </div>
             <div class="fp-display" id="fp-rv-4br-35">
@@ -388,6 +415,15 @@
                   </div>
                   <a href="#contact" class="fp-cta">Schedule a Showing</a>
                 </div>
+              </div>
+              <div class="fp-photos">
+                <img class="fp-photo" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/exterior/ext-4br.jpg" alt="4BR Exterior" onclick="openLightbox(this.src)">
+                <img class="fp-photo" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/interior/4br-kitchen.jpg" alt="Kitchen" onclick="openLightbox(this.src)">
+                <img class="fp-photo" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/interior/4br-living.jpg" alt="Living Room" onclick="openLightbox(this.src)">
+                <img class="fp-photo" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/interior/4br-bedroom.jpg" alt="Bedroom" onclick="openLightbox(this.src)">
+                <img class="fp-photo" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/interior/4br-bath.jpg" alt="Bathroom" onclick="openLightbox(this.src)">
+                <img class="fp-photo" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/interior/4br-master.jpg" alt="Master" onclick="openLightbox(this.src)">
+                <img class="fp-photo" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/interior/4br-tub.jpg" alt="Soaking Tub" onclick="openLightbox(this.src)">
               </div>
             </div>
             <div class="fp-display" id="fp-rv-placeholder">
@@ -522,6 +558,14 @@
                   <a href="#contact" class="fp-cta">Schedule a Showing</a>
                 </div>
               </div>
+              <div class="fp-photos">
+                <img class="fp-photo" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/exterior/ext-2br.jpg" alt="2BR Exterior" onclick="openLightbox(this.src)">
+                <img class="fp-photo" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/interior/2br-kitchen.jpg" alt="Kitchen" onclick="openLightbox(this.src)">
+                <img class="fp-photo" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/interior/2br-living.jpg" alt="Living Room" onclick="openLightbox(this.src)">
+                <img class="fp-photo" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/interior/2br-bedroom.jpg" alt="Bedroom" onclick="openLightbox(this.src)">
+                <img class="fp-photo" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/interior/2br-bath.jpg" alt="Bathroom" onclick="openLightbox(this.src)">
+                <img class="fp-photo" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/interior/2br-master.jpg" alt="Master" onclick="openLightbox(this.src)">
+              </div>
             </div>
             <div class="fp-display" id="fp-rv3-3br">
               <div class="fp-display-inner">
@@ -537,6 +581,15 @@
                   </div>
                   <a href="#contact" class="fp-cta">Schedule a Showing</a>
                 </div>
+              </div>
+              <div class="fp-photos">
+                <img class="fp-photo" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/exterior/ext-3br.jpg" alt="3BR Exterior" onclick="openLightbox(this.src)">
+                <img class="fp-photo" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/interior/3br-kitchen.jpg" alt="Kitchen" onclick="openLightbox(this.src)">
+                <img class="fp-photo" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/interior/3br-living.jpg" alt="Living Room" onclick="openLightbox(this.src)">
+                <img class="fp-photo" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/interior/3br-bedroom.jpg" alt="Bedroom" onclick="openLightbox(this.src)">
+                <img class="fp-photo" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/interior/3br-bath.jpg" alt="Bathroom" onclick="openLightbox(this.src)">
+                <img class="fp-photo" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/interior/3br-master.jpg" alt="Master" onclick="openLightbox(this.src)">
+                <img class="fp-photo" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/interior/3br-den.jpg" alt="Den" onclick="openLightbox(this.src)">
               </div>
             </div>
             <div class="fp-display" id="fp-rv3-4br-35">
@@ -554,6 +607,15 @@
                   </div>
                   <a href="#contact" class="fp-cta">Schedule a Showing</a>
                 </div>
+              </div>
+              <div class="fp-photos">
+                <img class="fp-photo" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/exterior/ext-4br.jpg" alt="4BR Exterior" onclick="openLightbox(this.src)">
+                <img class="fp-photo" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/interior/4br-kitchen.jpg" alt="Kitchen" onclick="openLightbox(this.src)">
+                <img class="fp-photo" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/interior/4br-living.jpg" alt="Living Room" onclick="openLightbox(this.src)">
+                <img class="fp-photo" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/interior/4br-bedroom.jpg" alt="Bedroom" onclick="openLightbox(this.src)">
+                <img class="fp-photo" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/interior/4br-bath.jpg" alt="Bathroom" onclick="openLightbox(this.src)">
+                <img class="fp-photo" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/interior/4br-master.jpg" alt="Master" onclick="openLightbox(this.src)">
+                <img class="fp-photo" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/interior/4br-tub.jpg" alt="Soaking Tub" onclick="openLightbox(this.src)">
               </div>
             </div>
             <div class="fp-display" id="fp-rv3-cottage">
