@@ -6,7 +6,7 @@
   <title>Richland Village | Auburn, Alabama</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -20,7 +20,7 @@
       --border: #E3DDD5;
     }
     html { scroll-behavior: smooth; }
-    body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--white); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
 
     /* BANNER */
     .banner { position: fixed; top: 0; left: 0; right: 0; z-index: 300; background: var(--navy); display: flex; align-items: center; justify-content: center; gap: 24px; padding: 9px 24px; flex-wrap: wrap; }
@@ -32,7 +32,7 @@
 
     /* NAV */
     nav { position: fixed; top: 33px; left: 0; right: 0; z-index: 200; background: rgba(255,255,255,0.97); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 52px; height: 60px; }
-    .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 500; letter-spacing: 0.12em; color: var(--navy); text-transform: uppercase; text-decoration: none; }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 500; letter-spacing: 0.12em; color: var(--navy); text-transform: uppercase; text-decoration: none; }
     .nav-links { display: flex; align-items: center; gap: 32px; }
     .nav-links a { color: var(--muted); text-decoration: none; font-size: 11px; font-weight: 400; letter-spacing: 0.05em; text-transform: uppercase; transition: color 0.2s; }
     .nav-links a:hover { color: var(--navy); }
@@ -46,7 +46,7 @@
     .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,18,30,0.88) 0%, rgba(10,18,30,0.35) 50%, rgba(10,18,30,0.1) 100%); }
     .hero-content { position: relative; z-index: 2; padding: 0 60px 72px; max-width: 760px; }
     .hero-eyebrow { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 18px; display: block; }
-    .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(56px, 7vw, 96px); font-weight: 300; line-height: 0.92; color: white; margin-bottom: 22px; }
+    .hero-title { font-family: 'Playfair Display', serif; font-size: clamp(52px, 6.5vw, 88px); font-weight: 400; line-height: 0.95; color: white; margin-bottom: 22px; }
     .hero-title em { font-style: italic; }
     .hero-sub { font-size: 15px; color: rgba(255,255,255,0.6); line-height: 1.8; font-weight: 300; margin-bottom: 36px; max-width: 440px; }
     .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
@@ -58,8 +58,8 @@
     @media (max-width: 768px) { .hero-content { padding: 0 24px 56px; } }
 
     /* SECTION TITLES */
-    .section-label { font-size: 10px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; display: block; }
-    .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(28px, 3.5vw, 44px); font-weight: 300; line-height: 1.1; color: var(--navy); }
+    .section-label { font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; display: block; }
+    .section-title { font-family: 'Playfair Display', serif; font-size: clamp(28px, 3.5vw, 44px); font-weight: 400; line-height: 1.15; color: var(--navy); }
 
     /* MAP */
     .map-section { background: var(--cream); padding: 80px 56px; }
@@ -75,7 +75,7 @@
     .map-card:first-child { border-top: none; }
     .map-card:hover { background: #faf7f3; }
     .map-card-tag { font-size: 9px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 6px; }
-    .map-card-name { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 400; color: var(--navy); margin-bottom: 6px; }
+    .map-card-name { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 400; color: var(--navy); margin-bottom: 6px; }
     .map-card-detail { font-size: 12px; color: var(--muted); line-height: 1.7; }
     .map-card-link { display: inline-block; margin-top: 10px; font-size: 11px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; color: var(--navy); text-decoration: none; border-bottom: 1px solid var(--border); padding-bottom: 1px; transition: border-color 0.2s; }
     .map-card-link:hover { border-color: var(--navy); }
@@ -93,7 +93,7 @@
     .comm-card.active .comm-card-overlay { background: linear-gradient(to top, rgba(10,18,30,0.95) 0%, rgba(10,18,30,0.6) 55%, rgba(10,18,30,0.2) 100%); }
     .comm-card-content { position: relative; z-index: 2; padding: 36px 40px; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; }
     .comm-card-badge { font-size: 9px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 10px; }
-    .comm-card-name { font-family: 'Cormorant Garamond', serif; font-size: clamp(24px, 2.5vw, 36px); font-weight: 300; color: white; line-height: 1.1; margin-bottom: 6px; }
+    .comm-card-name { font-family: 'Playfair Display', serif; font-size: clamp(24px, 2.5vw, 36px); font-weight: 300; color: white; line-height: 1.1; margin-bottom: 6px; }
     .comm-card-addr { font-size: 11px; color: rgba(255,255,255,0.4); margin-bottom: 14px; }
     .comm-card-units { font-size: 12px; color: rgba(255,255,255,0.6); font-weight: 300; line-height: 1.6; margin-bottom: 20px; }
     .comm-card-btn { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255,255,255,0.5); border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 2px; transition: all 0.2s; }
@@ -107,7 +107,7 @@
     .comm-detail.active { display: block; }
     .detail-inner { max-width: 1200px; margin: 0 auto; padding: 60px 56px; }
     .detail-tabs { display: flex; border-bottom: 1px solid var(--border); margin-bottom: 48px; }
-    .detail-tab { padding: 14px 28px 16px; background: none; border: none; border-bottom: 2px solid transparent; margin-bottom: -1px; cursor: pointer; font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); transition: all 0.2s; }
+    .detail-tab { padding: 14px 28px 16px; background: none; border: none; border-bottom: 2px solid transparent; margin-bottom: -1px; cursor: pointer; font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); transition: all 0.2s; }
     .detail-tab.active { color: var(--navy); border-bottom-color: var(--navy); }
     .detail-tab:hover:not(.active) { color: var(--navy); }
     .detail-panel { display: none; }
@@ -120,16 +120,16 @@
     .fp-thumb.active { border-color: var(--navy); }
     .fp-thumb-img { width: 100%; aspect-ratio: 4/3; object-fit: contain; padding: 20px; background: white; display: block; }
     .fp-thumb-label { padding: 12px 16px; border-top: 1px solid var(--border); }
-    .fp-thumb-beds { font-size: 9px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 2px; }
-    .fp-thumb-name { font-family: 'Cormorant Garamond', serif; font-size: 16px; font-weight: 400; color: var(--navy); }
+    .fp-thumb-beds { font-size: 10px; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 2px; }
+    .fp-thumb-name { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; color: var(--navy); }
     .fp-thumb-sqft { font-size: 11px; color: var(--muted); margin-top: 2px; }
     .fp-display { margin-top: 2px; background: white; }
     .fp-display-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
     .fp-img-wrap { padding: 40px; display: flex; align-items: center; justify-content: center; min-height: 480px; background: white; }
     .fp-img-wrap img { max-width: 100%; max-height: 560px; object-fit: contain; cursor: zoom-in; display: block; }
     .fp-info { padding: 48px 40px; background: var(--navy); color: white; display: flex; flex-direction: column; justify-content: center; }
-    .fp-info-tag { font-size: 9px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; display: block; }
-    .fp-info-title { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 300; color: white; line-height: 1.1; margin-bottom: 24px; }
+    .fp-info-tag { font-size: 11px; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; display: block; }
+    .fp-info-title { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 300; color: white; line-height: 1.1; margin-bottom: 24px; }
     .fp-info-stats { display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }
     .fp-stat { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
     .fp-stat-label { font-size: 11px; color: rgba(255,255,255,0.45); letter-spacing: 0.04em; text-transform: uppercase; }
@@ -146,7 +146,7 @@
     .tour-tab { flex: 1; min-width: 120px; padding: 18px 20px; background: white; border: 1px solid var(--border); cursor: pointer; text-align: left; transition: all 0.2s; display: flex; flex-direction: column; gap: 4px; }
     .tour-tab:hover { border-color: var(--navy); }
     .tour-tab.active { border-color: var(--navy); background: var(--navy); }
-    .tour-tab-num { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300; color: var(--muted); line-height: 1; transition: color 0.2s; }
+    .tour-tab-num { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 300; color: var(--muted); line-height: 1; transition: color 0.2s; }
     .tour-tab.active .tour-tab-num { color: white; }
     .tour-tab-label { font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); transition: color 0.2s; }
     .tour-tab.active .tour-tab-label { color: var(--gold); }
@@ -163,12 +163,12 @@
     .contact-section .section-label { color: var(--gold); }
     .contact-sub { color: rgba(255,255,255,0.4); font-size: 14px; font-weight: 300; margin-bottom: 40px; }
     .contact-form { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-    .contact-form input, .contact-form select, .contact-form textarea { width: 100%; padding: 12px 14px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: white; font-size: 13px; font-family: 'Inter', sans-serif; font-weight: 300; outline: none; transition: border-color 0.2s; appearance: none; }
+    .contact-form input, .contact-form select, .contact-form textarea { width: 100%; padding: 12px 14px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: white; font-size: 13px; font-family: 'DM Sans', sans-serif; font-weight: 300; outline: none; transition: border-color 0.2s; appearance: none; }
     .contact-form input::placeholder, .contact-form textarea::placeholder { color: rgba(255,255,255,0.28); }
     .contact-form input:focus, .contact-form textarea:focus, .contact-form select:focus { border-color: rgba(255,255,255,0.38); }
     .contact-form select option { background: var(--navy); }
     .contact-form textarea { grid-column: 1/-1; resize: none; height: 90px; }
-    .contact-submit { grid-column: 1/-1; background: var(--gold); color: white; border: none; padding: 14px; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; font-family: 'Inter', sans-serif; transition: opacity 0.2s; }
+    .contact-submit { grid-column: 1/-1; background: var(--gold); color: white; border: none; padding: 14px; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: opacity 0.2s; }
     .contact-submit:hover { opacity: 0.88; }
     .success-msg { display: none; margin-top: 20px; color: rgba(255,255,255,0.5); font-size: 13px; }
     .success-msg.show { display: block; }
@@ -179,7 +179,7 @@
     .footer-inner { max-width: 1200px; margin: 0 auto; }
     .footer-cols { display: grid; grid-template-columns: 1.7fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 56px; }
     .footer-brand-wordmark { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; text-decoration: none; }
-    .footer-brand-d { width: 38px; height: 38px; border: 1px solid rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 400; color: rgba(255,255,255,0.65); flex-shrink: 0; }
+    .footer-brand-d { width: 38px; height: 38px; border: 1px solid rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 400; color: rgba(255,255,255,0.65); flex-shrink: 0; }
     .footer-brand-name { font-size: 13px; font-weight: 400; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.7); line-height: 1.3; }
     .footer-brand-name strong { font-weight: 600; }
     .footer-desc { font-size: 12px; color: rgba(255,255,255,0.3); line-height: 1.95; margin-bottom: 28px; max-width: 290px; font-weight: 300; }
@@ -207,6 +207,64 @@
     .fp-photo:first-child { flex: 0 0 380px; }
     .fp-photo:hover { opacity: 0.9; }
     @media (max-width: 900px) { .fp-photo { flex: 0 0 220px; height: 160px; } .fp-photo:first-child { flex: 0 0 260px; } }
+
+    /* APPLY WIDGET */
+    .apply-fab { position: fixed; bottom: 28px; right: 28px; z-index: 500; display: flex; align-items: center; gap: 10px; background: var(--navy); color: white; padding: 14px 22px; cursor: pointer; box-shadow: 0 8px 32px rgba(0,0,0,0.28); transition: transform 0.2s, box-shadow 0.2s; user-select: none; }
+    .apply-fab:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(0,0,0,0.36); }
+    .apply-fab-icon { width: 18px; height: 18px; flex-shrink: 0; }
+    .apply-fab-label { font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+    .apply-fab-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--gold); flex-shrink: 0; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:0.6; transform:scale(0.85); } }
+
+    .apply-widget { position: fixed; bottom: 84px; right: 28px; z-index: 500; width: 340px; background: white; box-shadow: 0 16px 60px rgba(0,0,0,0.22); display: none; flex-direction: column; overflow: hidden; }
+    .apply-widget.open { display: flex; animation: awSlideUp 0.22s ease; }
+    @keyframes awSlideUp { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
+
+    .aw-top { background: var(--navy); padding: 20px 20px 16px; display: flex; align-items: center; justify-content: space-between; }
+    .aw-top-title { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 400; color: white; }
+    .aw-top-actions { display: flex; align-items: center; gap: 12px; }
+    .aw-back-btn { background: none; border: none; color: rgba(255,255,255,0.5); font-size: 20px; cursor: pointer; padding: 0; line-height: 1; display: none; transition: color 0.15s; }
+    .aw-back-btn:hover { color: white; }
+    .aw-close-btn { background: none; border: none; color: rgba(255,255,255,0.5); font-size: 22px; cursor: pointer; padding: 0; line-height: 1; transition: color 0.15s; }
+    .aw-close-btn:hover { color: white; }
+
+    .aw-progress-bar { height: 3px; background: rgba(255,255,255,0.1); }
+    .aw-progress-fill { height: 100%; background: var(--gold); transition: width 0.35s ease; width: 0%; }
+
+    .aw-body { padding: 24px 20px; flex: 1; overflow-y: auto; }
+    .aw-step { display: none; }
+    .aw-step.active { display: block; animation: awFadeIn 0.18s ease; }
+    @keyframes awFadeIn { from { opacity:0; transform:translateX(10px); } to { opacity:1; transform:translateX(0); } }
+
+    .aw-step-label { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+    .aw-step-title { font-size: 15px; font-weight: 500; color: var(--navy); margin-bottom: 18px; line-height: 1.4; }
+
+    .aw-cards { display: flex; flex-direction: column; gap: 8px; }
+    .aw-card { border: 1.5px solid var(--border); padding: 14px 16px; cursor: pointer; transition: all 0.15s; display: flex; align-items: center; gap: 14px; }
+    .aw-card:hover { border-color: var(--navy); background: var(--cream); }
+    .aw-card-ico { width: 36px; height: 36px; background: var(--cream); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .aw-card-ico svg { width: 18px; height: 18px; stroke: var(--navy); }
+    .aw-card-text {}
+    .aw-card-name { font-size: 13px; font-weight: 600; color: var(--navy); margin-bottom: 1px; }
+    .aw-card-desc { font-size: 11px; color: var(--muted); line-height: 1.5; }
+
+    .aw-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .aw-chip { border: 1.5px solid var(--border); padding: 9px 14px; font-size: 12px; font-weight: 500; color: var(--navy); cursor: pointer; transition: all 0.15s; }
+    .aw-chip:hover, .aw-chip.selected { border-color: var(--navy); background: var(--navy); color: white; }
+
+    .aw-input { width: 100%; padding: 10px 12px; border: 1.5px solid var(--border); font-size: 13px; font-family: 'DM Sans', sans-serif; color: var(--text); outline: none; margin-bottom: 8px; transition: border-color 0.2s; display: block; }
+    .aw-input:focus { border-color: var(--navy); }
+    .aw-input::placeholder { color: var(--muted); }
+    .aw-submit { width: 100%; background: var(--gold); color: white; border: none; padding: 13px; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; margin-top: 8px; font-family: 'DM Sans', sans-serif; transition: opacity 0.2s; }
+    .aw-submit:hover { opacity: 0.88; }
+
+    .aw-success { text-align: center; padding: 12px 0 4px; }
+    .aw-success-check { width: 52px; height: 52px; background: #edf7ed; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
+    .aw-success-check svg { width: 26px; height: 26px; stroke: #2e7d32; }
+    .aw-success-title { font-size: 16px; font-weight: 600; color: var(--navy); margin-bottom: 8px; }
+    .aw-success-msg { font-size: 13px; color: var(--muted); line-height: 1.7; }
+
+    @media (max-width: 420px) { .apply-widget { width: calc(100vw - 32px); right: 16px; } .apply-fab { right: 16px; bottom: 16px; } }
 
     /* LIGHTBOX */
     .lightbox { display: none; position: fixed; inset: 0; background: rgba(5,10,18,0.97); z-index: 600; align-items: center; justify-content: center; padding: 40px; }
@@ -789,6 +847,103 @@
     </div>
   </footer>
 
+  <!-- APPLY WIDGET FAB -->
+  <div class="apply-fab" id="applyFab" onclick="awOpen()">
+    <svg class="apply-fab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a1 1 0 01-1 1H4a1 1 0 01-1-1z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    <span class="apply-fab-label">Apply Now</span>
+    <div class="apply-fab-dot"></div>
+  </div>
+
+  <!-- APPLY WIDGET PANEL -->
+  <div class="apply-widget" id="applyWidget">
+    <div class="aw-top">
+      <div class="aw-top-title">Richland Village</div>
+      <div class="aw-top-actions">
+        <button class="aw-back-btn" id="awBackBtn" onclick="awBack()">&#8592;</button>
+        <button class="aw-close-btn" onclick="awClose()">&#215;</button>
+      </div>
+    </div>
+    <div class="aw-progress-bar"><div class="aw-progress-fill" id="awProgress"></div></div>
+    <div class="aw-body">
+
+      <!-- Step 0: Choose path -->
+      <div class="aw-step active" id="aw-s0">
+        <div class="aw-step-label">Get Started</div>
+        <div class="aw-step-title">How can we help you today?</div>
+        <div class="aw-cards">
+          <div class="aw-card" onclick="awGo(1,'Book a Tour')">
+            <div class="aw-card-ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+            <div class="aw-card-text"><div class="aw-card-name">Book a Tour</div><div class="aw-card-desc">Schedule a showing at either community</div></div>
+          </div>
+          <div class="aw-card" onclick="awGo(1,'Start Application')">
+            <div class="aw-card-ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></div>
+            <div class="aw-card-text"><div class="aw-card-name">Start Application</div><div class="aw-card-desc">Begin your leasing process today</div></div>
+          </div>
+          <div class="aw-card" onclick="awGo(1,'Ask a Question')">
+            <div class="aw-card-ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
+            <div class="aw-card-text"><div class="aw-card-name">Ask a Question</div><div class="aw-card-desc">We reply within one business day</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 1: Which community -->
+      <div class="aw-step" id="aw-s1">
+        <div class="aw-step-label">Step 1 of 3</div>
+        <div class="aw-step-title">Which community interests you?</div>
+        <div class="aw-cards">
+          <div class="aw-card" onclick="awSelect('community','Richland Village');awGo(2)">
+            <div class="aw-card-ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a1 1 0 01-1 1H4a1 1 0 01-1-1z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+            <div class="aw-card-text"><div class="aw-card-name">Richland Village</div><div class="aw-card-desc">538 Richland Rd &middot; 10 Townhomes</div></div>
+          </div>
+          <div class="aw-card" onclick="awSelect('community','Richland Village III');awGo(2)">
+            <div class="aw-card-ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a1 1 0 01-1 1H4a1 1 0 01-1-1z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+            <div class="aw-card-text"><div class="aw-card-name">Richland Village III</div><div class="aw-card-desc">Shug Jordan Pkwy &middot; 11 Units</div></div>
+          </div>
+          <div class="aw-card" onclick="awSelect('community','Both Communities');awGo(2)">
+            <div class="aw-card-ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg></div>
+            <div class="aw-card-text"><div class="aw-card-name">Both Communities</div><div class="aw-card-desc">I&rsquo;d like to explore all options</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2: Floor plan -->
+      <div class="aw-step" id="aw-s2">
+        <div class="aw-step-label">Step 2 of 3</div>
+        <div class="aw-step-title">Which floor plan are you considering?</div>
+        <div class="aw-chips" style="margin-bottom:18px;">
+          <div class="aw-chip" onclick="awChip(this,'plan','2 Bed · 2.5 Bath')">2 Bed · 2.5 Bath</div>
+          <div class="aw-chip" onclick="awChip(this,'plan','3 Bed · 3.5 Bath')">3 Bed · 3.5 Bath</div>
+          <div class="aw-chip" onclick="awChip(this,'plan','4 Bed · 3.5 Bath')">4 Bed · 3.5 Bath</div>
+          <div class="aw-chip" onclick="awChip(this,'plan','4 Bed · 4.5 Bath')">4 Bed · 4.5 Bath</div>
+          <div class="aw-chip" onclick="awChip(this,'plan','Not sure yet')">Not sure yet</div>
+        </div>
+        <button class="aw-submit" onclick="awGo(3)" style="background:var(--navy);">Continue &rarr;</button>
+      </div>
+
+      <!-- Step 3: Contact info -->
+      <div class="aw-step" id="aw-s3">
+        <div class="aw-step-label">Step 3 of 3</div>
+        <div class="aw-step-title">Almost there — your contact info</div>
+        <input class="aw-input" id="aw-name" type="text" placeholder="Full Name">
+        <input class="aw-input" id="aw-email" type="email" placeholder="Email Address">
+        <input class="aw-input" id="aw-phone" type="tel" placeholder="Phone Number">
+        <button class="aw-submit" onclick="awSubmit()">Send Request &rarr;</button>
+      </div>
+
+      <!-- Step 4: Success -->
+      <div class="aw-step" id="aw-s4">
+        <div class="aw-success">
+          <div class="aw-success-check">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div class="aw-success-title">You&rsquo;re on the list!</div>
+          <div class="aw-success-msg">We&rsquo;ll reach out within one business day to confirm your <span id="aw-action-label">request</span>.<br><br>(334) 750-2059<br>leasing@parmerdevelopment.com</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
   <!-- LIGHTBOX -->
   <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
     <span class="lb-close" onclick="closeLightbox()">&times;</span>
@@ -895,6 +1050,49 @@
       }
     }
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+    // APPLY WIDGET
+    const awState = { step: 0, history: [], intent: '', community: '', plan: '' };
+    const awProgress = [0, 0, 33, 66, 100, 100];
+
+    function awOpen() {
+      document.getElementById('applyWidget').classList.add('open');
+      document.getElementById('applyFab').style.display = 'none';
+    }
+    function awClose() {
+      document.getElementById('applyWidget').classList.remove('open');
+      document.getElementById('applyFab').style.display = 'flex';
+    }
+    function awGo(step, intent) {
+      if (intent) awState.intent = intent;
+      awShowStep(step);
+    }
+    function awBack() {
+      if (awState.history.length > 0) {
+        awShowStep(awState.history.pop(), true);
+      }
+    }
+    function awShowStep(step, back) {
+      if (!back) awState.history.push(awState.step);
+      document.getElementById('aw-s' + awState.step).classList.remove('active');
+      awState.step = step;
+      document.getElementById('aw-s' + step).classList.add('active');
+      document.getElementById('awProgress').style.width = (awProgress[step] || 0) + '%';
+      document.getElementById('awBackBtn').style.display = (awState.history.length > 0 && step < 4) ? 'block' : 'none';
+    }
+    function awSelect(key, val) { awState[key] = val; }
+    function awChip(el, key, val) {
+      el.closest('.aw-chips').querySelectorAll('.aw-chip').forEach(c => c.classList.remove('selected'));
+      el.classList.add('selected');
+      awState[key] = val;
+    }
+    function awSubmit() {
+      const name = document.getElementById('aw-name').value.trim();
+      const email = document.getElementById('aw-email').value.trim();
+      if (!name || !email) { alert('Please enter your name and email.'); return; }
+      document.getElementById('aw-action-label').textContent = awState.intent.toLowerCase();
+      awGo(4);
+    }
 
     // CONTACT
     function handleSubmit(e) {
