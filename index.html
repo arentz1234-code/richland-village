@@ -384,7 +384,6 @@
         <div class="detail-inner">
           <div class="detail-tabs">
             <button class="detail-tab active" onclick="switchTab('rv','plans',this)">Floor Plans</button>
-            <button class="detail-tab" onclick="switchTab('rv','tours',this)">Virtual Tours</button>
           </div>
 
           <!-- RV FLOOR PLANS -->
@@ -442,7 +441,12 @@
                   </div>
                   <a href="#contact" class="fp-cta">Schedule a Showing</a>
                 </div>
-              </div></div>
+              </div>
+              <div style="padding:24px 32px 32px;border-top:1px solid var(--border);">
+                <span class="section-label" style="font-size:9px;display:block;margin-bottom:16px;">Virtual Tour</span>
+                <iframe class="tour-embed" src="https://my.matterport.com/show/?m=nAha3DLi7LG&play=1" allowfullscreen allow="xr-spatial-tracking; gyroscope; accelerometer"></iframe>
+              </div>
+            </div>
             <div class="fp-display" id="fp-rv-3br">
               <div class="fp-display-inner">
                 <div class="fp-img-wrap"><img src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/floorplans/fp-3br.jpg" alt="3BR Floor Plan" onclick="openLightbox(this.src)"></div>
@@ -457,7 +461,21 @@
                   </div>
                   <a href="#contact" class="fp-cta">Schedule a Showing</a>
                 </div>
-              </div></div>
+              </div>
+              <div style="padding:24px 32px 32px;border-top:1px solid var(--border);">
+                <span class="section-label" style="font-size:9px;display:block;margin-bottom:16px;">Virtual Tours &mdash; 2 Unit Layouts</span>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+                  <div>
+                    <p style="font-size:10px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">Unit A</p>
+                    <iframe class="tour-embed" src="https://my.matterport.com/show/?m=wo3qGHMzLVR&play=1" allowfullscreen allow="xr-spatial-tracking; gyroscope; accelerometer"></iframe>
+                  </div>
+                  <div>
+                    <p style="font-size:10px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">Unit B &mdash; Mirrored</p>
+                    <iframe class="tour-embed" src="https://my.matterport.com/show/?m=wYBsMXMtcgC&play=1" allowfullscreen allow="xr-spatial-tracking; gyroscope; accelerometer"></iframe>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div class="fp-display" id="fp-rv-4br-35">
               <div class="fp-display-inner">
                 <div class="fp-img-wrap"><img src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/floorplans/fp-4br-35.jpg" alt="4BR 3.5BA Floor Plan" onclick="openLightbox(this.src)"></div>
@@ -473,7 +491,12 @@
                   </div>
                   <a href="#contact" class="fp-cta">Schedule a Showing</a>
                 </div>
-              </div></div>
+              </div>
+              <div style="padding:24px 32px 32px;border-top:1px solid var(--border);">
+                <span class="section-label" style="font-size:9px;display:block;margin-bottom:16px;">Virtual Tour</span>
+                <iframe class="tour-embed" src="https://my.matterport.com/show/?m=HB5wVuChnxR&play=1" allowfullscreen allow="xr-spatial-tracking; gyroscope; accelerometer"></iframe>
+              </div>
+            </div>
             <div class="fp-display" id="fp-rv-placeholder">
               <div class="fp-display-inner">
                 <div class="fp-placeholder" style="min-height:400px;">
@@ -492,41 +515,6 @@
                   <a href="#contact" class="fp-cta">Get Details</a>
                 </div>
               </div>
-            </div>
-          </div>
-
-          <!-- RV VIRTUAL TOURS -->
-          <div class="detail-panel" id="rv-tours">
-            <div class="tour-tabs">
-              <button class="tour-tab active" onclick="switchTour('rv','tour-rv-2br',this)">
-                <span class="tour-tab-num">2</span>
-                <span class="tour-tab-label">Bed / 2.5 Bath</span>
-              </button>
-              <button class="tour-tab" onclick="switchTour('rv','tour-rv-3br',this)">
-                <span class="tour-tab-num">3</span>
-                <span class="tour-tab-label">Bed / 3.5 Bath</span>
-              </button>
-              <button class="tour-tab" onclick="switchTour('rv','tour-rv-3br-m',this)">
-                <span class="tour-tab-num">3</span>
-                <span class="tour-tab-label">Bed / 3.5 Bath</span>
-                <span class="tour-tab-sub">Mirrored</span>
-              </button>
-              <button class="tour-tab" onclick="switchTour('rv','tour-rv-4br',this)">
-                <span class="tour-tab-num">4</span>
-                <span class="tour-tab-label">Bed / 4.5 Bath</span>
-              </button>
-            </div>
-            <div class="tour-unit active" id="tour-rv-2br">
-              <iframe class="tour-embed" src="https://my.matterport.com/show/?m=nAha3DLi7LG&play=1" allowfullscreen allow="xr-spatial-tracking; gyroscope; accelerometer"></iframe>
-            </div>
-            <div class="tour-unit" id="tour-rv-3br">
-              <iframe class="tour-embed" src="https://my.matterport.com/show/?m=wo3qGHMzLVR&play=1" allowfullscreen allow="xr-spatial-tracking; gyroscope; accelerometer"></iframe>
-            </div>
-            <div class="tour-unit" id="tour-rv-3br-m">
-              <iframe class="tour-embed" src="https://my.matterport.com/show/?m=wYBsMXMtcgC&play=1" allowfullscreen allow="xr-spatial-tracking; gyroscope; accelerometer"></iframe>
-            </div>
-            <div class="tour-unit" id="tour-rv-4br">
-              <iframe class="tour-embed" src="https://my.matterport.com/show/?m=HB5wVuChnxR&play=1" allowfullscreen allow="xr-spatial-tracking; gyroscope; accelerometer"></iframe>
             </div>
           </div>
         </div>
