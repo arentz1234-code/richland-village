@@ -982,6 +982,26 @@
     // CONTACT
     function handleSubmit(e) {
       e.preventDefault();
+      var inputs = e.target.querySelectorAll('input');
+      var firstName = inputs[0] ? inputs[0].value.trim() : '';
+      var lastName = inputs[1] ? inputs[1].value.trim() : '';
+      var email = inputs[2] ? inputs[2].value.trim() : '';
+      var phone = inputs[3] ? inputs[3].value.trim() : '';
+      var community = e.target.querySelector('select') ? e.target.querySelector('select').value : 'Richland Village';
+      var message = e.target.querySelector('textarea') ? e.target.querySelector('textarea').value.trim() : '';
+      fetch('https://parmer-dashboard-andrews-projects-64e8e9b7.vercel.app/api/submissions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          property: community || 'Richland Village',
+          source_site: 'richland-village-andrews-projects-64e8e9b7.vercel.app',
+          first_name: firstName,
+          last_name: lastName,
+          email: email,
+          phone: phone,
+          message: message
+        })
+      }).catch(function() {});
       document.getElementById('successMsg').classList.add('show');
       e.target.style.display = 'none';
     }
