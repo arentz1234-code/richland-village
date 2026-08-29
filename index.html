@@ -645,20 +645,10 @@
       <h2 class="section-title">Let&rsquo;s Talk</h2>
       <p class="contact-sub">We&rsquo;ll be in touch within one business day.</p>
       <form class="contact-form" id="contactForm" onsubmit="handleSubmit(event)">
-        <input type="text" placeholder="First Name" required>
-        <input type="text" placeholder="Last Name" required>
-        <input type="email" placeholder="Email Address" required>
-        <input type="tel" placeholder="Phone Number">
-        <select>
-          <option value="" disabled selected>Community of interest&hellip;</option>
-          <option>Richland Village (10 Townhomes)</option>
-          <option>Richland Village III (Townhomes)</option>
-          <option>Richland Village III (Cottage)</option>
-          <option>Both Communities</option>
-          <option>General Inquiry</option>
-        </select>
-        <input type="text" placeholder="How did you hear about us?">
-        <textarea placeholder="Questions or notes&hellip;"></textarea>
+        <input type="text" placeholder="Name" required style="grid-column:1/-1;">
+        <input type="email" placeholder="Email" required>
+        <input type="tel" placeholder="Phone">
+        <textarea placeholder="Message&hellip;"></textarea>
         <button type="submit" class="contact-submit">Send Inquiry</button>
       </form>
       <div class="success-msg" id="successMsg">Thank you! A member of our team will be in touch within 24 hours.</div>
