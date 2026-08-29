@@ -533,7 +533,6 @@
         <div class="detail-inner">
           <div class="detail-tabs">
             <button class="detail-tab active" onclick="switchTab('rv3','plans',this)">Floor Plans</button>
-            <button class="detail-tab" onclick="switchTab('rv3','tours',this)">Virtual Tours</button>
           </div>
 
           <!-- RV3 FLOOR PLANS -->
@@ -593,7 +592,12 @@
                   </div>
                   <a href="#contact" class="fp-cta">Schedule a Showing</a>
                 </div>
-              </div></div>
+              </div>
+              <div style="padding:24px 32px 32px;border-top:1px solid var(--border);">
+                <span class="section-label" style="font-size:9px;display:block;margin-bottom:16px;">Virtual Tour</span>
+                <iframe class="tour-embed" src="https://my.matterport.com/show/?m=nAha3DLi7LG&play=1" allowfullscreen allow="xr-spatial-tracking; gyroscope; accelerometer"></iframe>
+              </div>
+            </div>
             <div class="fp-display" id="fp-rv3-3br">
               <div class="fp-display-inner">
                 <div class="fp-img-wrap"><img src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/floorplans/fp-3br.jpg" alt="3BR Floor Plan" onclick="openLightbox(this.src)"></div>
@@ -624,7 +628,12 @@
                   </div>
                   <a href="#contact" class="fp-cta">Schedule a Showing</a>
                 </div>
-              </div></div>
+              </div>
+              <div style="padding:24px 32px 32px;border-top:1px solid var(--border);">
+                <span class="section-label" style="font-size:9px;display:block;margin-bottom:16px;">Virtual Tour</span>
+                <iframe class="tour-embed" src="https://my.matterport.com/show/?m=HB5wVuChnxR&play=1" allowfullscreen allow="xr-spatial-tracking; gyroscope; accelerometer"></iframe>
+              </div>
+            </div>
             <div class="fp-display" id="fp-rv3-cottage" style="display:none">
               <div class="fp-display-inner">
                 <div class="fp-placeholder" style="min-height:400px;">
@@ -643,42 +652,6 @@
                   <a href="#contact" class="fp-cta">Get Details</a>
                 </div>
               </div>
-            </div>
-          </div>
-
-          <!-- RV3 VIRTUAL TOURS -->
-          <div class="detail-panel" id="rv3-tours">
-            <p style="font-size:13px;color:var(--muted);margin-bottom:32px;line-height:1.8;max-width:600px;">Townhome virtual tours are shared across both communities. Explore each unit type below.</p>
-            <div class="tour-tabs">
-              <button class="tour-tab active" onclick="switchTour('rv3','tour-rv3-2br',this)">
-                <span class="tour-tab-num">2</span>
-                <span class="tour-tab-label">Bed / 2.5 Bath</span>
-              </button>
-              <button class="tour-tab" onclick="switchTour('rv3','tour-rv3-3br',this)">
-                <span class="tour-tab-num">3</span>
-                <span class="tour-tab-label">Bed / 3.5 Bath</span>
-              </button>
-              <button class="tour-tab" onclick="switchTour('rv3','tour-rv3-3br-m',this)">
-                <span class="tour-tab-num">3</span>
-                <span class="tour-tab-label">Bed / 3.5 Bath</span>
-                <span class="tour-tab-sub">Mirrored</span>
-              </button>
-              <button class="tour-tab" onclick="switchTour('rv3','tour-rv3-4br',this)">
-                <span class="tour-tab-num">4</span>
-                <span class="tour-tab-label">Bed / 4.5 Bath</span>
-              </button>
-            </div>
-            <div class="tour-unit active" id="tour-rv3-2br">
-              <iframe class="tour-embed" src="https://my.matterport.com/show/?m=nAha3DLi7LG&play=1" allowfullscreen allow="xr-spatial-tracking; gyroscope; accelerometer"></iframe>
-            </div>
-            <div class="tour-unit" id="tour-rv3-3br">
-              <iframe class="tour-embed" src="https://my.matterport.com/show/?m=wo3qGHMzLVR&play=1" allowfullscreen allow="xr-spatial-tracking; gyroscope; accelerometer"></iframe>
-            </div>
-            <div class="tour-unit" id="tour-rv3-3br-m">
-              <iframe class="tour-embed" src="https://my.matterport.com/show/?m=wYBsMXMtcgC&play=1" allowfullscreen allow="xr-spatial-tracking; gyroscope; accelerometer"></iframe>
-            </div>
-            <div class="tour-unit" id="tour-rv3-4br">
-              <iframe class="tour-embed" src="https://my.matterport.com/show/?m=HB5wVuChnxR&play=1" allowfullscreen allow="xr-spatial-tracking; gyroscope; accelerometer"></iframe>
             </div>
           </div>
         </div>
