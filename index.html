@@ -24,7 +24,7 @@
       --border: #E3DDD5;
     }
     html { scroll-behavior: smooth; }
-    body { font-family: 'DM Sans', sans-serif; background: var(--white); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--white); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
 
     /* BANNER */
     .banner { position: fixed; top: 0; left: 0; right: 0; z-index: 300; background: var(--navy); display: flex; align-items: center; justify-content: center; gap: 24px; padding: 9px 24px; flex-wrap: wrap; }
@@ -33,6 +33,7 @@
     .banner-cta { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--navy); background: var(--gold); padding: 5px 16px; text-decoration: none; white-space: nowrap; transition: opacity 0.15s; }
     .banner-cta:hover { opacity: 0.88; }
     @media (max-width: 640px) { .banner { gap: 12px; } .banner-dot { display: none; } }
+    @media (max-width: 520px) { .banner { flex-wrap: nowrap; justify-content: space-between; padding: 9px 16px; } .banner-text:nth-child(3), .banner-text:nth-child(5) { display: none; } }
 
     /* NAV */
     nav { position: fixed; top: 33px; left: 0; right: 0; z-index: 200; background: rgba(255,255,255,0.97); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 52px; height: 60px; }
@@ -43,6 +44,7 @@
     .nav-apply { background: var(--navy) !important; color: white !important; padding: 9px 22px !important; transition: background 0.2s !important; }
     .nav-apply:hover { background: var(--gold) !important; color: white !important; }
     @media (max-width: 768px) { nav { padding: 0 20px; } .nav-links { gap: 18px; } .nav-links a:not(.nav-apply) { display: none; } }
+    @media (max-width: 480px) { nav { padding: 0 16px; } .nav-logo { font-size: 20px; letter-spacing: 0.08em; } }
 
     /* HERO */
     .hero { height: 100vh; min-height: 600px; position: relative; display: flex; align-items: flex-end; overflow: hidden; padding-top: 93px; }
@@ -50,7 +52,7 @@
     .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to right, rgba(10,18,30,0.82) 0%, rgba(10,18,30,0.35) 55%, rgba(10,18,30,0) 100%), linear-gradient(to top, rgba(10,18,30,0.92) 0%, rgba(10,18,30,0.55) 45%, rgba(10,18,30,0.2) 100%); }
     .hero-content { position: relative; z-index: 2; padding: 0 60px 72px; max-width: 760px; }
     .hero-eyebrow { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 18px; display: block; }
-    .hero-title { font-family: 'Playfair Display', serif; font-size: clamp(52px, 6.5vw, 88px); font-weight: 400; line-height: 0.95; color: white; margin-bottom: 22px; text-shadow: 0 2px 24px rgba(0,0,0,0.4); }
+    .hero-title { font-family: 'Playfair Display', serif; font-size: clamp(38px, 8vw, 88px); font-weight: 400; line-height: 0.95; color: white; margin-bottom: 22px; text-shadow: 0 2px 24px rgba(0,0,0,0.4); }
     .hero-title em { font-style: italic; }
     .hero-sub { font-size: 15px; color: rgba(255,255,255,0.82); line-height: 1.8; font-weight: 400; margin-bottom: 36px; max-width: 440px; text-shadow: 0 1px 12px rgba(0,0,0,0.5); }
     .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
@@ -60,6 +62,7 @@
     .btn-outline { border: 1px solid rgba(255,255,255,0.4); color: rgba(255,255,255,0.8); }
     .btn-outline:hover { border-color: white; color: white; }
     @media (max-width: 768px) { .hero-content { padding: 0 24px 56px; } }
+    @media (max-width: 480px) { .hero-content { padding: 0 20px 40px; } .hero-sub { font-size: 14px; } }
 
     /* SECTION TITLES */
     .section-label { font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; display: block; }
@@ -84,6 +87,7 @@
     .map-card-link { display: inline-block; margin-top: 10px; font-size: 11px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; color: var(--navy); text-decoration: none; border-bottom: 1px solid var(--border); padding-bottom: 1px; transition: border-color 0.2s; }
     .map-card-link:hover { border-color: var(--navy); }
     @media (max-width: 900px) { .map-section { padding: 60px 24px; } .map-layout { grid-template-columns: 1fr; } .map-wrap { height: 340px; } }
+    @media (max-width: 480px) { .map-section { padding: 48px 16px; } .map-wrap { height: 260px; } .map-card { padding: 16px; } }
 
     /* COMMUNITIES */
     .communities-section { background: white; padding: 80px 56px; }
@@ -104,7 +108,8 @@
     .comm-card.active .comm-card-btn { color: var(--gold); border-color: var(--gold); }
     .comm-card-indicator { position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: var(--gold); transform: scaleX(0); transition: transform 0.3s; transform-origin: left; }
     .comm-card.active .comm-card-indicator { transform: scaleX(1); }
-    @media (max-width: 700px) { .communities-section { padding: 60px 20px; } .comm-cards { grid-template-columns: 1fr; } .comm-card { min-height: 280px; } .comm-card-content { padding: 24px; } }
+    @media (max-width: 700px) { .communities-section { padding: 60px 20px; } .comm-cards { grid-template-columns: 1fr; } .comm-card { min-height: 260px; } .comm-card-content { padding: 24px; } }
+    @media (max-width: 480px) { .comm-card { min-height: 220px; } .comm-card-name { font-size: 22px; } }
 
     /* COMMUNITY DETAIL */
     .comm-detail { display: none; background: var(--cream); }
@@ -142,8 +147,11 @@
     .fp-cta:hover { opacity: 0.88; }
     .fp-placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; min-height: 400px; background: #f4f0eb; }
     .fp-placeholder p { font-size: 14px; color: var(--muted); text-align: center; max-width: 220px; line-height: 1.7; }
+    .fp-tour-wrap { padding: 24px 32px 32px; border-top: 1px solid var(--border); }
     @media (max-width: 900px) { .fp-grid { grid-template-columns: 1fr 1fr; } .fp-display-inner { grid-template-columns: 1fr; } .fp-img-wrap { min-height: 300px; padding: 24px; } .fp-info { padding: 32px 24px; } }
-    @media (max-width: 500px) { .fp-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 700px) { .fp-tour-wrap { padding: 16px 16px 24px; } }
+    @media (max-width: 500px) { .fp-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 480px) { .detail-inner { padding: 28px 16px; } .fp-img-wrap { padding: 16px; min-height: 220px; } .fp-info { padding: 24px 16px; } }
 
     /* VIRTUAL TOURS */
     .tour-embed { width: 100%; aspect-ratio: 16/9; border: 0; display: block; }
@@ -279,7 +287,7 @@
 
   <!-- HERO -->
   <section class="hero">
-    <img class="hero-bg" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/exterior/exterior-rv-cover.jpg" alt="Richland Village">
+    <img class="hero-bg" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/exterior/exterior-rv-cover.jpg" alt="Richland Village" fetchpriority="high">
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <span class="hero-eyebrow">Auburn, Alabama &nbsp;&middot;&nbsp; Now Leasing Fall 2027</span>
@@ -330,7 +338,7 @@
       </div>
       <div class="comm-cards">
         <div class="comm-card active" id="card-rv" onclick="selectComm('rv')">
-          <img class="comm-card-bg" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/exterior/exterior-rv-cover.jpg" alt="Richland Village">
+          <img class="comm-card-bg" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/exterior/exterior-rv-cover.jpg" alt="Richland Village" loading="lazy">
           <div class="comm-card-overlay"></div>
           <div class="comm-card-content">
             <span class="comm-card-badge">Now Leasing &middot; Fall 2027</span>
@@ -342,7 +350,7 @@
           <div class="comm-card-indicator"></div>
         </div>
         <div class="comm-card" id="card-rv3" onclick="selectComm('rv3')">
-          <img class="comm-card-bg" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/exterior/exterior-rv3-cover.jpg" alt="Richland Village III" style="object-position:center 30%">
+          <img class="comm-card-bg" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/exterior/exterior-rv3-cover.jpg" alt="Richland Village III" style="object-position:center 30%" loading="lazy">
           <div class="comm-card-overlay"></div>
           <div class="comm-card-content">
             <span class="comm-card-badge">Now Leasing &middot; Fall 2027</span>
@@ -366,7 +374,7 @@
           <div class="detail-panel active" id="rv-plans">
             <div class="fp-grid" id="rv-fp-grid">
               <div class="fp-thumb active" onclick="selectPlan('rv','fp-rv-2br',this)">
-                <img class="fp-thumb-img" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/floorplans/fp-2br.jpg" alt="2BR">
+                <img class="fp-thumb-img" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/floorplans/fp-2br.jpg" alt="2BR" loading="lazy">
                 <div class="fp-thumb-label">
                   <span class="fp-thumb-beds">2 Bedroom</span>
                   <div class="fp-thumb-name">2 Bed &middot; 2.5 Bath</div>
@@ -374,7 +382,7 @@
                 </div>
               </div>
               <div class="fp-thumb" onclick="selectPlan('rv','fp-rv-3br',this)">
-                <img class="fp-thumb-img" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/floorplans/fp-3br.jpg" alt="3BR">
+                <img class="fp-thumb-img" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/floorplans/fp-3br.jpg" alt="3BR" loading="lazy">
                 <div class="fp-thumb-label">
                   <span class="fp-thumb-beds">3 Bedroom</span>
                   <div class="fp-thumb-name">3 Bed &middot; 3.5 Bath</div>
@@ -382,7 +390,7 @@
                 </div>
               </div>
               <div class="fp-thumb" onclick="selectPlan('rv','fp-rv-4br-35',this)">
-                <img class="fp-thumb-img" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/floorplans/fp-4br-35.jpg" alt="4BR 3.5BA">
+                <img class="fp-thumb-img" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/floorplans/fp-4br-35.jpg" alt="4BR 3.5BA" loading="lazy">
                 <div class="fp-thumb-label">
                   <span class="fp-thumb-beds">4 Bedroom</span>
                   <div class="fp-thumb-name">4 Bed &middot; 3.5 Bath</div>
@@ -418,9 +426,9 @@
                   <a href="#contact" class="fp-cta">Schedule a Showing</a>
                 </div>
               </div>
-              <div style="padding:24px 32px 32px;border-top:1px solid var(--border);">
+              <div class="fp-tour-wrap">
                 <span class="section-label" style="font-size:9px;display:block;margin-bottom:16px;">Virtual Tour</span>
-                <iframe class="tour-embed" src="https://my.matterport.com/show/?m=nAha3DLi7LG&play=1" allowfullscreen allow="xr-spatial-tracking; gyroscope; accelerometer"></iframe>
+                <iframe class="tour-embed" loading="lazy" src="https://my.matterport.com/show/?m=nAha3DLi7LG&play=1" allowfullscreen allow="xr-spatial-tracking; gyroscope; accelerometer"></iframe>
               </div>
             </div>
             <div class="fp-display" id="fp-rv-3br">
@@ -455,9 +463,9 @@
                   <a href="#contact" class="fp-cta">Schedule a Showing</a>
                 </div>
               </div>
-              <div style="padding:24px 32px 32px;border-top:1px solid var(--border);">
+              <div class="fp-tour-wrap">
                 <span class="section-label" style="font-size:9px;display:block;margin-bottom:16px;">Virtual Tour</span>
-                <iframe class="tour-embed" src="https://my.matterport.com/show/?m=wo3qGHMzLVR&play=1" allowfullscreen allow="xr-spatial-tracking; gyroscope; accelerometer"></iframe>
+                <iframe class="tour-embed" loading="lazy" src="https://my.matterport.com/show/?m=wo3qGHMzLVR&play=1" allowfullscreen allow="xr-spatial-tracking; gyroscope; accelerometer"></iframe>
               </div>
             </div>
             <div class="fp-display" id="fp-rv-placeholder">
@@ -496,7 +504,7 @@
 
             <div class="fp-grid" id="rv3-fp-grid" style="margin-bottom:32px;">
               <div class="fp-thumb active" onclick="selectPlan('rv3','fp-rv3-2br',this)">
-                <img class="fp-thumb-img" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/floorplans/fp-2br.jpg" alt="2BR">
+                <img class="fp-thumb-img" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/floorplans/fp-2br.jpg" alt="2BR" loading="lazy">
                 <div class="fp-thumb-label">
                   <span class="fp-thumb-beds">2 Bedroom</span>
                   <div class="fp-thumb-name">2 Bed &middot; 2.5 Bath</div>
@@ -504,7 +512,7 @@
                 </div>
               </div>
               <div class="fp-thumb" onclick="selectPlan('rv3','fp-rv3-3br',this)">
-                <img class="fp-thumb-img" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/floorplans/fp-3br.jpg" alt="3BR">
+                <img class="fp-thumb-img" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/floorplans/fp-3br.jpg" alt="3BR" loading="lazy">
                 <div class="fp-thumb-label">
                   <span class="fp-thumb-beds">3 Bedroom</span>
                   <div class="fp-thumb-name">3 Bed &middot; 3.5 Bath</div>
@@ -512,7 +520,7 @@
                 </div>
               </div>
               <div class="fp-thumb" onclick="selectPlan('rv3','fp-rv3-4br-35',this)">
-                <img class="fp-thumb-img" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/floorplans/fp-4br-35.jpg" alt="4BR 3.5BA">
+                <img class="fp-thumb-img" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/floorplans/fp-4br-35.jpg" alt="4BR 3.5BA" loading="lazy">
                 <div class="fp-thumb-label">
                   <span class="fp-thumb-beds">4 Bedroom</span>
                   <div class="fp-thumb-name">4 Bed &middot; 3.5 Bath</div>
@@ -548,9 +556,9 @@
                   <a href="#contact" class="fp-cta">Schedule a Showing</a>
                 </div>
               </div>
-              <div style="padding:24px 32px 32px;border-top:1px solid var(--border);">
+              <div class="fp-tour-wrap">
                 <span class="section-label" style="font-size:9px;display:block;margin-bottom:16px;">Virtual Tour</span>
-                <iframe class="tour-embed" src="https://my.matterport.com/show/?m=nAha3DLi7LG&play=1" allowfullscreen allow="xr-spatial-tracking; gyroscope; accelerometer"></iframe>
+                <iframe class="tour-embed" loading="lazy" src="https://my.matterport.com/show/?m=nAha3DLi7LG&play=1" allowfullscreen allow="xr-spatial-tracking; gyroscope; accelerometer"></iframe>
               </div>
             </div>
             <div class="fp-display" id="fp-rv3-3br">
@@ -584,9 +592,9 @@
                   <a href="#contact" class="fp-cta">Schedule a Showing</a>
                 </div>
               </div>
-              <div style="padding:24px 32px 32px;border-top:1px solid var(--border);">
+              <div class="fp-tour-wrap">
                 <span class="section-label" style="font-size:9px;display:block;margin-bottom:16px;">Virtual Tour</span>
-                <iframe class="tour-embed" src="https://my.matterport.com/show/?m=wo3qGHMzLVR&play=1" allowfullscreen allow="xr-spatial-tracking; gyroscope; accelerometer"></iframe>
+                <iframe class="tour-embed" loading="lazy" src="https://my.matterport.com/show/?m=wo3qGHMzLVR&play=1" allowfullscreen allow="xr-spatial-tracking; gyroscope; accelerometer"></iframe>
               </div>
             </div>
             <div class="fp-display" id="fp-rv3-cottage" style="display:none">
