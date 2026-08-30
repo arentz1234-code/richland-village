@@ -829,24 +829,12 @@
         </div>`;
       }
 
-      async function geocode(q) {
-        const r = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(q)}&format=json&limit=1`);
-        const d = await r.json();
-        return d[0] ? [+d[0].lat, +d[0].lon] : null;
-      }
-
-      async function init() {
-        const [c1, c2] = await Promise.all([
-          geocode('538 Richland Road Auburn Alabama USA'),
-          geocode('1256 Shug Jordan Pkwy Auburn Alabama USA')
-        ]);
-        const pts = [];
-        if (c1) { pts.push(c1); L.marker(c1, { icon: pin('#1B2B41','#9A7540','RV') }).addTo(map).bindPopup(popup('Richland Village','538 Richland Road · Auburn, AL','10 Townhomes'), { maxWidth: 260 }); }
-        if (c2) { pts.push(c2); L.marker(c2, { icon: pin('#9A7540','#1B2B41','III') }).addTo(map).bindPopup(popup('Richland Village III','1256 Shug Jordan Pkwy · Auburn, AL','3 Cottages & 8 Townhomes'), { maxWidth: 260 }); }
-        if (pts.length === 2) map.fitBounds(pts, { padding: [70, 70] });
-        else if (pts.length === 1) map.setView(pts[0], 16);
-      }
-      init();
+      const c1 = [32.5933, -85.4765]; // 538 Richland Road, Auburn AL
+      const c2 = [32.6021, -85.5012]; // 1256 Shug Jordan Pkwy, Auburn AL
+      const pts = [c1, c2];
+      L.marker(c1, { icon: pin('#1B2B41','#9A7540','RV') }).addTo(map).bindPopup(popup('Richland Village','538 Richland Road · Auburn, AL','10 Townhomes'), { maxWidth: 260 });
+      L.marker(c2, { icon: pin('#9A7540','#1B2B41','III') }).addTo(map).bindPopup(popup('Richland Village III','1256 Shug Jordan Pkwy · Auburn, AL','3 Cottages & 8 Townhomes'), { maxWidth: 260 });
+      map.fitBounds(pts, { padding: [70, 70] });
     })();
 
     // COMMUNITY SWITCHING
