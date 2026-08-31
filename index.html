@@ -12,6 +12,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -198,63 +199,41 @@
     @media (max-width: 560px) { .footer-cols { grid-template-columns: 1fr; gap: 32px; } }
 
 
-    /* APPLY WIDGET */
-    .apply-fab { position: fixed; bottom: 28px; right: 28px; z-index: 500; display: flex; align-items: center; gap: 10px; background: var(--navy); color: white; padding: 14px 22px; cursor: pointer; box-shadow: 0 8px 32px rgba(0,0,0,0.28); transition: transform 0.2s, box-shadow 0.2s; user-select: none; }
+    /* APPLY MODAL */
+    .apply-modal-overlay { position: fixed; inset: 0; z-index: 8000; background: rgba(15,22,35,0.78); display: flex; align-items: center; justify-content: center; padding: 20px; opacity: 0; pointer-events: none; transition: opacity 0.25s; backdrop-filter: blur(4px); }
+    .apply-modal-overlay.open { opacity: 1; pointer-events: all; }
+    .apply-modal { background: white; width: 100%; max-width: 580px; max-height: 92vh; overflow-y: auto; position: relative; transform: translateY(18px); transition: transform 0.28s cubic-bezier(.22,.68,0,1.2); }
+    .apply-modal-overlay.open .apply-modal { transform: translateY(0); }
+    .am-head { background: var(--navy); padding: 32px 40px 28px; position: relative; }
+    .am-eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; display: block; }
+    .am-title { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 400; color: white; margin: 0; line-height: 1.1; }
+    .am-close { position: absolute; top: 18px; right: 22px; background: none; border: none; color: rgba(255,255,255,0.4); font-size: 28px; cursor: pointer; line-height: 1; padding: 4px 8px; transition: color 0.15s; }
+    .am-close:hover { color: white; }
+    .am-body { padding: 32px 40px 36px; }
+    .am-label { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--navy); margin-bottom: 10px; display: block; }
+    .am-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+    .am-pill { border: 1.5px solid var(--border); background: white; color: var(--navy); font-size: 12px; font-weight: 500; padding: 9px 18px; cursor: pointer; transition: all 0.15s; font-family: 'DM Sans', sans-serif; }
+    .am-pill:hover { border-color: var(--navy); }
+    .am-pill.on { background: var(--navy); color: white; border-color: var(--navy); }
+    .am-divider { height: 1px; background: var(--border); margin: 22px 0; }
+    .am-field { width: 100%; border: 1.5px solid var(--border); padding: 13px 14px; font-size: 14px; font-family: 'DM Sans', sans-serif; color: var(--navy); background: white; margin-bottom: 10px; outline: none; transition: border-color 0.15s; box-sizing: border-box; display: block; }
+    .am-field:focus { border-color: var(--navy); }
+    .am-field::placeholder { color: var(--muted); }
+    .am-textarea { resize: vertical; min-height: 80px; }
+    .am-error { color: #c0392b; font-size: 13px; margin-bottom: 12px; display: none; }
+    .am-submit { width: 100%; background: var(--gold); color: white; border: none; padding: 16px; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: opacity 0.2s; margin-top: 4px; }
+    .am-submit:hover { opacity: 0.88; }
+    .am-success { text-align: center; padding: 24px 0 8px; }
+    .am-success-icon { width: 64px; height: 64px; background: var(--cream); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; }
+    .am-success-icon svg { width: 30px; height: 30px; stroke: var(--gold); }
+    .am-success-title { font-family: 'Playfair Display', serif; font-size: 28px; color: var(--navy); margin: 0 0 12px; font-weight: 400; }
+    .am-success-msg { font-size: 14px; color: var(--muted); line-height: 1.9; }
+    /* FAB */
+    .apply-fab { position: fixed; bottom: 28px; right: 28px; z-index: 500; display: flex; align-items: center; gap: 10px; background: var(--navy); color: white; padding: 14px 22px; cursor: pointer; box-shadow: 0 8px 32px rgba(0,0,0,0.28); transition: transform 0.2s, box-shadow 0.2s; user-select: none; border: none; font-family: 'DM Sans', sans-serif; }
     .apply-fab:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(0,0,0,0.36); }
-    .apply-fab-icon { width: 18px; height: 18px; flex-shrink: 0; }
-    .apply-fab-label { font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
     .apply-fab-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--gold); flex-shrink: 0; animation: pulse 2s infinite; }
     @keyframes pulse { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:0.6; transform:scale(0.85); } }
-
-    .apply-widget { position: fixed; bottom: 84px; right: 28px; z-index: 500; width: 340px; background: white; box-shadow: 0 16px 60px rgba(0,0,0,0.22); display: none; flex-direction: column; overflow: hidden; }
-    .apply-widget.open { display: flex; animation: awSlideUp 0.22s ease; }
-    @keyframes awSlideUp { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
-
-    .aw-top { background: var(--navy); padding: 20px 20px 16px; display: flex; align-items: center; justify-content: space-between; }
-    .aw-top-title { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 400; color: white; }
-    .aw-top-actions { display: flex; align-items: center; gap: 12px; }
-    .aw-back-btn { background: none; border: none; color: rgba(255,255,255,0.5); font-size: 20px; cursor: pointer; padding: 0; line-height: 1; display: none; transition: color 0.15s; }
-    .aw-back-btn:hover { color: white; }
-    .aw-close-btn { background: none; border: none; color: rgba(255,255,255,0.5); font-size: 22px; cursor: pointer; padding: 0; line-height: 1; transition: color 0.15s; }
-    .aw-close-btn:hover { color: white; }
-
-    .aw-progress-bar { height: 3px; background: rgba(255,255,255,0.1); }
-    .aw-progress-fill { height: 100%; background: var(--gold); transition: width 0.35s ease; width: 0%; }
-
-    .aw-body { padding: 24px 20px; flex: 1; overflow-y: auto; }
-    .aw-step { display: none; }
-    .aw-step.active { display: block; animation: awFadeIn 0.18s ease; }
-    @keyframes awFadeIn { from { opacity:0; transform:translateX(10px); } to { opacity:1; transform:translateX(0); } }
-
-    .aw-step-label { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
-    .aw-step-title { font-size: 15px; font-weight: 500; color: var(--navy); margin-bottom: 18px; line-height: 1.4; }
-
-    .aw-cards { display: flex; flex-direction: column; gap: 8px; }
-    .aw-card { border: 1.5px solid var(--border); padding: 14px 16px; cursor: pointer; transition: all 0.15s; display: flex; align-items: center; gap: 14px; }
-    .aw-card:hover { border-color: var(--navy); background: var(--cream); }
-    .aw-card-ico { width: 36px; height: 36px; background: var(--cream); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .aw-card-ico svg { width: 18px; height: 18px; stroke: var(--navy); }
-    .aw-card-text {}
-    .aw-card-name { font-size: 13px; font-weight: 600; color: var(--navy); margin-bottom: 1px; }
-    .aw-card-desc { font-size: 11px; color: var(--muted); line-height: 1.5; }
-
-    .aw-chips { display: flex; flex-wrap: wrap; gap: 8px; }
-    .aw-chip { border: 1.5px solid var(--border); padding: 9px 14px; font-size: 12px; font-weight: 500; color: var(--navy); cursor: pointer; transition: all 0.15s; }
-    .aw-chip:hover, .aw-chip.selected { border-color: var(--navy); background: var(--navy); color: white; }
-
-    .aw-input { width: 100%; padding: 10px 12px; border: 1.5px solid var(--border); font-size: 13px; font-family: 'DM Sans', sans-serif; color: var(--text); outline: none; margin-bottom: 8px; transition: border-color 0.2s; display: block; }
-    .aw-input:focus { border-color: var(--navy); }
-    .aw-input::placeholder { color: var(--muted); }
-    .aw-submit { width: 100%; background: var(--gold); color: white; border: none; padding: 13px; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; margin-top: 8px; font-family: 'DM Sans', sans-serif; transition: opacity 0.2s; }
-    .aw-submit:hover { opacity: 0.88; }
-
-    .aw-success { text-align: center; padding: 12px 0 4px; }
-    .aw-success-check { width: 52px; height: 52px; background: #edf7ed; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
-    .aw-success-check svg { width: 26px; height: 26px; stroke: #2e7d32; }
-    .aw-success-title { font-size: 16px; font-weight: 600; color: var(--navy); margin-bottom: 8px; }
-    .aw-success-msg { font-size: 13px; color: var(--muted); line-height: 1.7; }
-
-    @media (max-width: 420px) { .apply-widget { width: calc(100vw - 32px); right: 16px; } .apply-fab { right: 16px; bottom: 16px; } }
+    @media (max-width: 600px) { .am-head { padding: 24px 24px 20px; } .am-body { padding: 24px 24px 28px; } .am-title { font-size: 26px; } .apply-fab { right: 16px; bottom: 16px; } }
 
     /* LIGHTBOX */
     .lightbox { display: none; position: fixed; inset: 0; background: rgba(5,10,18,0.97); z-index: 600; align-items: center; justify-content: center; padding: 40px; }
@@ -274,7 +253,7 @@
     <div class="banner-dot"></div>
     <span class="banner-text">(334) 750-2059</span>
     <div class="banner-dot"></div>
-    <a href="#contact" class="banner-cta">Apply Now</a>
+    <a href="javascript:void(0)" class="banner-cta" onclick="openApplyModal()">Apply Now</a>
   </div>
 
   <!-- NAV -->
@@ -286,7 +265,7 @@
     <div class="nav-links">
       <a href="#map">Locations</a>
       <a href="#communities">Communities</a>
-      <a href="#contact" class="nav-apply">Apply Now</a>
+      <a href="javascript:void(0)" class="nav-apply" onclick="openApplyModal()">Apply Now</a>
     </div>
   </nav>
 
@@ -720,99 +699,74 @@
   </footer>
 
   <!-- APPLY WIDGET FAB -->
-  <div class="apply-fab" id="applyFab" onclick="awOpen()">
-    <svg class="apply-fab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a1 1 0 01-1 1H4a1 1 0 01-1-1z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-    <span class="apply-fab-label">Apply Now</span>
+  <!-- FLOATING APPLY BUTTON -->
+  <button class="apply-fab" onclick="openApplyModal()">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0"><path d="M3 9l9-7 9 7v11a1 1 0 01-1 1H4a1 1 0 01-1-1z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    <span style="font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;">Apply Now</span>
     <div class="apply-fab-dot"></div>
-  </div>
+  </button>
 
-  <!-- APPLY WIDGET PANEL -->
-  <div class="apply-widget" id="applyWidget">
-    <div class="aw-top">
-      <div class="aw-top-title">Richland Village</div>
-      <div class="aw-top-actions">
-        <button class="aw-back-btn" id="awBackBtn" onclick="awBack()">&#8592;</button>
-        <button class="aw-close-btn" onclick="awClose()">&#215;</button>
+  <!-- APPLY MODAL -->
+  <div id="applyModal" class="apply-modal-overlay" onclick="amOverlayClick(event)">
+    <div class="apply-modal">
+      <div class="am-head">
+        <span class="am-eyebrow">Leasing Inquiry</span>
+        <h2 class="am-title">Request a Tour</h2>
+        <button class="am-close" onclick="closeApplyModal()" aria-label="Close">&times;</button>
       </div>
-    </div>
-    <div class="aw-progress-bar"><div class="aw-progress-fill" id="awProgress"></div></div>
-    <div class="aw-body">
+      <div class="am-body">
 
-      <!-- Step 0: Choose path -->
-      <div class="aw-step active" id="aw-s0">
-        <div class="aw-step-label">Get Started</div>
-        <div class="aw-step-title">How can we help you today?</div>
-        <div class="aw-cards">
-          <div class="aw-card" onclick="awGo(1,'Book a Tour')">
-            <div class="aw-card-ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
-            <div class="aw-card-text"><div class="aw-card-name">Book a Tour</div><div class="aw-card-desc">Schedule a showing at either community</div></div>
+        <div id="amForm">
+          <span class="am-label">Community</span>
+          <div class="am-pills" id="amCommunity">
+            <button class="am-pill on" onclick="amPick('amCommunity',this)">Richland Village</button>
+            <button class="am-pill" onclick="amPick('amCommunity',this)">Richland Village III</button>
           </div>
-          <div class="aw-card" onclick="awGo(1,'Start Application')">
-            <div class="aw-card-ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></div>
-            <div class="aw-card-text"><div class="aw-card-name">Start Application</div><div class="aw-card-desc">Begin your leasing process today</div></div>
+
+          <span class="am-label">Bedrooms</span>
+          <div class="am-pills" id="amBedrooms">
+            <button class="am-pill" onclick="amPick('amBedrooms',this)">2 Bed</button>
+            <button class="am-pill" onclick="amPick('amBedrooms',this)">3 Bed</button>
+            <button class="am-pill" onclick="amPick('amBedrooms',this)">Cottage</button>
+            <button class="am-pill" onclick="amPick('amBedrooms',this)">4 Bed</button>
+            <button class="am-pill" onclick="amPick('amBedrooms',this)">Not sure yet</button>
           </div>
-          <div class="aw-card" onclick="awGo(1,'Ask a Question')">
-            <div class="aw-card-ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
-            <div class="aw-card-text"><div class="aw-card-name">Ask a Question</div><div class="aw-card-desc">We reply within one business day</div></div>
+
+          <span class="am-label">Target Move-in</span>
+          <div class="am-pills" id="amTerm">
+            <button class="am-pill" onclick="amPick('amTerm',this)">Fall 2027</button>
+            <button class="am-pill" onclick="amPick('amTerm',this)">Fall 2028</button>
+            <button class="am-pill" onclick="amPick('amTerm',this)">Fall 2029</button>
           </div>
+
+          <div class="am-divider"></div>
+
+          <input class="am-field" id="amName" type="text" placeholder="Full Name *">
+          <input class="am-field" id="amEmail" type="email" placeholder="Email Address *">
+          <input class="am-field" id="amPhone" type="tel" placeholder="Phone Number *">
+          <textarea class="am-field am-textarea" id="amMessage" placeholder="Questions or comments (optional)"></textarea>
+
+          <!-- Honeypot: invisible to humans, filled by bots -->
+          <input type="text" id="amHoneypot" style="position:absolute;left:-9999px;opacity:0;height:0;" tabindex="-1" autocomplete="off">
+
+          <!-- Cloudflare Turnstile — sign up free at dash.cloudflare.com/turnstile then replace data-sitekey -->
+          <div style="margin:16px 0 12px;">
+            <div class="cf-turnstile" data-sitekey="1x00000000000000000000AA" data-theme="light"></div>
+          </div>
+
+          <div class="am-error" id="amError"></div>
+          <button class="am-submit" onclick="submitApplyModal()">Send Inquiry &rarr;</button>
         </div>
-      </div>
 
-      <!-- Step 1: Which community -->
-      <div class="aw-step" id="aw-s1">
-        <div class="aw-step-label">Step 1 of 3</div>
-        <div class="aw-step-title">Which community interests you?</div>
-        <div class="aw-cards">
-          <div class="aw-card" onclick="awSelect('community','Richland Village');awGo(2)">
-            <div class="aw-card-ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a1 1 0 01-1 1H4a1 1 0 01-1-1z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
-            <div class="aw-card-text"><div class="aw-card-name">Richland Village</div><div class="aw-card-desc">538 Richland Rd &middot; 10 Townhomes</div></div>
+        <div id="amSuccess" style="display:none;" class="am-success">
+          <div class="am-success-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </div>
-          <div class="aw-card" onclick="awSelect('community','Richland Village III');awGo(2)">
-            <div class="aw-card-ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a1 1 0 01-1 1H4a1 1 0 01-1-1z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
-            <div class="aw-card-text"><div class="aw-card-name">Richland Village III</div><div class="aw-card-desc">Shug Jordan Pkwy &middot; 11 Units</div></div>
-          </div>
-          <div class="aw-card" onclick="awSelect('community','Both Communities');awGo(2)">
-            <div class="aw-card-ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg></div>
-            <div class="aw-card-text"><div class="aw-card-name">Both Communities</div><div class="aw-card-desc">I&rsquo;d like to explore all options</div></div>
-          </div>
+          <h3 class="am-success-title">Inquiry Received</h3>
+          <p class="am-success-msg">Thank you! A member of our team will be in touch within one business day.<br><span style="color:var(--gold);font-weight:500;">(334) 750-2059</span></p>
         </div>
-      </div>
 
-      <!-- Step 2: Floor plan -->
-      <div class="aw-step" id="aw-s2">
-        <div class="aw-step-label">Step 2 of 3</div>
-        <div class="aw-step-title">Which floor plan are you considering?</div>
-        <div class="aw-chips" style="margin-bottom:18px;">
-          <div class="aw-chip" onclick="awChip(this,'plan','2 Bed · 2.5 Bath')">2 Bed · 2.5 Bath</div>
-          <div class="aw-chip" onclick="awChip(this,'plan','3 Bed · 3.5 Bath')">3 Bed · 3.5 Bath</div>
-          <div class="aw-chip" onclick="awChip(this,'plan','4 Bed · 3.5 Bath')">4 Bed · 3.5 Bath</div>
-          <div class="aw-chip" onclick="awChip(this,'plan','4 Bed · 4.5 Bath')">4 Bed · 4.5 Bath</div>
-          <div class="aw-chip" onclick="awChip(this,'plan','Not sure yet')">Not sure yet</div>
-        </div>
-        <button class="aw-submit" onclick="awGo(3)" style="background:var(--navy);">Continue &rarr;</button>
       </div>
-
-      <!-- Step 3: Contact info -->
-      <div class="aw-step" id="aw-s3">
-        <div class="aw-step-label">Step 3 of 3</div>
-        <div class="aw-step-title">Almost there — your contact info</div>
-        <input class="aw-input" id="aw-name" type="text" placeholder="Full Name">
-        <input class="aw-input" id="aw-email" type="email" placeholder="Email Address">
-        <input class="aw-input" id="aw-phone" type="tel" placeholder="Phone Number">
-        <button class="aw-submit" onclick="awSubmit()">Send Request &rarr;</button>
-      </div>
-
-      <!-- Step 4: Success -->
-      <div class="aw-step" id="aw-s4">
-        <div class="aw-success">
-          <div class="aw-success-check">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-          </div>
-          <div class="aw-success-title">You&rsquo;re on the list!</div>
-          <div class="aw-success-msg">We&rsquo;ll reach out within one business day to confirm your <span id="aw-action-label">request</span>.<br><br>(334) 750-2059<br>leasing@parmerdevelopment.com</div>
-        </div>
-      </div>
-
     </div>
   </div>
 
@@ -897,49 +851,54 @@
         document.body.style.overflow = '';
       }
     }
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') { closeLightbox(); closeApplyModal(); } });
 
-    // APPLY WIDGET
-    const awState = { step: 0, history: [], intent: '', community: '', plan: '' };
-    const awProgress = [0, 0, 33, 66, 100, 100];
-
-    function awOpen() {
-      document.getElementById('applyWidget').classList.add('open');
-      document.getElementById('applyFab').style.display = 'none';
+    // APPLY MODAL
+    function openApplyModal() {
+      document.getElementById('applyModal').classList.add('open');
+      document.body.style.overflow = 'hidden';
     }
-    function awClose() {
-      document.getElementById('applyWidget').classList.remove('open');
-      document.getElementById('applyFab').style.display = 'flex';
+    function closeApplyModal() {
+      document.getElementById('applyModal').classList.remove('open');
+      document.body.style.overflow = '';
     }
-    function awGo(step, intent) {
-      if (intent) awState.intent = intent;
-      awShowStep(step);
+    function amOverlayClick(e) {
+      if (e.target === document.getElementById('applyModal')) closeApplyModal();
     }
-    function awBack() {
-      if (awState.history.length > 0) {
-        awShowStep(awState.history.pop(), true);
+    function amPick(groupId, btn) {
+      document.getElementById(groupId).querySelectorAll('.am-pill').forEach(function(p) { p.classList.remove('on'); });
+      btn.classList.add('on');
+    }
+    function submitApplyModal() {
+      if (document.getElementById('amHoneypot').value) return;
+      var name = document.getElementById('amName').value.trim();
+      var email = document.getElementById('amEmail').value.trim();
+      var phone = document.getElementById('amPhone').value.trim();
+      var message = document.getElementById('amMessage').value.trim();
+      var errEl = document.getElementById('amError');
+      if (!name || !email || !phone) {
+        errEl.textContent = 'Please fill in your name, email, and phone number.';
+        errEl.style.display = 'block';
+        return;
       }
-    }
-    function awShowStep(step, back) {
-      if (!back) awState.history.push(awState.step);
-      document.getElementById('aw-s' + awState.step).classList.remove('active');
-      awState.step = step;
-      document.getElementById('aw-s' + step).classList.add('active');
-      document.getElementById('awProgress').style.width = (awProgress[step] || 0) + '%';
-      document.getElementById('awBackBtn').style.display = (awState.history.length > 0 && step < 4) ? 'block' : 'none';
-    }
-    function awSelect(key, val) { awState[key] = val; }
-    function awChip(el, key, val) {
-      el.closest('.aw-chips').querySelectorAll('.aw-chip').forEach(c => c.classList.remove('selected'));
-      el.classList.add('selected');
-      awState[key] = val;
-    }
-    function awSubmit() {
-      const name = document.getElementById('aw-name').value.trim();
-      const email = document.getElementById('aw-email').value.trim();
-      if (!name || !email) { alert('Please enter your name and email.'); return; }
-      document.getElementById('aw-action-label').textContent = awState.intent.toLowerCase();
-      awGo(4);
+      var token = document.querySelector('[name="cf-turnstile-response"]');
+      if (token && !token.value) {
+        errEl.textContent = 'Please complete the verification check.';
+        errEl.style.display = 'block';
+        return;
+      }
+      errEl.style.display = 'none';
+      var community = (document.querySelector('#amCommunity .am-pill.on') || {}).textContent || 'Richland Village';
+      var bedrooms = (document.querySelector('#amBedrooms .am-pill.on') || {}).textContent || '';
+      var term = (document.querySelector('#amTerm .am-pill.on') || {}).textContent || '';
+      var notes = [bedrooms, term, message].filter(Boolean).join(' · ');
+      fetch('https://parmer-dashboard-andrews-projects-64e8e9b7.vercel.app/api/submissions', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ property: community, source_site: 'richland-village-andrews-projects-64e8e9b7.vercel.app', first_name: name, last_name: '', email: email, phone: phone, message: notes })
+      }).catch(function() {});
+      launchConfetti();
+      document.getElementById('amForm').style.display = 'none';
+      document.getElementById('amSuccess').style.display = 'block';
     }
 
     // CONTACT
