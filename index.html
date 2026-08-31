@@ -1095,8 +1095,18 @@
     }
   </script>
 <script>
-(function(){try{fetch('https://parmer-dashboard.vercel.app/api/track',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({site:'Richland Village',path:location.pathname,referrer:document.referrer||null}),keepalive:true})}catch(e){}}
-)();
+(function(){
+  try{
+    fetch('https://ipwho.is/')
+      .then(function(r){return r.json()})
+      .then(function(g){
+        fetch('https://parmer-dashboard.vercel.app/api/track',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({site:'Richland Village',path:location.pathname,referrer:document.referrer||null,city:g.city||null,region:g.region_code||null,country:g.country_code||null}),keepalive:true});
+      })
+      .catch(function(){
+        fetch('https://parmer-dashboard.vercel.app/api/track',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({site:'Richland Village',path:location.pathname,referrer:document.referrer||null}),keepalive:true});
+      });
+  }catch(e){}
+})();
 </script>
 </body>
 </html>
