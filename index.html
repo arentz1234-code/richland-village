@@ -12,7 +12,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
-  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -795,8 +794,9 @@
           <input class="am-field" id="amPhone" type="tel" placeholder="Phone Number *">
           <textarea class="am-field am-textarea" id="amMessage" placeholder="Questions or comments (optional)"></textarea>
           <input type="text" id="amHoneypot" style="position:absolute;left:-9999px;opacity:0;height:0;" tabindex="-1" autocomplete="off">
-          <div style="margin:12px 0 0;">
-            <div class="cf-turnstile" data-sitekey="1x00000000000000000000AA" data-theme="light"></div>
+          <div style="margin:14px 0 4px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+            <label style="font-size:13px;font-weight:600;color:var(--navy);white-space:nowrap;" id="amCaptchaQ"></label>
+            <input class="am-field" id="amCaptchaA" type="number" placeholder="Answer" style="width:100px;margin:0;">
           </div>
           <div class="am-error" id="amError"></div>
         </div>
@@ -907,6 +907,14 @@
     // APPLY MODAL
     var amCurrent = 1;
     var amData = { community: '' };
+    var amCaptchaAnswer = 0;
+    function amGenerateCaptcha() {
+      var a = Math.floor(Math.random() * 9) + 1;
+      var b = Math.floor(Math.random() * 9) + 1;
+      amCaptchaAnswer = a + b;
+      document.getElementById('amCaptchaQ').textContent = 'Quick check: what is ' + a + ' + ' + b + '?';
+      document.getElementById('amCaptchaA').value = '';
+    }
     var amTitles = { 1: 'Which community?', 2: 'Preferred floor plan?', 3: 'Target move-in?', 4: 'Your details' };
 
     function openApplyModal() {
@@ -934,6 +942,7 @@
       ['amName','amEmail','amPhone','amMessage'].forEach(function(id) { document.getElementById(id).value = ''; });
       document.getElementById('amError').style.display = 'none';
       document.getElementById('amHoneypot').value = '';
+      amGenerateCaptcha();
       amCurrent = 1;
       amData = { community: '' };
       document.getElementById('amProgressFill').style.width = '0%';
@@ -985,10 +994,11 @@
         errEl.style.display = 'block';
         return;
       }
-      var token = document.querySelector('[name="cf-turnstile-response"]');
-      if (token && !token.value) {
-        errEl.textContent = 'Please complete the human verification.';
+      var captchaVal = parseInt(document.getElementById('amCaptchaA').value, 10);
+      if (captchaVal !== amCaptchaAnswer) {
+        errEl.textContent = 'Incorrect answer — please try again.';
         errEl.style.display = 'block';
+        amGenerateCaptcha();
         return;
       }
       errEl.style.display = 'none';
