@@ -763,10 +763,6 @@
           <input class="am-field" id="amPhone" type="tel" placeholder="Phone Number *">
           <textarea class="am-field am-textarea" id="amMessage" placeholder="Questions or comments (optional)"></textarea>
           <input type="text" id="amHoneypot" style="position:absolute;left:-9999px;opacity:0;height:0;" tabindex="-1" autocomplete="off">
-          <div style="margin:14px 0 4px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
-            <label style="font-size:13px;font-weight:600;color:var(--navy);white-space:nowrap;" id="amCaptchaQ"></label>
-            <input class="am-field" id="amCaptchaA" type="number" placeholder="Answer" style="width:100px;margin:0;">
-          </div>
           <div class="am-error" id="amError"></div>
         </div>
 
@@ -876,14 +872,6 @@
     // APPLY MODAL
     var amCurrent = 1;
     var amData = { community: '' };
-    var amCaptchaAnswer = 0;
-    function amGenerateCaptcha() {
-      var a = Math.floor(Math.random() * 9) + 1;
-      var b = Math.floor(Math.random() * 9) + 1;
-      amCaptchaAnswer = a + b;
-      document.getElementById('amCaptchaQ').textContent = 'Quick check: what is ' + a + ' + ' + b + '?';
-      document.getElementById('amCaptchaA').value = '';
-    }
     var amTitles = { 1: 'Which community?', 2: 'Preferred floor plan?', 3: 'Target move-in?', 4: 'Your details' };
 
     function openApplyModal() {
@@ -911,7 +899,6 @@
       ['amName','amEmail','amPhone','amMessage'].forEach(function(id) { document.getElementById(id).value = ''; });
       document.getElementById('amError').style.display = 'none';
       document.getElementById('amHoneypot').value = '';
-      amGenerateCaptcha();
       amCurrent = 1;
       amData = { community: '' };
       document.getElementById('amProgressFill').style.width = '0%';
@@ -961,13 +948,6 @@
       if (!name || !email || !phone) {
         errEl.textContent = 'Please fill in your name, email, and phone number.';
         errEl.style.display = 'block';
-        return;
-      }
-      var captchaVal = parseInt(document.getElementById('amCaptchaA').value, 10);
-      if (captchaVal !== amCaptchaAnswer) {
-        errEl.textContent = 'Incorrect answer — please try again.';
-        errEl.style.display = 'block';
-        amGenerateCaptcha();
         return;
       }
       errEl.style.display = 'none';
