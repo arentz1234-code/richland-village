@@ -358,6 +358,18 @@
           </div>
           <div class="comm-card-indicator"></div>
         </div>
+        <div class="comm-card" id="card-judd" onclick="selectComm('judd')">
+          <img class="comm-card-bg" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/judd/judd-exterior.png" alt="Judd Ave Cottages" loading="lazy">
+          <div class="comm-card-overlay"></div>
+          <div class="comm-card-content">
+            <span class="comm-card-badge">Now Leasing &middot; Fall 2027</span>
+            <h3 class="comm-card-name">Judd Ave Cottages</h3>
+            <div class="comm-card-addr">533 Judd Ave &middot; Auburn, AL</div>
+            <div class="comm-card-units">3 Cottages<br>2 &amp; 3 Bedroom layouts</div>
+            <span class="comm-card-btn">View Floor Plans &rsaquo;</span>
+          </div>
+          <div class="comm-card-indicator"></div>
+        </div>
         <div class="comm-card" id="card-rv3" onclick="selectComm('rv3')">
           <img class="comm-card-bg" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/exterior/exterior-rv3-cover.jpg" alt="Richland Village III" style="object-position:center 30%" loading="lazy">
           <div class="comm-card-overlay"></div>
@@ -468,6 +480,109 @@
               <div class="fp-tour-wrap">
                 <span class="section-label" style="font-size:9px;display:block;margin-bottom:16px;">Virtual Tour</span>
                 <iframe class="tour-embed" loading="lazy" src="https://my.matterport.com/show/?m=wo3qGHMzLVR&play=1" allowfullscreen allow="xr-spatial-tracking; gyroscope; accelerometer"></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- JUDD AVE COTTAGES DETAIL -->
+      <div class="comm-detail" id="detail-judd">
+        <div class="detail-inner">
+          <div class="detail-tabs">
+            <button class="detail-tab active" onclick="switchTab('judd','plans',this)">Floor Plans</button>
+          </div>
+
+          <!-- JUDD FLOOR PLANS -->
+          <div class="detail-panel active" id="judd-plans">
+            <div class="fp-grid" id="judd-fp-grid">
+              <div class="fp-thumb active" onclick="selectPlan('judd','fp-judd-b-display',this)">
+                <img class="fp-thumb-img" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/judd/fp-judd-b.png" alt="Cottage B" loading="lazy">
+                <div class="fp-thumb-label">
+                  <span class="fp-thumb-beds">2 Bedroom</span>
+                  <div class="fp-thumb-name">Cottage B &middot; 2 Bed &middot; 2.5 Bath</div>
+                  <div class="fp-thumb-sqft">1,295 sq ft</div>
+                </div>
+              </div>
+              <div class="fp-thumb" onclick="selectPlan('judd','fp-judd-a-display',this)">
+                <img class="fp-thumb-img" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/judd/fp-judd-a.png" alt="Cottage A" loading="lazy">
+                <div class="fp-thumb-label">
+                  <span class="fp-thumb-beds">3 Bedroom</span>
+                  <div class="fp-thumb-name">Cottage A &middot; 3 Bed &middot; 3.5 Bath</div>
+                  <div class="fp-thumb-sqft">1,541 sq ft</div>
+                </div>
+              </div>
+              <div class="fp-thumb" onclick="selectPlan('judd','fp-judd-c-display',this)">
+                <img class="fp-thumb-img" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/judd/fp-judd-c.png" alt="Cottage C" loading="lazy">
+                <div class="fp-thumb-label">
+                  <span class="fp-thumb-beds">3 Bedroom</span>
+                  <div class="fp-thumb-name">Cottage C &middot; 3 Bed &middot; 3.5 Bath</div>
+                  <div class="fp-thumb-sqft">1,495 sq ft</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="fp-display" id="fp-judd-b-display" style="display:block">
+              <div class="fp-display-inner">
+                <div class="fp-img-wrap"><img src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/judd/fp-judd-b.png" alt="Cottage B Floor Plan" onclick="openLightbox(this.src)"></div>
+                <div class="fp-info">
+                  <span class="fp-info-tag">Judd Ave Cottages &mdash; Cottage B</span>
+                  <div class="fp-info-title">2 Bed · 2.5 Bath</div>
+                  <div class="fp-info-stats">
+                    <div class="fp-stat"><span class="fp-stat-label">Size</span><span class="fp-stat-val">1,295 sq ft</span></div>
+                    <div class="fp-stat"><span class="fp-stat-label">Bedrooms</span><span class="fp-stat-val">2</span></div>
+                    <div class="fp-stat"><span class="fp-stat-label">Bathrooms</span><span class="fp-stat-val">2.5</span></div>
+                    <div class="fp-stat"><span class="fp-stat-label">Type</span><span class="fp-stat-val">Cottage</span></div>
+                    <div class="fp-stat"><span class="fp-stat-label">Community</span><span class="fp-stat-val">Judd Ave Cottages</span></div>
+                  </div>
+                  <a href="#contact" class="fp-cta">Schedule a Showing</a>
+                </div>
+              </div>
+              <div class="fp-tour-wrap" style="display:flex;align-items:center;gap:14px;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#9A7540" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <p style="font-family:'Playfair Display',serif;font-size:15px;font-style:italic;color:#6B6B6B;margin:0;">Virtual tour coming soon</p>
+              </div>
+            </div>
+            <div class="fp-display" id="fp-judd-a-display">
+              <div class="fp-display-inner">
+                <div class="fp-img-wrap"><img src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/judd/fp-judd-a.png" alt="Cottage A Floor Plan" onclick="openLightbox(this.src)"></div>
+                <div class="fp-info">
+                  <span class="fp-info-tag">Judd Ave Cottages &mdash; Cottage A</span>
+                  <div class="fp-info-title">3 Bed · 3.5 Bath</div>
+                  <div class="fp-info-stats">
+                    <div class="fp-stat"><span class="fp-stat-label">Size</span><span class="fp-stat-val">1,541 sq ft</span></div>
+                    <div class="fp-stat"><span class="fp-stat-label">Bedrooms</span><span class="fp-stat-val">3</span></div>
+                    <div class="fp-stat"><span class="fp-stat-label">Bathrooms</span><span class="fp-stat-val">3.5</span></div>
+                    <div class="fp-stat"><span class="fp-stat-label">Type</span><span class="fp-stat-val">Cottage</span></div>
+                    <div class="fp-stat"><span class="fp-stat-label">Community</span><span class="fp-stat-val">Judd Ave Cottages</span></div>
+                  </div>
+                  <a href="#contact" class="fp-cta">Schedule a Showing</a>
+                </div>
+              </div>
+              <div class="fp-tour-wrap" style="display:flex;align-items:center;gap:14px;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#9A7540" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <p style="font-family:'Playfair Display',serif;font-size:15px;font-style:italic;color:#6B6B6B;margin:0;">Virtual tour coming soon</p>
+              </div>
+            </div>
+            <div class="fp-display" id="fp-judd-c-display">
+              <div class="fp-display-inner">
+                <div class="fp-img-wrap"><img src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/judd/fp-judd-c.png" alt="Cottage C Floor Plan" onclick="openLightbox(this.src)"></div>
+                <div class="fp-info">
+                  <span class="fp-info-tag">Judd Ave Cottages &mdash; Cottage C</span>
+                  <div class="fp-info-title">3 Bed · 3.5 Bath</div>
+                  <div class="fp-info-stats">
+                    <div class="fp-stat"><span class="fp-stat-label">Size</span><span class="fp-stat-val">1,495 sq ft</span></div>
+                    <div class="fp-stat"><span class="fp-stat-label">Bedrooms</span><span class="fp-stat-val">3</span></div>
+                    <div class="fp-stat"><span class="fp-stat-label">Bathrooms</span><span class="fp-stat-val">3.5</span></div>
+                    <div class="fp-stat"><span class="fp-stat-label">Type</span><span class="fp-stat-val">Cottage</span></div>
+                    <div class="fp-stat"><span class="fp-stat-label">Community</span><span class="fp-stat-val">Judd Ave Cottages</span></div>
+                  </div>
+                  <a href="#contact" class="fp-cta">Schedule a Showing</a>
+                </div>
+              </div>
+              <div class="fp-tour-wrap" style="display:flex;align-items:center;gap:14px;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#9A7540" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <p style="font-family:'Playfair Display',serif;font-size:15px;font-style:italic;color:#6B6B6B;margin:0;">Virtual tour coming soon</p>
               </div>
             </div>
           </div>
@@ -671,7 +786,7 @@
           <div class="footer-col-links">
             <a href="#communities" onclick="selectComm('rv')">Richland Village</a>
             <a href="#">Bragg Avenue Brownstones</a>
-            <a href="#">Judd Avenue Cottages</a>
+            <a href="#communities" onclick="selectComm('judd')">Judd Ave Cottages</a>
             <a href="#communities" onclick="selectComm('rv3')">Richland Village III</a>
           </div>
         </div>
@@ -723,6 +838,10 @@
             <div class="am-comm-card" data-value="Richland Village" onclick="amPickCommunity(this)">
               <div class="am-comm-ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a1 1 0 01-1 1H4a1 1 0 01-1-1z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
               <div><div class="am-comm-name">Richland Village</div><div class="am-comm-desc">538 Richland Road &middot; Auburn, AL &middot; 10 Townhomes</div></div>
+            </div>
+            <div class="am-comm-card" data-value="Judd Ave Cottages" onclick="amPickCommunity(this)">
+              <div class="am-comm-ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a1 1 0 01-1 1H4a1 1 0 01-1-1z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+              <div><div class="am-comm-name">Judd Ave Cottages</div><div class="am-comm-desc">533 Judd Ave &middot; Auburn, AL &middot; 3 Cottages</div></div>
             </div>
             <div class="am-comm-card" data-value="Richland Village III" onclick="amPickCommunity(this)">
               <div class="am-comm-ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a1 1 0 01-1 1H4a1 1 0 01-1-1z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
@@ -823,15 +942,17 @@
 
       const c1 = [32.6137857, -85.5073729]; // 538 Richland Road, Auburn AL
       const c2 = [32.6150950, -85.5073461]; // 1256 Shug Jordan Pkwy, Auburn AL
-      const pts = [c1, c2];
+      const c3 = [32.6098000, -85.4973000]; // 533 Judd Ave, Auburn AL
+      const pts = [c1, c2, c3];
       L.marker(c1, { icon: pin('#1B2B41','#9A7540','RV') }).addTo(map).bindPopup(popup('Richland Village','538 Richland Road · Auburn, AL','10 Townhomes'), { maxWidth: 260 });
       L.marker(c2, { icon: pin('#9A7540','#1B2B41','III') }).addTo(map).bindPopup(popup('Richland Village III','1256 Shug Jordan Pkwy · Auburn, AL','3 Cottages & 8 Townhomes'), { maxWidth: 260 });
+      L.marker(c3, { icon: pin('#7C5C2E','#1B2B41','JC') }).addTo(map).bindPopup(popup('Judd Ave Cottages','533 Judd Ave · Auburn, AL','3 Cottages · 2 &amp; 3 Bedroom'), { maxWidth: 260 });
       map.fitBounds(pts, { padding: [70, 70] });
     })();
 
     // COMMUNITY SWITCHING
     function selectComm(id) {
-      ['rv','rv3'].forEach(c => {
+      ['rv','judd','rv3'].forEach(c => {
         document.getElementById('card-' + c).classList.toggle('active', c === id);
         document.getElementById('detail-' + c).classList.toggle('active', c === id);
       });
