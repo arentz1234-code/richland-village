@@ -400,7 +400,7 @@
 
           <!-- RV FLOOR PLANS -->
           <div class="detail-panel active" id="rv-plans">
-            <div class="fp-grid" id="rv-fp-grid">
+            <div class="fp-grid" id="rv-fp-grid" style="grid-template-columns: repeat(3, 1fr);">
               <div class="fp-thumb active" onclick="selectPlan('rv','fp-rv-2br',this)">
                 <img class="fp-thumb-img" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/floorplans/fp-2br.jpg" alt="2BR" loading="lazy">
                 <div class="fp-thumb-label">
@@ -409,14 +409,7 @@
                   <div class="fp-thumb-sqft">1,200 sq ft</div>
                 </div>
               </div>
-              <div class="fp-thumb" onclick="selectPlan('rv','fp-rv-3br',this)">
-                <img class="fp-thumb-img" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/floorplans/fp-3br.jpg" alt="3BR" loading="lazy">
-                <div class="fp-thumb-label">
-                  <span class="fp-thumb-beds">3 Bedroom</span>
-                  <div class="fp-thumb-name">3 Bed &middot; 3.5 Bath</div>
-                  <div class="fp-thumb-sqft">&nbsp;</div>
-                </div>
-              </div>
+
               <div class="fp-thumb" onclick="selectPlan('rv','fp-rv-4br-35',this)">
                 <img class="fp-thumb-img" src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/floorplans/fp-4br-35.jpg" alt="4BR 3.5BA" loading="lazy">
                 <div class="fp-thumb-label">
@@ -456,26 +449,7 @@
                 <iframe class="tour-embed" loading="lazy" src="https://my.matterport.com/show/?m=nAha3DLi7LG&play=1" allowfullscreen allow="xr-spatial-tracking; gyroscope; accelerometer"></iframe>
               </div>
             </div>
-            <div class="fp-display" id="fp-rv-3br">
-              <div class="fp-display-inner">
-                <div class="fp-img-wrap"><img src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/floorplans/fp-3br.jpg" alt="3BR Floor Plan" onclick="openLightbox(this.src)"></div>
-                <div class="fp-info">
-                  <span class="fp-info-tag">Richland Village</span>
-                  <div class="fp-info-title">3 Bed · 3.5 Bath</div>
-                  <div class="fp-info-stats">
-                    <div class="fp-stat"><span class="fp-stat-label">Bedrooms</span><span class="fp-stat-val">3</span></div>
-                    <div class="fp-stat"><span class="fp-stat-label">Bathrooms</span><span class="fp-stat-val">3.5</span></div>
-                    <div class="fp-stat"><span class="fp-stat-label">Stories</span><span class="fp-stat-val">2</span></div>
-                    <div class="fp-stat"><span class="fp-stat-label">Community</span><span class="fp-stat-val">Richland Village</span></div>
-                  </div>
-                  <a href="#contact" class="fp-cta">Schedule a Showing</a>
-                </div>
-              </div>
-              <div class="fp-tour-wrap" style="display:flex;align-items:center;gap:14px;">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#9A7540" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                <p style="font-family:'Playfair Display',serif;font-size:15px;font-style:italic;color:#6B6B6B;margin:0;">Virtual tour coming soon</p>
-              </div>
-            </div>
+
             <div class="fp-display" id="fp-rv-4br-35">
               <div class="fp-display-inner">
                 <div class="fp-img-wrap"><img src="https://cdn.jsdelivr.net/gh/arentz1234-code/richland-village@main/assets/floorplans/fp-4br-35.jpg" alt="4BR 3.5BA Floor Plan" onclick="openLightbox(this.src)"></div>
