@@ -742,7 +742,8 @@
       <h2 class="section-title">Let&rsquo;s Talk</h2>
       <p class="contact-sub">We&rsquo;ll be in touch within one business day.</p>
       <form class="contact-form" id="contactForm" onsubmit="handleSubmit(event)">
-        <input type="text" placeholder="Name" required style="grid-column:1/-1;">
+        <input type="text" placeholder="First Name" required>
+        <input type="text" placeholder="Last Name" required>
         <input type="email" placeholder="Email" required>
         <input type="tel" placeholder="Phone">
         <textarea placeholder="Message&hellip;"></textarea>
@@ -887,7 +888,10 @@
 
         <!-- Step 4: Contact info -->
         <div class="am-step" id="amStep4">
-          <input class="am-field" id="amName" type="text" placeholder="Full Name *">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:0;">
+            <input class="am-field" id="amFirstName" type="text" placeholder="First Name *" style="margin-bottom:0;">
+            <input class="am-field" id="amLastName" type="text" placeholder="Last Name *" style="margin-bottom:0;">
+          </div>
           <input class="am-field" id="amEmail" type="email" placeholder="Email Address *">
           <input class="am-field" id="amPhone" type="tel" placeholder="Phone Number *">
           <textarea class="am-field am-textarea" id="amMessage" placeholder="Questions or comments (optional)"></textarea>
@@ -1027,7 +1031,7 @@
       document.getElementById('amFooter').style.display = 'flex';
       document.querySelectorAll('.am-comm-card').forEach(function(c) { c.classList.remove('selected'); });
       document.querySelectorAll('.am-pill').forEach(function(p) { p.classList.remove('on'); });
-      ['amName','amEmail','amPhone','amMessage'].forEach(function(id) { document.getElementById(id).value = ''; });
+      ['amFirstName','amLastName','amEmail','amPhone','amMessage'].forEach(function(id) { document.getElementById(id).value = ''; });
       document.getElementById('amError').style.display = 'none';
       document.getElementById('amHoneypot').value = '';
       amCurrent = 1;
@@ -1071,13 +1075,14 @@
     }
     function submitApplyModal() {
       if (document.getElementById('amHoneypot').value) return;
-      var name = document.getElementById('amName').value.trim();
+      var firstName = document.getElementById('amFirstName').value.trim();
+      var lastName = document.getElementById('amLastName').value.trim();
       var email = document.getElementById('amEmail').value.trim();
       var phone = document.getElementById('amPhone').value.trim();
       var message = document.getElementById('amMessage').value.trim();
       var errEl = document.getElementById('amError');
-      if (!name || !email || !phone) {
-        errEl.textContent = 'Please fill in your name, email, and phone number.';
+      if (!firstName || !lastName || !email || !phone) {
+        errEl.textContent = 'Please fill in your first name, last name, email, and phone number.';
         errEl.style.display = 'block';
         return;
       }
@@ -1087,7 +1092,7 @@
       var notes = [bedrooms, term, message].filter(Boolean).join(' · ');
       fetch('https://parmer-dashboard-andrews-projects-64e8e9b7.vercel.app/api/submissions', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ property: amData.community || 'Richland Village', source_site: 'richland-village-andrews-projects-64e8e9b7.vercel.app', first_name: name, last_name: '', email: email, phone: phone, message: notes })
+        body: JSON.stringify({ property: amData.community || 'Richland Village', source_site: 'richland-village-andrews-projects-64e8e9b7.vercel.app', first_name: firstName, last_name: lastName, email: email, phone: phone, message: notes })
       }).catch(function() {});
       launchConfetti();
       document.getElementById('amStep4').classList.remove('active');
